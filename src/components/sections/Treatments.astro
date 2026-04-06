@@ -1,14 +1,14 @@
 ---
 const treatments = [
-  { icon: '🦷', title: '一般歯科', text: 'むし歯・歯周病の診断・治療' },
-  { icon: '👶', title: '小児歯科', text: '乳歯から永久歯への移行をサポート' },
-  { icon: '🛡️', title: '予防歯科', text: 'クリーニング・フッ素・PMTC' },
-  { icon: '✨', title: '審美歯科', text: 'ホワイトニング・セラミック治療' },
-  { icon: '🔧', title: '矯正歯科', text: 'マウスピース矯正・ワイヤー矯正' },
-  { icon: '🦴', title: 'インプラント', text: '自然な噛み心地の人工歯根' },
-  { icon: '🦷', title: '入れ歯', text: '精密義歯・総義歯・部分義歯' },
-  { icon: '😴', title: '静脈内鎮静', text: '歯科恐怖症の方への無痛治療' },
-  { icon: '🌙', title: '訪問歯科', text: '在宅・施設への訪問診療' },
+  { img: '/images/site/t-general.jpg', title: '一般歯科', text: 'むし歯・歯周病の診断・治療' },
+  { img: '/images/site/t-child.jpg', title: '小児歯科', text: '乳歯から永久歯への移行をサポート' },
+  { img: '/images/site/t-prevent.jpg', title: '予防歯科', text: 'クリーニング・フッ素・PMTC' },
+  { img: '/images/site/t-aesthetic.jpg', title: '審美歯科', text: 'ホワイトニング・セラミック治療' },
+  { img: '/images/site/t-ortho.jpg', title: '矯正歯科', text: 'マウスピース矯正・ワイヤー矯正' },
+  { img: '/images/site/t-implant.jpg', title: 'インプラント', text: '自然な噛み心地の人工歯根' },
+  { img: '/images/site/t-denture.jpg', title: '入れ歯', text: '精密義歯・総義歯・部分義歯' },
+  { img: '/images/site/t-sedation.jpg', title: '静脈内鎮静', text: '歯科恐怖症の方への無痛治療' },
+  { img: '/images/site/t-visit.jpg', title: '訪問歯科', text: '在宅・施設への訪問診療' },
 ];
 ---
 <section class="treatments" id="treatments">
@@ -23,9 +23,13 @@ const treatments = [
     <div class="treatments-grid reveal">
       {treatments.map(t => (
         <div class="treatment-card">
-          <div class="treatment-icon">{t.icon}</div>
-          <h3 class="treatment-title">{t.title}</h3>
-          <p class="treatment-text">{t.text}</p>
+          <div class="treatment-img">
+            <img src={t.img} alt={t.title} loading="lazy" />
+          </div>
+          <div class="treatment-body">
+            <h3 class="treatment-title">{t.title}</h3>
+            <p class="treatment-text">{t.text}</p>
+          </div>
         </div>
       ))}
     </div>
@@ -74,8 +78,7 @@ const treatments = [
 .treatment-card {
   background: #f8faf8;
   border-radius: 12px;
-  padding: 32px 20px;
-  text-align: center;
+  overflow: hidden;
   border: 1px solid #e8f0ec;
   transition: transform 0.2s, box-shadow 0.2s;
 }
@@ -83,9 +86,23 @@ const treatments = [
   transform: translateY(-4px);
   box-shadow: 0 8px 24px rgba(1,137,102,0.12);
 }
-.treatment-icon {
-  font-size: 2rem;
-  margin-bottom: 12px;
+.treatment-img {
+  height: 180px;
+  overflow: hidden;
+}
+.treatment-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease;
+}
+.treatment-card:hover .treatment-img img {
+  transform: scale(1.05);
+}
+.treatment-body {
+  padding: 20px 20px 24px;
+  text-align: center;
 }
 .treatment-title {
   font-size: 1.1rem;

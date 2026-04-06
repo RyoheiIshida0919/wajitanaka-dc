@@ -54,17 +54,22 @@ const hours = [
           </div>
         </div>
       </div>
-      <div class="access-map reveal">
-        <iframe
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3261.2!2d137.15!3d35.05!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2z5ZKM5Zyw44Gf44Gq44GL6KeS56eR!5e0!3m2!1sja!2sjp!4v1234567890"
-          width="100%"
-          height="400"
-          style="border:0;"
-          allowfullscreen=""
-          loading="lazy"
-          referrerpolicy="no-referrer-when-downgrade"
-          title="和地たなか歯科 地図"
-        ></iframe>
+      <div class="access-right reveal">
+        <div class="access-ext-photo">
+          <img src="/images/site/access-ext.jpg" alt="和地たなか歯科 外観" loading="lazy" />
+        </div>
+        <div class="access-map">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3261.2!2d137.15!3d35.05!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2z5ZKM5Zyw44Gf44Gq44GL6KeS56eR!5e0!3m2!1sja!2sjp!4v1234567890"
+            width="100%"
+            height="300"
+            style="border:0;"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            title="和地たなか歯科 地図"
+          ></iframe>
+        </div>
       </div>
     </div>
   </div>
@@ -98,7 +103,7 @@ const hours = [
   align-items: flex-start;
 }
 .access-info {
-  flex: 0 0 420px;
+  flex: 0 0 400px;
 }
 .access-block {
   margin-bottom: 36px;
@@ -145,8 +150,28 @@ const hours = [
 .access-tel {
   margin-top: 16px;
 }
-.access-map {
+.btn--primary {
+  background: var(--color-primary);
+  color: #fff;
+}
+.access-right {
   flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.access-ext-photo {
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+}
+.access-ext-photo img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  display: block;
+}
+.access-map {
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 4px 20px rgba(0,0,0,0.1);
@@ -157,6 +182,9 @@ const hours = [
   }
   .access-info {
     flex: none;
+    width: 100%;
+  }
+  .access-right {
     width: 100%;
   }
 }
