@@ -1,0 +1,16 @@
+{
+  "name": "和地たなか歯科",
+  "short_name": "和地たなか歯科",
+  "description": "0歳から100歳まで通える浜松市中央区の歯科医院",
+  "start_url": "/",
+  "display": "browser",
+  "background_color": "#FAFCFF",
+  "theme_color": "#3B82C4",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}

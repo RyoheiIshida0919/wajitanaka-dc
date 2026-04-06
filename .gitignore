@@ -1,0 +1,20 @@
+# Astro
+dist/
+.astro/
+
+# Node.js
+node_modules/
+
+# 環境変数（機密情報）
+.env
+.env.local
+.env.*.local
+
+# OS
+.DS_Store
+Thumbs.db
+
+# エディタ
+.vscode/
+.idea/
+*.swp
