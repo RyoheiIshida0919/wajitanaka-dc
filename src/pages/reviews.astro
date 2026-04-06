@@ -1,0 +1,29 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import StickyFooterCTA from '../components/StickyFooterCTA.astro';
+---
+<BaseLayout title="こだわりとQ&A｜和地たなか歯科" description="患者さんの声とよくある質問。和地たなか歯科のこだわりと丁寧な対応をご紹介します。">
+  <Header />
+  <main>
+    <section class="page-hero">
+      <h1>こだわりとQ&A</h1>
+    </section>
+    <section class="page-content container">
+      <p>コンテンツ準備中です。</p>
+    </section>
+  </main>
+  <Footer />
+  <StickyFooterCTA />
+</BaseLayout>
+<style>
+  .page-hero {
+    background-color: var(--color-primary);
+    color: #fff;
+    padding: 4rem 1.25rem;
+    text-align: center;
+  }
+  .page-hero h1 { font-size: 2rem; font-weight: 700; }
+  .page-content { padding-block: 4rem; }
+</style>

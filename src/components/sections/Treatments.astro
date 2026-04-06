@@ -1,0 +1,114 @@
+---
+const treatments = [
+  { icon: '🦷', title: '一般歯科', text: 'むし歯・歯周病の診断・治療' },
+  { icon: '👶', title: '小児歯科', text: '乳歯から永久歯への移行をサポート' },
+  { icon: '🛡️', title: '予防歯科', text: 'クリーニング・フッ素・PMTC' },
+  { icon: '✨', title: '審美歯科', text: 'ホワイトニング・セラミック治療' },
+  { icon: '🔧', title: '矯正歯科', text: 'マウスピース矯正・ワイヤー矯正' },
+  { icon: '🦴', title: 'インプラント', text: '自然な噛み心地の人工歯根' },
+  { icon: '🦷', title: '入れ歯', text: '精密義歯・総義歯・部分義歯' },
+  { icon: '😴', title: '静脈内鎮静', text: '歯科恐怖症の方への無痛治療' },
+  { icon: '🌙', title: '訪問歯科', text: '在宅・施設への訪問診療' },
+];
+---
+<section class="treatments" id="treatments">
+  <div class="treatments-header">
+    <div class="container">
+      <span class="section-en">TREATMENTS</span>
+      <h2 class="section-title">診療案内</h2>
+      <p class="treatments-sub">お口のことなら何でもご相談ください</p>
+    </div>
+  </div>
+  <div class="container">
+    <div class="treatments-grid reveal">
+      {treatments.map(t => (
+        <div class="treatment-card">
+          <div class="treatment-icon">{t.icon}</div>
+          <h3 class="treatment-title">{t.title}</h3>
+          <p class="treatment-text">{t.text}</p>
+        </div>
+      ))}
+    </div>
+    <div class="treatments-cta reveal">
+      <a href="/treatments" class="btn">診療メニューを詳しく見る</a>
+    </div>
+  </div>
+</section>
+
+<style>
+.treatments {
+  padding-bottom: 80px;
+  background: #fff;
+}
+.treatments-header {
+  background: var(--color-primary);
+  padding: 60px 0 48px;
+  margin-bottom: 48px;
+  text-align: center;
+  color: #fff;
+}
+.treatments-header .section-en {
+  display: block;
+  font-size: 13px;
+  letter-spacing: 0.2em;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: rgba(255,255,255,0.8);
+}
+.treatments-header .section-title {
+  font-size: clamp(1.6rem, 4vw, 2.2rem);
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 12px;
+}
+.treatments-sub {
+  color: rgba(255,255,255,0.85);
+  font-size: 1rem;
+}
+.treatments-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-bottom: 40px;
+}
+.treatment-card {
+  background: #f8faf8;
+  border-radius: 12px;
+  padding: 32px 20px;
+  text-align: center;
+  border: 1px solid #e8f0ec;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.treatment-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(1,137,102,0.12);
+}
+.treatment-icon {
+  font-size: 2rem;
+  margin-bottom: 12px;
+}
+.treatment-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  margin-bottom: 8px;
+}
+.treatment-text {
+  font-size: 0.85rem;
+  color: #666;
+  line-height: 1.6;
+}
+.treatments-cta {
+  text-align: center;
+}
+@media (max-width: 768px) {
+  .treatments-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 480px) {
+  .treatments-grid {
+    grid-template-columns: 1fr;
+  }
+}
+</style>

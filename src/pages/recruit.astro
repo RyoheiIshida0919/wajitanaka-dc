@@ -1,0 +1,24 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import StickyFooterCTA from '../components/StickyFooterCTA.astro';
+---
+<BaseLayout title="求人｜和地たなか歯科" description="和地たなか歯科の求人情報。スタッフ募集中です。">
+  <Header />
+  <main>
+    <section class="page-hero">
+      <h1>求人</h1>
+    </section>
+    <section class="page-content container">
+      <p>コンテンツ準備中です。</p>
+    </section>
+  </main>
+  <Footer />
+  <StickyFooterCTA />
+</BaseLayout>
+<style>
+  .page-hero { background-color: var(--color-primary); color: #fff; padding: 4rem 1.25rem; text-align: center; }
+  .page-hero h1 { font-size: 2rem; font-weight: 700; }
+  .page-content { padding-block: 4rem; }
+</style>

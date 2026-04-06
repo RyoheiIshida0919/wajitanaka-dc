@@ -1,0 +1,33 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import StickyFooterCTA from '../components/StickyFooterCTA.astro';
+import Hero from '../components/sections/Hero.astro';
+import Catch from '../components/sections/Catch.astro';
+import StaffHero from '../components/sections/StaffHero.astro';
+import Features from '../components/sections/Features.astro';
+import Treatments from '../components/sections/Treatments.astro';
+import Access from '../components/sections/Access.astro';
+import Instagram from '../components/sections/Instagram.astro';
+
+const seo = {
+  title: '和地たなか歯科｜浜松市中央区・和地町 0歳から100歳まで通える歯科医院',
+  description: 'ここから笑顔が生まれる。歯も、心も。浜松市中央区和地町の和地たなか歯科。0歳から100歳まで通える歯科医院。保育士による無料託児・女性歯科医師在籍・静脈内鎮静法対応。TEL: 053-489-8185',
+};
+---
+
+<BaseLayout title={seo.title} description={seo.description}>
+  <Header />
+  <main id="main-content">
+    <Hero />
+    <Catch />
+    <StaffHero />
+    <Features />
+    <Treatments />
+    <Access />
+    <Instagram />
+  </main>
+  <Footer />
+  <StickyFooterCTA />
+</BaseLayout>

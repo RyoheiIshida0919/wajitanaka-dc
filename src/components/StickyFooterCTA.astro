@@ -1,0 +1,51 @@
+---
+---
+<div class="sticky-cta">
+  <a href="tel:053-489-8185" class="sticky-cta__tel">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+      <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 8.43 19.79 19.79 0 01.08 2a2 2 0 012-2.18h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.09a16 16 0 006 6l.41-.41a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"></path>
+    </svg>
+    電話で予約
+  </a>
+  <a href="https://example.com/reserve" class="sticky-cta__reserve" target="_blank" rel="noopener noreferrer">
+    Web予約
+  </a>
+</div>
+
+<style>
+  .sticky-cta {
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 50;
+    height: 56px;
+  }
+
+  @media (min-width: 1024px) {
+    .sticky-cta { display: none; }
+  }
+
+  .sticky-cta__tel,
+  .sticky-cta__reserve {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    font-size: 0.9rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+  }
+
+  .sticky-cta__tel {
+    background-color: #222;
+    color: #fff;
+  }
+
+  .sticky-cta__reserve {
+    background-color: var(--color-primary, #018966);
+    color: #fff;
+  }
+</style>

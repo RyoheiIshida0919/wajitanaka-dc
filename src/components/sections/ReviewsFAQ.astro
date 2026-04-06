@@ -1,0 +1,34 @@
+---
+const reviews = [
+  { name: '30代 女性', text: '子どもが歯医者嫌いでしたが、ここでは楽しそうに通っています。先生もスタッフも優しいです。' },
+  { name: '50代 男性', text: 'バリアフリーで車椅子でも安心。丁寧な説明で安心して治療を受けられました。' },
+  { name: '20代 女性', text: 'Web予約がとても便利。待ち時間も少なく、清潔感があって通いやすいです。' },
+];
+---
+<section class="reviews-faq">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-en">REVIEWS</span>
+      <h2 class="section-title">患者さんの声</h2>
+    </div>
+    <div class="reviews-grid reveal">
+      {reviews.map(r => (
+        <div class="review-card">
+          <p class="review-text">「{r.text}」</p>
+          <p class="review-name">{r.name}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+<style>
+.reviews-faq { padding: 80px 0; background: #f8faf8; }
+.section-header { text-align: center; margin-bottom: 48px; }
+.section-en { display: block; font-size: 13px; letter-spacing: 0.2em; color: var(--color-primary); font-weight: 600; margin-bottom: 8px; }
+.section-title { font-size: clamp(1.6rem, 4vw, 2.2rem); font-weight: 700; color: #1a1a1a; }
+.reviews-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.review-card { background: #fff; border-radius: 12px; padding: 28px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+.review-text { font-size: 0.95rem; line-height: 1.9; color: #444; margin-bottom: 16px; }
+.review-name { font-size: 0.85rem; color: var(--color-primary); font-weight: 600; }
+@media (max-width: 768px) { .reviews-grid { grid-template-columns: 1fr; } }
+</style>

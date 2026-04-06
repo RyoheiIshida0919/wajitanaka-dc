@@ -1,0 +1,22 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+<BaseLayout title="プライバシーポリシー｜和地たなか歯科" description="和地たなか歯科のプライバシーポリシー。">
+  <Header />
+  <main>
+    <section class="page-hero">
+      <h1>プライバシーポリシー</h1>
+    </section>
+    <section class="page-content container">
+      <p>個人情報の取り扱いについては、法令に従い適切に管理します。</p>
+    </section>
+  </main>
+  <Footer />
+</BaseLayout>
+<style>
+  .page-hero { background-color: var(--color-primary); color: #fff; padding: 4rem 1.25rem; text-align: center; }
+  .page-hero h1 { font-size: 2rem; font-weight: 700; }
+  .page-content { padding-block: 4rem; }
+</style>

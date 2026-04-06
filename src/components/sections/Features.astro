@@ -1,0 +1,172 @@
+---
+const features = [
+  {
+    id: '01',
+    title: 'バリアフリー設計で\n安心して通える',
+    text: 'スロープ・広い通路・段差なしの院内で、車いすやベビーカーでもスムーズに入院いただけます。高齢の方や体の不自由な方にも安心の設計です。',
+    images: ['/images/site/f01-1.jpg', '/images/site/f01-2.jpg', '/images/site/f01-3.jpg'],
+  },
+  {
+    id: '02',
+    title: '痛みの少ない治療への\nこだわり',
+    text: '表面麻酔・電動注射器・レーザーなどを活用し、できる限り痛みを抑えた治療を行います。「怖い・痛い」というイメージを変えることが私たちの使命です。',
+    images: ['/images/site/f02-1.jpg', '/images/site/f02-2.jpg', '/images/site/f02-3.jpg'],
+  },
+  {
+    id: '03',
+    title: '清潔で快適な\n診療環境',
+    text: '個室ブースやゆったりとした診療チェア、最新の機器を完備。患者さんがリラックスして治療を受けられる空間づくりに力を入れています。',
+    images: ['/images/site/f03-1.jpg', '/images/site/f03-2.jpg', '/images/site/f03-3.jpg'],
+  },
+  {
+    id: '04',
+    title: '女性歯科医師在籍で\n女性も安心',
+    text: '女性の歯科医師が在籍しているため、女性の患者さんも安心して相談いただけます。お子様の診療も女性ならではの視点で丁寧に対応します。',
+    images: ['/images/site/f04-1.jpg', '/images/site/f04-2.jpg', '/images/site/f04-3.jpg'],
+  },
+  {
+    id: '05',
+    title: 'ITを活用した\nスムーズな受診体験',
+    text: 'Web予約・タブレットによる問診・デジタルレントゲンなど最新のIT技術を導入。待ち時間の短縮と正確な診断を実現しています。',
+    images: ['/images/site/f05-1.jpg', '/images/site/f05-2.jpg', '/images/site/f05-3.jpg'],
+  },
+  {
+    id: '06',
+    title: 'お子様の予防歯科に\n力を入れています',
+    text: '保育士が常駐し、お子様が楽しく通える環境を整えています。フッ素塗布・シーラントなどの予防処置で、健康な歯を守ります。',
+    images: ['/images/site/f06-1.jpg', '/images/site/f06-2.jpg', '/images/site/f06-3.jpg'],
+  },
+];
+---
+<section class="features" id="features">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-en">FEATURES</span>
+      <h2 class="section-title">当院の特長</h2>
+    </div>
+    {features.map((f, i) => (
+      <div class={`feature-item reveal ${i % 2 === 1 ? 'feature-item--reverse' : ''}`}>
+        <div class="feature-images">
+          <div class="feature-img-main">
+            <img src={f.images[0]} alt={f.title.replace('\n', ' ')} loading="lazy" />
+          </div>
+          <div class="feature-img-sub">
+            <img src={f.images[1]} alt="" loading="lazy" />
+            <img src={f.images[2]} alt="" loading="lazy" />
+          </div>
+        </div>
+        <div class="feature-content">
+          <span class="feature-num">{f.id}</span>
+          <h3 class="feature-title">{f.title.split('\n').map((line, j) => (
+            j === 0 ? line : <><br />{line}</>
+          ))}</h3>
+          <p class="feature-text">{f.text}</p>
+        </div>
+      </div>
+    ))}
+  </div>
+</section>
+
+<style>
+.features {
+  padding: 80px 0;
+  background: #fff;
+}
+.section-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+.section-en {
+  display: block;
+  font-size: 13px;
+  letter-spacing: 0.2em;
+  color: var(--color-primary);
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+.section-title {
+  font-size: clamp(1.6rem, 4vw, 2.2rem);
+  font-weight: 700;
+  color: #1a1a1a;
+}
+.feature-item {
+  display: flex;
+  align-items: center;
+  gap: 60px;
+  margin-bottom: 80px;
+}
+.feature-item--reverse {
+  flex-direction: row-reverse;
+}
+.feature-images {
+  flex: 0 0 50%;
+  display: flex;
+  gap: 8px;
+}
+.feature-img-main {
+  flex: 1;
+  border-radius: 12px;
+  overflow: hidden;
+}
+.feature-img-main img {
+  width: 100%;
+  height: 320px;
+  object-fit: cover;
+  display: block;
+}
+.feature-img-sub {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 0 0 40%;
+}
+.feature-img-sub img {
+  width: 100%;
+  height: 156px;
+  object-fit: cover;
+  border-radius: 8px;
+  display: block;
+}
+.feature-content {
+  flex: 1;
+}
+.feature-num {
+  display: block;
+  font-size: 3rem;
+  font-weight: 800;
+  color: var(--color-primary);
+  opacity: 0.2;
+  line-height: 1;
+  margin-bottom: 8px;
+  font-family: 'Georgia', serif;
+}
+.feature-title {
+  font-size: clamp(1.2rem, 2.5vw, 1.5rem);
+  font-weight: 700;
+  line-height: 1.6;
+  color: #1a1a1a;
+  margin-bottom: 16px;
+}
+.feature-text {
+  font-size: 0.95rem;
+  line-height: 2;
+  color: #555;
+}
+@media (max-width: 768px) {
+  .feature-item,
+  .feature-item--reverse {
+    flex-direction: column;
+    gap: 24px;
+  }
+  .feature-images {
+    flex: none;
+    width: 100%;
+  }
+  .feature-img-main img {
+    height: 220px;
+  }
+  .feature-img-sub img {
+    height: 106px;
+  }
+}
+</style>

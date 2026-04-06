@@ -1,0 +1,125 @@
+---
+const navItems = [
+  { label: 'ホーム',         href: '/' },
+  { label: '当院の特長',     href: '/#features' },
+  { label: '診療案内',       href: '/#treatments' },
+  { label: '患者さんの声',   href: '/reviews' },
+  { label: 'アクセス',       href: '/#access' },
+  { label: 'ブログ',         href: '/blog' },
+  { label: 'こだわりとQ&A', href: '/reviews#faq' },
+];
+---
+
+<header id="site-header" class="header">
+  <div class="header__inner container">
+    <a href="/" class="header__logo" aria-label="和地たなか歯科 トップへ">
+      <img
+        src="https://storage.googleapis.com/studio-design-asset-files/projects/Kwa5x4ogqX/s-400x150_webp_fd667224-34af-4ea1-b45f-3dec542364fb.webp"
+        alt="和地たなか歯科"
+        width="160"
+        height="60"
+        class="header__logo-img"
+      />
+    </a>
+    <nav class="header__nav" aria-label="メインナビゲーション">
+      <ul class="header__nav-list">
+        {navItems.map((item) => (
+          <li><a href={item.href} class="header__nav-link">{item.label}</a></li>
+        ))}
+      </ul>
+    </nav>
+    <div class="header__cta">
+      <a href="https://example.com/reserve" class="btn-reserve" target="_blank" rel="noopener noreferrer">診療予約</a>
+      <a href="tel:053-489-8185" class="btn-tel">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+          <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 8.43 19.79 19.79 0 01.08 2a2 2 0 012-2.18h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.09a16 16 0 006 6l.41-.41a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"></path>
+        </svg>
+        初診予約をお電話で
+      </a>
+    </div>
+    <button id="menu-toggle" class="header__hamburger" aria-label="メニューを開く" aria-expanded="false" aria-controls="mobile-menu">
+      <span class="header__hamburger-bar"></span>
+      <span class="header__hamburger-bar"></span>
+      <span class="header__hamburger-bar"></span>
+    </button>
+  </div>
+</header>
+
+<div id="mobile-menu" class="mobile-menu" role="dialog" aria-label="ナビゲーション" aria-modal="true" hidden>
+  <div class="mobile-menu__overlay"></div>
+  <div class="mobile-menu__panel">
+    <div class="mobile-menu__header">
+      <span class="mobile-menu__logo">和地たなか歯科</span>
+      <button id="menu-close" class="mobile-menu__close" aria-label="メニューを閉じる">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+    <nav aria-label="モバイルナビ">
+      <ul class="mobile-menu__list">
+        {navItems.map((item) => (
+          <li><a href={item.href} class="mobile-menu__link">{item.label}</a></li>
+        ))}
+      </ul>
+    </nav>
+    <div class="mobile-menu__actions">
+      <a href="https://example.com/reserve" class="mobile-menu__btn mobile-menu__btn--reserve" target="_blank" rel="noopener noreferrer">診療予約</a>
+      <a href="tel:053-489-8185" class="mobile-menu__btn mobile-menu__btn--tel">053-489-8185</a>
+    </div>
+  </div>
+</div>
+
+<style>
+  .header { position: sticky; top: 0; z-index: 100; padding-block: 0.6rem; background-color: #fff; box-shadow: 0 1px 0 rgba(0,0,0,0.08); transition: box-shadow 0.3s; }
+  .header.is-scrolled { box-shadow: 0 2px 16px rgba(0,0,0,0.1); }
+  .header__inner { display: flex; align-items: center; gap: 0.75rem; }
+  .header__logo { flex-shrink: 0; }
+  .header__logo-img { height: 40px; width: auto; object-fit: contain; }
+  .header__nav { display: none; flex: 1; }
+  .header__nav-list { display: flex; align-items: center; flex-wrap: wrap; }
+  .header__nav-link { display: block; padding: 0.35rem 0.5rem; font-size: 0.8rem; color: #333; white-space: nowrap; transition: color 0.2s; }
+  .header__nav-link:hover { color: var(--color-primary); }
+  .header__cta { display: none; align-items: center; gap: 0.5rem; flex-shrink: 0; }
+  .btn-reserve { display: inline-flex; align-items: center; justify-content: center; padding: 0.5rem 1rem; font-size: 0.8rem; font-weight: 500; border: 1.5px solid var(--color-primary); color: var(--color-primary); border-radius: 4px; white-space: nowrap; transition: background-color 0.2s, color 0.2s; }
+  .btn-reserve:hover { background-color: var(--color-primary); color: #fff; }
+  .btn-tel { display: inline-flex; align-items: center; gap: 0.35rem; padding: 0.5rem 1rem; font-size: 0.8rem; font-weight: 500; background-color: var(--color-primary); color: #fff; border-radius: 4px; white-space: nowrap; transition: background-color 0.2s; }
+  .btn-tel:hover { background-color: var(--color-primary-dark); }
+  .header__hamburger { display: flex; flex-direction: column; gap: 5px; padding: 0.5rem; margin-left: auto; border-radius: 4px; }
+  .header__hamburger-bar { display: block; width: 22px; height: 2px; background-color: #333; border-radius: 2px; }
+  .mobile-menu { position: fixed; inset: 0; z-index: 200; }
+  .mobile-menu[hidden] { display: none; }
+  .mobile-menu__overlay { position: absolute; inset: 0; background-color: rgba(0,0,0,0.45); }
+  .mobile-menu__panel { position: absolute; top: 0; right: 0; bottom: 0; width: min(300px, 85vw); background-color: #fff; overflow-y: auto; animation: slideIn 0.28s cubic-bezier(0.4,0,0.2,1); }
+  @keyframes slideIn { from { transform: translateX(100%); } to { transform: translateX(0); } }
+  .mobile-menu__header { display: flex; align-items: center; justify-content: space-between; padding: 1.25rem; border-bottom: 1px solid #ebebeb; }
+  .mobile-menu__logo { font-size: 1rem; font-weight: 700; color: var(--color-primary); }
+  .mobile-menu__close { padding: 0.25rem; color: #666; }
+  .mobile-menu__list { padding: 0.5rem 0; }
+  .mobile-menu__link { display: block; padding: 0.875rem 1.5rem; font-size: 0.9rem; color: #333; border-bottom: 1px solid #ebebeb; transition: background-color 0.15s; }
+  .mobile-menu__link:hover { background-color: #f5f5f5; color: var(--color-primary); }
+  .mobile-menu__actions { padding: 1.25rem; display: flex; flex-direction: column; gap: 0.75rem; }
+  .mobile-menu__btn { display: flex; align-items: center; justify-content: center; gap: 0.5rem; padding: 0.875rem; font-size: 0.9rem; font-weight: 500; border-radius: 4px; text-align: center; }
+  .mobile-menu__btn--reserve { border: 1.5px solid var(--color-primary); color: var(--color-primary); }
+  .mobile-menu__btn--tel { background-color: var(--color-primary); color: #fff; }
+  @media (min-width: 1024px) {
+    .header__nav { display: flex; }
+    .header__cta { display: flex; }
+    .header__hamburger { display: none; }
+  }
+</style>
+
+<script>
+  const toggle = document.getElementById('menu-toggle');
+  const closeBtn = document.getElementById('menu-close');
+  const menu = document.getElementById('mobile-menu');
+  const overlay = menu?.querySelector('.mobile-menu__overlay');
+  const open = () => { menu?.removeAttribute('hidden'); toggle?.setAttribute('aria-expanded','true'); document.body.style.overflow='hidden'; };
+  const close = () => { menu?.setAttribute('hidden',''); toggle?.setAttribute('aria-expanded','false'); document.body.style.overflow=''; };
+  toggle?.addEventListener('click', open);
+  closeBtn?.addEventListener('click', close);
+  overlay?.addEventListener('click', close);
+  menu?.querySelectorAll('.mobile-menu__link').forEach((l) => l.addEventListener('click', close));
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') close(); });
+</script>
