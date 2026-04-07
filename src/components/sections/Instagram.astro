@@ -6,17 +6,25 @@
       <span class="section-en">INSTAGRAM</span>
       <h2 class="section-title">インスタグラム</h2>
       <p class="instagram-handle">
-        <a href="https://www.instagram.com/wajitanaka_dc/" target="_blank" rel="noopener noreferrer">
-          @wajitanaka_dc
+        <a href="https://www.instagram.com/wajitanakadc/" target="_blank" rel="noopener noreferrer">
+          @wajitanakadc
         </a>
       </p>
     </div>
-    <div class="instagram-grid" id="instagram-grid">
-      <!-- Instagram posts will be loaded here -->
-      <div class="instagram-placeholder">
-        <p>インスタグラムの最新投稿はこちらから</p>
-        <a href="https://www.instagram.com/wajitanaka_dc/" target="_blank" rel="noopener noreferrer" class="btn">
-          インスタグラムを見る
+    <div class="instagram-feed">
+      <!-- Instagram embed via Elfsight or direct embed -->
+      <div class="instagram-embed-wrap">
+        <blockquote
+          class="instagram-media"
+          data-instgrm-permalink="https://www.instagram.com/wajitanakadc/"
+          data-instgrm-version="14"
+          style="background:#FFF; border:0; border-radius:3px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin:1px; max-width:100%; min-width:326px; padding:0; width:99.375%;"
+        ></blockquote>
+      </div>
+      <script async src="//www.instagram.com/embed.js"></script>
+      <div class="instagram-cta">
+        <a href="https://www.instagram.com/wajitanakadc/" target="_blank" rel="noopener noreferrer" class="btn">
+          インスタグラムをフォローする
         </a>
       </div>
     </div>
@@ -55,16 +63,14 @@
 .instagram-handle a:hover {
   text-decoration: underline;
 }
-.instagram-placeholder {
-  text-align: center;
-  padding: 60px 20px;
-  background: #f8faf8;
-  border-radius: 12px;
-  border: 2px dashed #cce5dc;
+.instagram-feed {
+  max-width: 540px;
+  margin: 0 auto;
 }
-.instagram-placeholder p {
-  color: #666;
-  margin-bottom: 20px;
-  font-size: 1rem;
+.instagram-embed-wrap {
+  margin-bottom: 24px;
+}
+.instagram-cta {
+  text-align: center;
 }
 </style>

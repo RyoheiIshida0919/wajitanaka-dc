@@ -3,27 +3,320 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import StickyFooterCTA from '../components/StickyFooterCTA.astro';
+
+const commitments = [
+  {
+    num: '1',
+    title: '丁寧な対応と清潔な院内',
+    text: '患者さんお一人おひとりに丁寧に向き合い、説明を大切にしています。また、院内を常にきれいに保つことに力を入れています。マンション、戸建て、診療、事務所など、幅広な建物管理業者までご対応で、初診は丁寧に一緒にお話しします。お悩みやご要望をしっかりとお聞かせください。',
+    img: '/images/site/f03-1.jpg',
+  },
+  {
+    num: '2',
+    title: '子ども連れでも安心して通える',
+    text: '「子どもも一緒に行ける歯科になって欲しい」「気づきやスタッフが一体となるような医院にして欲しい」といった声を受けて、保育士が常駐し、お子様のための遊ぶスペースも備えています。',
+    img: '/images/site/f06-1.jpg',
+  },
+  {
+    num: '3',
+    title: '気づきのある診療と丁寧なカウンセリング',
+    text: '「気づかずにいた歯の問題を見つけてもらった」という声もいただきます。「歯科的な知識を丁寧に教えてくれる」という声も受け、歯科衛生士を中心にして丁寧なカウンセリングを心がけています。',
+    img: '/images/site/f02-1.jpg',
+  },
+  {
+    num: '4',
+    title: '院内の雰囲気が良くリラックスできる',
+    text: '院内スタッフの「雰囲気が良い」という声が多くあります。「リラックス歯科」を意識した雰囲気作りに力を入れており、院内全体がリラックスできるような空間を目指しています。',
+    img: '/images/site/f01-2.jpg',
+  },
+  {
+    num: '5',
+    title: '久しぶりの受診でも安心',
+    text: '「何年も歯医者に行っていなかったが安心して通えた」「スタッフが親切で、歯科のアドバイスもいただいた」という声もいただいています。久しぶりの受診でも丁寧にサポートします。',
+    img: '/images/site/f04-1.jpg',
+  },
+  {
+    num: '6',
+    title: 'デジタル診察券で便利に',
+    text: '「診察券アプリを使えている（便利）」という声もあります。スマホ診察券は絶大な好評をいただいており、次回の予約確認なども簡単にできます。',
+    img: '/images/site/f05-2.jpg',
+  },
+];
+
+const faqs = [
+  {
+    num: '1',
+    q: '赤ちゃんや小さな子どもも診てもらえますか？',
+    a: '本院の最大の特長の一つが、小さなお子様への対応力です。まず、何を最優先にするかを丁寧にお聞きし、お子様が安心できるよう工夫して診療を行います。保育士も常駐しておりますので、治療中のお子様のお預かりも可能です。初めての受診でも、丁寧にご対応しますのでお気軽にどうぞ。',
+  },
+  {
+    num: '2',
+    q: '子どもを預けて治療できますか？',
+    a: 'はい、平日午前中を中心に保育士常駐のキッズスペースでお子様をお預かりできます。詳しくは予約時にお申し付けください。お子様も院内のキッズスペースで楽しく過ごしていただけます。',
+  },
+  {
+    num: '3',
+    q: '歯医者が怖くて治療に行けません。対応してもらえますか？',
+    a: 'はい、対応可能です。当院では静脈内鎮静法（点滴で眠ったような状態で治療）に対応しております。「緊張してしまう」という方にも、じっくりとお話を聞いてから治療を進めますのでご安心ください。',
+  },
+  {
+    num: '4',
+    q: '女性の先生に診てもらえますか？',
+    a: 'はい、当院には女性歯科医師が在籍しています。「女性の先生に診てもらいたい」「子どもを女性の先生に診てほしい」という方もお気軽にご相談ください。',
+  },
+  {
+    num: '5',
+    q: 'どんな診療に力を入れていますか？',
+    a: '当院は、できる限りすべての診療を自院で対応することを目指しています。そのため、歯科の各分野（予防・小児・矯正・インプラント・訪問など）に対応した専門的な設備と技術を備えています。まず歯を守ることを大切にし、なるべく「抜かずに済む選択肢」を最大限考えてご提案します。',
+  },
+  {
+    num: '6',
+    q: '場所はどこにありますか？',
+    a: '当院は静岡県浜松市和地町4757-1にございます。浜松市の北区エリアで、東・三ケ日・細江・引佐・新都田・北浜・東浜・三方原・大人・大葉はじめ各方面からアクセスいただけます。駐車場も完備しておりますので、お車でのお越しも便利です。',
+  },
+];
 ---
-<BaseLayout title="こだわりとQ&A｜和地たなか歯科" description="患者さんの声とよくある質問。和地たなか歯科のこだわりと丁寧な対応をご紹介します。">
+
+<BaseLayout
+  title="こだわりとQ&A｜和地たなか歯科"
+  description="和地たなか歯科のこだわりと患者さんからよくある質問をご紹介。丁寧な対応・バリアフリー設計・子ども連れOK・女性歯科医師在籍など。"
+>
   <Header />
-  <main>
-    <section class="page-hero">
-      <h1>こだわりとQ&A</h1>
+  <main id="main-content">
+    <!-- Page Hero -->
+    <div class="page-hero">
+      <img src="/images/site/f03-2.jpg" alt="診療室" class="page-hero__img" />
+      <div class="page-hero__overlay">
+        <h1 class="page-hero__title">こだわりとQ&A</h1>
+      </div>
+    </div>
+
+    <!-- Commitments -->
+    <section class="commitments">
+      <div class="container">
+        {commitments.map((item) => (
+          <div class="commitment-item reveal">
+            <div class="commitment-num">{item.num}</div>
+            <div class="commitment-body">
+              <h2 class="commitment-title">{item.title}</h2>
+              <p class="commitment-text">{item.text}</p>
+            </div>
+            <div class="commitment-img">
+              <img src={item.img} alt={item.title} loading="lazy" />
+            </div>
+          </div>
+        ))}
+      </div>
     </section>
-    <section class="page-content container">
-      <p>コンテンツ準備中です。</p>
+
+    <!-- FAQ -->
+    <section class="faq" id="faq">
+      <div class="container">
+        <div class="section-header reveal">
+          <h2 class="faq-heading">よくある質問</h2>
+          <span class="faq-sub">-FAQ-</span>
+        </div>
+        <div class="faq-list">
+          {faqs.map((item) => (
+            <div class="faq-item reveal">
+              <div class="faq-num">{item.num}</div>
+              <div class="faq-content">
+                <p class="faq-q">{item.q}</p>
+                <p class="faq-a">{item.a}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="page-cta">
+      <div class="container">
+        <div class="page-cta-inner reveal">
+          <h2>まずはお気軽にご相談ください</h2>
+          <p>Web予約は24時間受付中。お電話でのご予約もどうぞ。</p>
+          <div class="page-cta-btns">
+            <a href="https://dentnet.jp/r/60040" target="_blank" rel="noopener noreferrer" class="btn btn--white">Web予約（24時間）</a>
+            <a href="tel:053-489-8185" class="btn btn--outline-white">📞 053-489-8185</a>
+          </div>
+        </div>
+      </div>
     </section>
   </main>
   <Footer />
   <StickyFooterCTA />
 </BaseLayout>
+
 <style>
-  .page-hero {
-    background-color: var(--color-primary);
-    color: #fff;
-    padding: 4rem 1.25rem;
-    text-align: center;
+/* Page Hero */
+.page-hero {
+  position: relative;
+  height: 320px;
+  overflow: hidden;
+}
+.page-hero__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.page-hero__overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.35);
+  display: flex;
+  align-items: flex-end;
+  padding: 40px 48px;
+}
+.page-hero__title {
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 0.05em;
+}
+
+/* Commitments */
+.commitments {
+  padding: 80px 0;
+  background: #fff;
+}
+.commitment-item {
+  display: grid;
+  grid-template-columns: 48px 1fr 340px;
+  gap: 32px;
+  align-items: center;
+  padding: 48px 0;
+  border-bottom: 1px solid #edf2ef;
+}
+.commitment-item:last-child {
+  border-bottom: none;
+}
+.commitment-num {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: var(--color-primary);
+  opacity: 0.3;
+  font-family: Georgia, serif;
+  line-height: 1;
+}
+.commitment-title {
+  font-size: clamp(1.1rem, 2vw, 1.3rem);
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 12px;
+}
+.commitment-text {
+  font-size: 0.95rem;
+  line-height: 2;
+  color: #555;
+}
+.commitment-img {
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+}
+.commitment-img img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  display: block;
+}
+
+/* FAQ */
+.faq {
+  padding: 80px 0;
+  background: #f8faf8;
+}
+.section-header {
+  text-align: center;
+  margin-bottom: 56px;
+}
+.faq-heading {
+  font-size: clamp(1.8rem, 4vw, 2.4rem);
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 4px;
+}
+.faq-sub {
+  display: block;
+  font-size: 0.9rem;
+  color: #999;
+  letter-spacing: 0.1em;
+}
+.faq-list {
+  max-width: 800px;
+  margin: 0 auto;
+}
+.faq-item {
+  display: flex;
+  gap: 24px;
+  margin-bottom: 40px;
+}
+.faq-num {
+  flex: 0 0 40px;
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--color-primary);
+  opacity: 0.3;
+  font-family: Georgia, serif;
+  line-height: 1.2;
+}
+.faq-content {
+  flex: 1;
+}
+.faq-q {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 10px;
+  line-height: 1.6;
+}
+.faq-a {
+  font-size: 0.95rem;
+  line-height: 2;
+  color: #555;
+}
+
+/* CTA */
+.page-cta {
+  background: var(--color-primary);
+  padding: 64px 0;
+}
+.page-cta-inner {
+  text-align: center;
+  color: #fff;
+}
+.page-cta-inner h2 {
+  font-size: clamp(1.4rem, 3vw, 1.8rem);
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+.page-cta-inner p {
+  color: rgba(255,255,255,0.85);
+  margin-bottom: 28px;
+}
+.page-cta-btns {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.btn--white { background: #fff; color: var(--color-primary); font-weight: 700; }
+.btn--outline-white { border: 2px solid #fff; color: #fff; background: transparent; }
+
+@media (max-width: 900px) {
+  .commitment-item {
+    grid-template-columns: 40px 1fr;
+    grid-template-rows: auto auto;
   }
-  .page-hero h1 { font-size: 2rem; font-weight: 700; }
-  .page-content { padding-block: 4rem; }
+  .commitment-img {
+    grid-column: 1 / -1;
+  }
+}
+@media (max-width: 640px) {
+  .page-hero { height: 220px; }
+  .page-hero__overlay { padding: 24px; }
+  .commitment-item { grid-template-columns: 32px 1fr; }
+}
 </style>
