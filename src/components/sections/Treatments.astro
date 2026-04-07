@@ -1,131 +1,204 @@
 ---
 const treatments = [
-  { img: '/images/site/t-general.jpg', title: '一般歯科', text: 'むし歯・歯周病の診断・治療' },
-  { img: '/images/site/t-child.jpg', title: '小児歯科', text: '乳歯から永久歯への移行をサポート' },
-  { img: '/images/site/t-prevent.jpg', title: '予防歯科', text: 'クリーニング・フッ素・PMTC' },
-  { img: '/images/site/t-aesthetic.jpg', title: '審美歯科', text: 'ホワイトニング・セラミック治療' },
-  { img: '/images/site/t-ortho.jpg', title: '矯正歯科', text: 'マウスピース矯正・ワイヤー矯正' },
-  { img: '/images/site/t-implant.jpg', title: 'インプラント', text: '自然な噛み心地の人工歯根' },
-  { img: '/images/site/t-denture.jpg', title: '入れ歯', text: '精密義歯・総義歯・部分義歯' },
-  { img: '/images/site/t-sedation.jpg', title: '静脈内鎮静', text: '歯科恐怖症の方への無痛治療' },
-  { img: '/images/site/t-visit.jpg', title: '訪問歯科', text: '在宅・施設への訪問診療' },
+  {
+    name: '一般歯科',
+    sub: 'むし歯・歯周病・知覚過敏',
+    href: '#',
+    icon: `<svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" width="64" height="64">
+      <path d="M40 10 C28,10 18,18 16,30 C14,40 18,48 16,58 C14,68 10,74 14,76 C18,78 22,72 26,72 C30,72 32,78 36,79 C38,79.5 40,79.5 40,79.5 C40,79.5 42,79.5 44,79 C48,78 50,72 54,72 C58,72 62,78 66,76 C70,74 66,68 64,58 C62,48 66,40 64,30 C62,18 52,10 40,10Z" stroke="#018966" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M40 10 L34 22 L44 20 L36 32" stroke="#018966" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>`,
+  },
+  {
+    name: '小児歯科',
+    sub: 'むし歯・歯みがき・歯並び',
+    href: '#',
+    icon: `<svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" width="64" height="64">
+      <circle cx="40" cy="36" r="22" stroke="#018966" stroke-width="3.5"/>
+      <circle cx="32" cy="32" r="3" fill="#018966"/>
+      <circle cx="48" cy="32" r="3" fill="#018966"/>
+      <path d="M32 46 Q40 52 48 46" stroke="#018966" stroke-width="3" stroke-linecap="round" fill="none"/>
+      <path d="M28 14 Q40 8 52 14" stroke="#018966" stroke-width="3" stroke-linecap="round" fill="none"/>
+    </svg>`,
+  },
+  {
+    name: '予防歯科',
+    sub: 'メンテナンス・定期検診',
+    href: '#',
+    icon: `<svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" width="64" height="64">
+      <path d="M40 8 C28,8 18,16 16,28 C14,38 18,46 16,56 C14,64 12,70 16,72 C20,74 24,68 28,68 C32,68 34,74 38,75 C40,75.5 42,75 44,74 C48,72 50,66 54,66 C58,66 62,72 66,70 C70,68 68,62 66,54 C64,44 68,36 66,26 C64,14 52,8 40,8Z" stroke="#018966" stroke-width="3.5" stroke-linecap="round"/>
+      <path d="M28 36 L36 44 L52 26" stroke="#018966" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>`,
+  },
+  {
+    name: '歯科恐怖外来',
+    sub: '静脈内鎮静法・リラックス歯科',
+    href: '#',
+    icon: `<svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" width="64" height="64">
+      <path d="M40 68 C40 68 12 52 12 32 C12 22 20 14 30 14 C35 14 40 18 40 18 C40 18 45 14 50 14 C60 14 68 22 68 32 C68 52 40 68 40 68Z" fill="#018966"/>
+      <path d="M28 34 L34 40 L46 28" stroke="white" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+      <circle cx="40" cy="35" r="8" stroke="white" stroke-width="2.5" fill="none"/>
+    </svg>`,
+  },
+  {
+    name: 'ホワイトニング',
+    sub: '審美歯科・白いかぶせ物',
+    href: '#',
+    icon: `<svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" width="64" height="64">
+      <path d="M40 10 C28,10 18,18 16,30 C14,40 18,48 16,58 C14,68 10,74 14,76 C18,78 22,72 26,72 C30,72 32,78 36,79 C40,80 44,79 44,79 C48,78 50,72 54,72 C58,72 62,78 66,76 C70,74 66,68 64,58 C62,48 66,40 64,30 C62,18 52,10 40,10Z" stroke="#018966" stroke-width="3.5" stroke-linecap="round"/>
+      <line x1="40" y1="6" x2="40" y2="2" stroke="#018966" stroke-width="2.5" stroke-linecap="round"/>
+      <line x1="50" y1="10" x2="54" y2="6" stroke="#018966" stroke-width="2.5" stroke-linecap="round"/>
+      <line x1="30" y1="10" x2="26" y2="6" stroke="#018966" stroke-width="2.5" stroke-linecap="round"/>
+      <line x1="56" y1="18" x2="60" y2="14" stroke="#018966" stroke-width="2" stroke-linecap="round"/>
+    </svg>`,
+  },
+  {
+    name: 'インプラント',
+    sub: 'むし歯・欠損・本格修復',
+    href: '#',
+    icon: `<svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" width="64" height="64">
+      <rect x="32" y="8" width="16" height="10" rx="3" stroke="#018966" stroke-width="3"/>
+      <line x1="40" y1="18" x2="40" y2="26" stroke="#018966" stroke-width="3" stroke-linecap="round"/>
+      <path d="M34 26 L46 26 L44 50 L36 50 Z" stroke="#018966" stroke-width="3" stroke-linejoin="round"/>
+      <line x1="34" y1="32" x2="46" y2="32" stroke="#018966" stroke-width="2.5" stroke-linecap="round"/>
+      <line x1="34" y1="38" x2="46" y2="38" stroke="#018966" stroke-width="2.5" stroke-linecap="round"/>
+      <line x1="34" y1="44" x2="46" y2="44" stroke="#018966" stroke-width="2.5" stroke-linecap="round"/>
+      <line x1="36" y1="52" x2="44" y2="52" stroke="#018966" stroke-width="2.5" stroke-linecap="round"/>
+      <line x1="38" y1="56" x2="42" y2="56" stroke="#018966" stroke-width="2" stroke-linecap="round"/>
+    </svg>`,
+  },
+  {
+    name: '歯並び',
+    sub: '矯正相談',
+    href: '#',
+    icon: `<svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" width="64" height="64">
+      <path d="M14 36 Q14 28 22 28 Q26 28 28 32 Q30 28 36 28 Q40 28 40 32 Q40 28 44 28 Q50 28 52 32 Q54 28 58 28 Q66 28 66 36 Q66 50 40 58 Q14 50 14 36Z" stroke="#018966" stroke-width="3.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      <line x1="40" y1="22" x2="40" y2="14" stroke="#018966" stroke-width="2.5" stroke-linecap="round"/>
+      <line x1="40" y1="14" x2="40" y2="8" stroke="#018966" stroke-width="2" stroke-linecap="round"/>
+      <line x1="48" y1="20" x2="54" y2="14" stroke="#018966" stroke-width="2.5" stroke-linecap="round"/>
+      <line x1="32" y1="20" x2="26" y2="14" stroke="#018966" stroke-width="2.5" stroke-linecap="round"/>
+    </svg>`,
+  },
+  {
+    name: '顎関節症',
+    sub: '歯ぎしり・くいしばり',
+    href: '#',
+    icon: `<svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" width="64" height="64">
+      <circle cx="38" cy="22" r="12" stroke="#018966" stroke-width="3.5"/>
+      <path d="M28 32 Q20 40 22 52 Q24 62 34 64 Q40 65 46 62 Q56 58 56 48 Q56 38 50 34" stroke="#018966" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+      <path d="M34 64 Q34 70 30 72" stroke="#018966" stroke-width="3" stroke-linecap="round"/>
+      <path d="M44 62 Q46 68 50 70" stroke="#018966" stroke-width="3" stroke-linecap="round"/>
+      <path d="M26 48 Q28 52 32 52 Q36 52 38 48" stroke="#018966" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+    </svg>`,
+  },
+  {
+    name: '口腔外科',
+    sub: '親知らず・口内炎・粘膜の異常',
+    href: '#',
+    icon: `<svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" width="64" height="64">
+      <path d="M40 10 C26,10 14,20 14,34 C14,46 22,54 20,64 C18,72 14,76 18,78 C22,80 28,74 34,74 C37,74 40,78 40,78 C40,78 43,74 46,74 C52,74 58,80 62,78 C66,76 62,72 60,64 C58,54 66,46 66,34 C66,20 54,10 40,10Z" stroke="#018966" stroke-width="3.5" stroke-linecap="round"/>
+      <path d="M28 34 C28 28 52 28 52 34" stroke="#018966" stroke-width="3" stroke-linecap="round" fill="none"/>
+      <circle cx="32" cy="38" r="2.5" fill="#018966"/>
+      <circle cx="40" cy="40" r="2.5" fill="#018966"/>
+      <circle cx="48" cy="38" r="2.5" fill="#018966"/>
+    </svg>`,
+  },
 ];
 ---
+
 <section class="treatments" id="treatments">
   <div class="treatments-header">
     <div class="container">
-      <span class="section-en">TREATMENTS</span>
-      <h2 class="section-title">診療案内</h2>
-      <p class="treatments-sub">お口のことなら何でもご相談ください</p>
+      <h2 class="treatments-title">診療案内</h2>
     </div>
   </div>
-  <div class="container">
-    <div class="treatments-grid reveal">
-      {treatments.map(t => (
-        <div class="treatment-card">
-          <div class="treatment-img">
-            <img src={t.img} alt={t.title} loading="lazy" />
-          </div>
-          <div class="treatment-body">
-            <h3 class="treatment-title">{t.title}</h3>
-            <p class="treatment-text">{t.text}</p>
-          </div>
-        </div>
-      ))}
-    </div>
-    <div class="treatments-cta reveal">
-      <a href="/treatments" class="btn">診療メニューを詳しく見る</a>
+  <div class="treatments-body">
+    <div class="container">
+      <ul class="treatments-grid reveal">
+        {treatments.map(item => (
+          <li class="treatment-item">
+            <a href={item.href} class="treatment-link" aria-label={`${item.name}について詳しく見る`}>
+              <div class="treatment-icon" set:html={item.icon} />
+              <p class="treatment-name">{item.name}</p>
+              <p class="treatment-sub">{item.sub}</p>
+            </a>
+          </li>
+        ))}
+      </ul>
     </div>
   </div>
 </section>
 
 <style>
-.treatments {
-  padding-bottom: 80px;
-  background: #fff;
-}
 .treatments-header {
-  background: var(--color-primary);
-  padding: 60px 0 48px;
-  margin-bottom: 48px;
+  background-color: var(--color-primary, #018966);
+  padding: 2rem 0;
   text-align: center;
-  color: #fff;
 }
-.treatments-header .section-en {
-  display: block;
-  font-size: 13px;
-  letter-spacing: 0.2em;
-  font-weight: 600;
-  margin-bottom: 8px;
-  color: rgba(255,255,255,0.8);
-}
-.treatments-header .section-title {
-  font-size: clamp(1.6rem, 4vw, 2.2rem);
+.treatments-title {
+  font-size: 1.5rem;
   font-weight: 700;
   color: #fff;
-  margin-bottom: 12px;
+  letter-spacing: 0.1em;
 }
-.treatments-sub {
-  color: rgba(255,255,255,0.85);
-  font-size: 1rem;
+.treatments-body {
+  background-color: #f5f5f5;
+  padding: 3rem 0;
 }
 .treatments-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-  margin-bottom: 40px;
+  gap: 1.5rem 1rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
-.treatment-card {
-  background: #f8faf8;
-  border-radius: 12px;
-  overflow: hidden;
-  border: 1px solid #e8f0ec;
-  transition: transform 0.2s, box-shadow 0.2s;
+.treatment-item {
+  display: flex;
 }
-.treatment-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 24px rgba(1,137,102,0.12);
-}
-.treatment-img {
-  height: 180px;
-  overflow: hidden;
-}
-.treatment-img img {
+.treatment-link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  transition: opacity 0.2s;
   width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  transition: transform 0.4s ease;
 }
-.treatment-card:hover .treatment-img img {
-  transform: scale(1.05);
+.treatment-link:hover {
+  opacity: 0.8;
 }
-.treatment-body {
-  padding: 20px 20px 24px;
-  text-align: center;
+.treatment-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 80px;
+  height: 80px;
+  margin-bottom: 0.5rem;
 }
-.treatment-title {
-  font-size: 1.1rem;
+.treatment-icon svg {
+  width: 64px;
+  height: 64px;
+}
+.treatment-name {
+  font-size: 0.95rem;
   font-weight: 700;
-  color: var(--color-primary);
-  margin-bottom: 8px;
-}
-.treatment-text {
-  font-size: 0.85rem;
-  color: #666;
-  line-height: 1.6;
-}
-.treatments-cta {
+  color: #222;
   text-align: center;
+  letter-spacing: 0.03em;
+  line-height: 1.4;
 }
-@media (max-width: 768px) {
-  .treatments-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
+.treatment-sub {
+  font-size: 0.7rem;
+  color: #666;
+  text-align: center;
+  margin-top: 0.2rem;
+  letter-spacing: 0.01em;
+  line-height: 1.4;
 }
-@media (max-width: 480px) {
-  .treatments-grid {
-    grid-template-columns: 1fr;
-  }
+@media (min-width: 640px) {
+  .treatment-icon { width: 96px; height: 96px; }
+  .treatment-icon svg { width: 80px; height: 80px; }
+  .treatment-name { font-size: 1rem; }
+  .treatment-sub { font-size: 0.75rem; }
 }
 </style>

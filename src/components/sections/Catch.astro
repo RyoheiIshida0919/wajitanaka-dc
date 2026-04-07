@@ -1,93 +1,78 @@
 ---
 ---
-<section class="catch-section reveal">
-  <div class="container">
-    <div class="catch-inner">
-      <div class="catch-icon">
-        <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M32 8C24 8 16 14 16 24c0 6 2 10 5 14l4 10c1 3 3 8 7 8s6-5 7-8l4-10c3-4 5-8 5-14 0-10-8-16-16-16z" fill="#018966" opacity="0.15"/>
-          <path d="M32 8C24 8 16 14 16 24c0 6 2 10 5 14l4 10c1 3 3 8 7 8s6-5 7-8l4-10c3-4 5-8 5-14 0-10-8-16-16-16z" stroke="#018966" stroke-width="2.5" fill="none"/>
-          <circle cx="26" cy="22" r="2.5" fill="#018966"/>
-          <circle cx="38" cy="22" r="2.5" fill="#018966"/>
-          <path d="M26 30c1.5 3 10.5 3 12 0" stroke="#018966" stroke-width="2" stroke-linecap="round"/>
-        </svg>
-      </div>
-      <h2 class="catch-title">
-        <span class="catch-en">CONCEPT</span>
-        0才から100才まで<br>みんなが通える歯医者さん
-      </h2>
-      <p class="catch-text">
-        和地たなか歯科は、お子様から高齢の方まで、すべての方が安心して通える歯科医院です。<br>
-        バリアフリー設計・女性歯科医師在籍・保育士常駐など、通いやすい環境を整えています。<br>
-        お口の健康を通じて、地域の皆さまの笑顔をサポートします。
-      </p>
+
+<section class="catch" aria-label="キャッチコピー">
+  <div class="catch__inner container">
+    <!-- 歯アイコン（SVG） - クリニックロゴ再現 -->
+    <div class="catch__icon" aria-hidden="true">
+      <svg viewBox="0 0 210 190" fill="none" xmlns="http://www.w3.org/2000/svg" width="150" height="136">
+        <!-- 歯の本体アウトライン（ストロークのみ） -->
+        <path
+          d="M 78,28
+             C 56,20 34,32 26,56
+             C 18,78 28,98 22,120
+             C 16,142 6,160 14,176
+             C 18,188 32,192 44,184
+             C 54,176 56,160 66,155
+             C 72,152 80,151 88,151
+             C 96,151 104,152 110,155
+             C 120,160 122,176 132,184
+             C 144,192 158,188 162,176
+             C 170,160 160,142 154,120
+             C 148,98 158,78 150,56
+             C 142,32 120,20 98,28"
+          stroke="#018966" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"
+        />
+        <!-- 右肩のスクロール/カール -->
+        <path
+          d="M 98,28
+             C 104,20 116,15 126,20
+             C 138,27 140,42 132,50
+             C 124,58 112,52 108,42
+             C 104,34 110,24 120,22"
+          stroke="#018966" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"
+        />
+        <!-- 内側 スパークルライン（青/ティール） -->
+        <line x1="58" y1="96" x2="118" y2="96" stroke="#2aaccc" stroke-width="4" stroke-linecap="round"/>
+        <!-- 中心レンズフレアスパーク -->
+        <line x1="88" y1="82" x2="88" y2="110" stroke="#2aaccc" stroke-width="3.5" stroke-linecap="round"/>
+        <line x1="74" y1="96" x2="102" y2="96" stroke="#2aaccc" stroke-width="3.5" stroke-linecap="round"/>
+        <!-- 外側スパークル大（右） -->
+        <line x1="172" y1="50" x2="172" y2="32" stroke="#2aaccc" stroke-width="3" stroke-linecap="round"/>
+        <line x1="163" y1="41" x2="181" y2="41" stroke="#2aaccc" stroke-width="3" stroke-linecap="round"/>
+        <line x1="165" y1="35" x2="179" y2="47" stroke="#2aaccc" stroke-width="2" stroke-linecap="round"/>
+        <line x1="179" y1="35" x2="165" y2="47" stroke="#2aaccc" stroke-width="2" stroke-linecap="round"/>
+        <!-- 外側スパークル小（右下） -->
+        <line x1="182" y1="72" x2="182" y2="62" stroke="#2aaccc" stroke-width="2.5" stroke-linecap="round"/>
+        <line x1="177" y1="67" x2="187" y2="67" stroke="#2aaccc" stroke-width="2.5" stroke-linecap="round"/>
+        <line x1="178" y1="63" x2="186" y2="71" stroke="#2aaccc" stroke-width="1.5" stroke-linecap="round"/>
+        <line x1="186" y1="63" x2="178" y2="71" stroke="#2aaccc" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
     </div>
-  </div>
-  <div class="catch-photos">
-    <div class="catch-photo"><img src="/images/site/catch-1.jpg" alt="院内の様子" loading="lazy" /></div>
-    <div class="catch-photo"><img src="/images/site/catch-2.jpg" alt="スタッフの様子" loading="lazy" /></div>
-    <div class="catch-photo"><img src="/images/site/catch-3.jpg" alt="診療の様子" loading="lazy" /></div>
-    <div class="catch-photo"><img src="/images/site/catch-4.jpg" alt="院内の様子" loading="lazy" /></div>
+    <!-- キャッチコピー -->
+    <h2 class="catch__headline">ここから笑顔がうまれる。<br />歯も、心も。</h2>
   </div>
 </section>
 
 <style>
-.catch-section {
-  padding: 80px 0 0;
-  background: #fff;
-}
-.catch-inner {
-  text-align: center;
-  max-width: 720px;
-  margin: 0 auto;
-  padding-bottom: 60px;
-}
-.catch-icon {
-  margin-bottom: 24px;
-}
-.catch-en {
-  display: block;
-  font-size: 13px;
-  letter-spacing: 0.2em;
-  color: var(--color-primary);
-  font-weight: 600;
-  margin-bottom: 12px;
-}
-.catch-title {
-  font-size: clamp(1.6rem, 4vw, 2.2rem);
-  font-weight: 700;
-  line-height: 1.6;
-  color: #1a1a1a;
-  margin-bottom: 24px;
-}
-.catch-text {
-  font-size: 1rem;
-  line-height: 2;
-  color: #555;
-}
-.catch-photos {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 0;
-  height: 260px;
-}
-.catch-photo {
-  overflow: hidden;
-}
-.catch-photo img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  transition: transform 0.4s ease;
-}
-.catch-photo:hover img {
-  transform: scale(1.05);
-}
-@media (max-width: 640px) {
-  .catch-photos {
-    grid-template-columns: repeat(2, 1fr);
-    height: 320px;
+  .catch {
+    background-color: #fff;
+    padding-block: 5rem 4rem;
+    text-align: center;
   }
-}
+  .catch__inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .catch__icon {
+    margin-bottom: 1.75rem;
+  }
+  .catch__headline {
+    font-size: clamp(1.4rem, 3.8vw, 2.1rem);
+    font-weight: 700;
+    color: #018966;
+    line-height: 1.7;
+    letter-spacing: 0.08em;
+  }
 </style>

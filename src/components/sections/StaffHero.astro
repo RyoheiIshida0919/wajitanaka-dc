@@ -1,96 +1,71 @@
 ---
 ---
-<section class="staff-hero reveal">
-  <div class="staff-hero-inner">
-    <div class="staff-hero-image">
-      <img src="/images/site/staff-hero.jpg" alt="田中亮次院長" loading="lazy" />
-    </div>
-    <div class="staff-hero-content">
-      <span class="staff-hero-en">DIRECTOR MESSAGE</span>
-      <h2 class="staff-hero-title">院長からの<br>メッセージ</h2>
-      <p class="staff-hero-text">
-        歯医者さんは怖い、痛いというイメージを持っている方が多いと思います。<br><br>
-        私たちは「行きたくなる歯医者さん」を目指しています。<br>
-        お子様には楽しく通えるよう、高齢の方には安心して来られるよう、<br>
-        すべての患者さんに寄り添った診療を心がけています。<br><br>
-        お口のことで気になることがあれば、どんな小さなことでもお気軽にご相談ください。
+
+<section class="staff-hero" aria-labelledby="staff-hero-title">
+  <img
+    src="/images/site/staff-hero.jpg"
+    alt="和地たなか歯科 院長・スタッフ"
+    class="staff-hero__img"
+    loading="lazy"
+  />
+  <div class="staff-hero__overlay">
+    <div class="container">
+      <h2 class="staff-hero__title" id="staff-hero-title">生きる力はお口から</h2>
+      <p class="staff-hero__sub">
+        食べること、話すこと、笑うこと<br />
+        お口の健康は、毎日の生活を支える大切な基礎です。
       </p>
-      <p class="staff-hero-name">院長 <strong>田中 亮次</strong></p>
+      <p class="staff-hero__body">
+        私たちは、ただ歯を直すだけでなく<br />
+        「一生自分の歯で健康に過ごすこと」を<br />
+        サポートする歯科医院を目指しています。
+      </p>
     </div>
   </div>
 </section>
 
 <style>
-.staff-hero {
-  padding: 80px 0;
-  background: #f8faf8;
-  overflow: hidden;
-}
-.staff-hero-inner {
-  display: flex;
-  align-items: center;
-  gap: 60px;
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 0 24px;
-}
-.staff-hero-image {
-  flex: 0 0 420px;
-  border-radius: 16px;
-  overflow: hidden;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.1);
-}
-.staff-hero-image img {
-  width: 100%;
-  height: 500px;
-  object-fit: cover;
-  object-position: top center;
-  display: block;
-}
-.staff-hero-content {
-  flex: 1;
-}
-.staff-hero-en {
-  display: block;
-  font-size: 12px;
-  letter-spacing: 0.2em;
-  color: #1a1a1a;
-  font-weight: 600;
-  margin-bottom: 16px;
-}
-.staff-hero-title {
-  font-size: clamp(1.6rem, 3vw, 2.2rem);
-  font-weight: 700;
-  line-height: 1.5;
-  color: #1a1a1a;
-  margin-bottom: 28px;
-}
-.staff-hero-text {
-  font-size: 1rem;
-  line-height: 2;
-  color: #555;
-  margin-bottom: 24px;
-}
-.staff-hero-name {
-  font-size: 1rem;
-  color: #333;
-}
-.staff-hero-name strong {
-  font-size: 1.2rem;
-  color: #1a1a1a;
-  margin-left: 8px;
-}
-@media (max-width: 768px) {
-  .staff-hero-inner {
-    flex-direction: column;
-    gap: 32px;
+  .staff-hero {
+    display: block;
+    line-height: 0;
   }
-  .staff-hero-image {
-    flex: none;
+  .staff-hero__img {
     width: 100%;
+    max-height: 520px;
+    object-fit: cover;
+    object-position: center top;
+    display: block;
   }
-  .staff-hero-image img {
-    height: 320px;
+  @media (max-width: 767px) {
+    .staff-hero__img { max-height: 300px; }
   }
-}
+  .staff-hero__overlay {
+    background-color: rgba(255, 255, 255, 0.93);
+    padding: 2rem 0 2.5rem;
+    line-height: 1;
+  }
+  .staff-hero__title {
+    font-size: clamp(1.6rem, 4.5vw, 2.6rem);
+    font-weight: 700;
+    color: #018966;
+    letter-spacing: 0.04em;
+    line-height: 1.3;
+    margin-bottom: 1rem;
+  }
+  .staff-hero__sub {
+    font-size: clamp(0.9rem, 2vw, 1rem);
+    color: #333;
+    line-height: 1.9;
+    letter-spacing: 0.04em;
+    margin-bottom: 1rem;
+  }
+  .staff-hero__body {
+    font-size: clamp(0.85rem, 1.8vw, 0.95rem);
+    color: #555;
+    line-height: 2;
+    letter-spacing: 0.04em;
+  }
+  @media (min-width: 768px) {
+    .staff-hero__overlay { padding: 2.5rem 0 3rem; }
+  }
 </style>
