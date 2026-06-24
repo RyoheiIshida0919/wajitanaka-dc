@@ -3,6 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import StickyFooterCTA from '../components/StickyFooterCTA.astro';
+import Catch from '../components/sections/Catch.astro';
 import Hero from '../components/sections/Hero.astro';
 import StaffHero from '../components/sections/StaffHero.astro';
 import Features from '../components/sections/Features.astro';
@@ -19,6 +20,7 @@ const seo = {
 <BaseLayout title={seo.title} description={seo.description}>
   <Header />
   <main id="main-content">
+    <Catch />
     <Hero />
     <StaffHero />
     <Features />
