@@ -1,17 +1,9 @@
----
----
-
-<section class="staff-hero" aria-labelledby="staff-hero-title">
-  <img
-    src="/images/site/staff-hero.jpg"
-    alt="和地たなか歯科 院長・スタッフ"
-    class="staff-hero__img"
-    loading="lazy"
-  />
-  <div class="staff-hero__overlay">
-    <div class="container">
-      <h2 class="staff-hero__title" id="staff-hero-title">生きる力はお口から</h2>
-      <p class="staff-hero__sub">
+<section class="staff-hero" aria-labelledby="staff-message">
+  <img src="/images/site/staff-hero.jpg" alt="和地たなか歯科の医師とスタッフ" loading="eager" />
+  <div class="staff-hero__message">
+    <div class="staff-hero__content">
+      <h2 id="staff-message">生きる力はお口から</h2>
+      <p class="staff-hero__lead">
         食べること、話すこと、笑うこと<br />
         お口の健康は、毎日の生活を支える大切な基礎です。
       </p>
@@ -26,46 +18,92 @@
 
 <style>
   .staff-hero {
-    display: block;
-    line-height: 0;
+    position: relative;
+    height: clamp(424px, 46vw, 640px);
+    overflow: hidden;
+    background: #e8e9e5;
   }
-  .staff-hero__img {
+
+  .staff-hero > img {
     width: 100%;
-    max-height: 520px;
+    height: 100%;
     object-fit: cover;
-    object-position: center top;
-    display: block;
+    object-position: center 26%;
   }
-  @media (max-width: 767px) {
-    .staff-hero__img { max-height: 300px; }
+
+  .staff-hero__message {
+    position: absolute;
+    right: 0;
+    bottom: clamp(8px, 1vw, 10px);
+    left: 0;
+    min-height: clamp(150px, 17vw, 169px);
+    padding: clamp(9px, 0.95vw, 12px) 20px 18px;
+    background: rgba(255, 255, 255, 0.82);
   }
-  .staff-hero__overlay {
-    background-color: rgba(255, 255, 255, 0.93);
-    padding: 2rem 0 2.5rem;
-    line-height: 1;
+
+  .staff-hero__content {
+    width: min(100%, 680px);
+    margin: 0 auto;
+    text-align: center;
   }
-  .staff-hero__title {
-    font-size: clamp(1.6rem, 4.5vw, 2.6rem);
+
+  .staff-hero__message h2 {
+    margin-bottom: 3px;
+    color: #008b5a;
+    font-family: "Hiragino Mincho ProN", "Yu Mincho", "Hiragino Mincho Pro", serif;
+    font-size: clamp(2rem, 3.35vw, 2.125rem);
     font-weight: 700;
-    color: #018966;
-    letter-spacing: 0.04em;
-    line-height: 1.3;
-    margin-bottom: 1rem;
+    line-height: 1.2;
+    letter-spacing: 0.08em;
   }
-  .staff-hero__sub {
-    font-size: clamp(0.9rem, 2vw, 1rem);
-    color: #333;
-    line-height: 1.9;
-    letter-spacing: 0.04em;
-    margin-bottom: 1rem;
-  }
+
+  .staff-hero__lead,
   .staff-hero__body {
-    font-size: clamp(0.85rem, 1.8vw, 0.95rem);
-    color: #555;
-    line-height: 2;
+    color: #000;
+    font-weight: 700;
     letter-spacing: 0.04em;
   }
-  @media (min-width: 768px) {
-    .staff-hero__overlay { padding: 2.5rem 0 3rem; }
+
+  .staff-hero__lead {
+    margin-bottom: 14px;
+    font-size: clamp(0.78rem, 1.28vw, 0.82rem);
+    line-height: 1.65;
+  }
+
+  .staff-hero__body {
+    font-size: clamp(0.78rem, 1.28vw, 0.82rem);
+    line-height: 1.45;
+  }
+
+  @media (max-width: 767px) {
+    .staff-hero {
+      height: 460px;
+    }
+
+    .staff-hero > img {
+      object-position: 56% top;
+    }
+
+    .staff-hero__message {
+      bottom: 0;
+      min-height: 0;
+      padding: 16px 16px 18px;
+    }
+
+    .staff-hero__message h2 {
+      font-size: clamp(1.7rem, 8.4vw, 2.1rem);
+      letter-spacing: 0.04em;
+    }
+
+    .staff-hero__lead {
+      margin-bottom: 10px;
+      font-size: 0.76rem;
+      line-height: 1.6;
+    }
+
+    .staff-hero__body {
+      font-size: 0.76rem;
+      line-height: 1.6;
+    }
   }
 </style>

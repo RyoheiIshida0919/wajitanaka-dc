@@ -3,46 +3,50 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import StickyFooterCTA from '../components/StickyFooterCTA.astro';
+import PageHero from '../components/PageHero.astro';
+
+const noteProfileUrl = import.meta.env.PUBLIC_NOTE_PROFILE_URL?.trim();
+const noteEmbedUrl = import.meta.env.PUBLIC_NOTE_EMBED_URL?.trim();
+const hasNoteFeed = Boolean(noteProfileUrl && noteEmbedUrl);
 ---
 
 <BaseLayout
   title="ブログ｜和地たなか歯科"
-  description="和地たなか歯科のブログ。診療案内・症例紹介・お口の健康情報などを発信しています。"
+  description="和地たなか歯科のブログ。診療案内、症例紹介、お口の健康情報などをnoteで発信しています。"
+  ogImage="/images/site/blog-hero.jpg"
 >
   <Header />
   <main id="main-content">
-    <!-- Page Hero -->
-    <div class="page-hero">
-      <img src="/images/site/hero-1.jpg" alt="和地たなか歯科" class="page-hero__img" />
-      <div class="page-hero__overlay">
-        <h1 class="page-hero__title">ブログ</h1>
-      </div>
-    </div>
+    <PageHero title="ブログ" image="/images/site/blog-hero.jpg" alt="院内に飾られた和地たなか歯科のイラスト" position="center 48%" />
 
-    <section class="blog-section">
-      <div class="container">
-        <p class="blog-intro">診療案内・症例紹介・お口の健康情報などを発信しています。</p>
-
-        <!-- note embed -->
-        <div class="note-embed">
-          <script src="https://note.com/scripts/embed.js" type="text/javascript" async></script>
-          <div id="note-embed-container">
-            <iframe
-              src="https://note.com/wajitanaka_dc/embed"
-              style="border: 0; display: block; max-width: 99%; width: 500px; padding: 0px; margin: 10px auto; position: static; visibility: visible;"
-              height="400"
-              loading="lazy"
-              title="和地たなか歯科 note"
-            ></iframe>
+    <section class="blog">
+      <div class="narrow">
+        <header class="blog__header reveal">
+          <p>診療案内・症例紹介・お口の健康情報などを発信しています。</p>
+        </header>
+        {hasNoteFeed ? (
+          <>
+            <div class="blog__embed reveal">
+              <iframe
+                src={noteEmbedUrl}
+                width="100%"
+                height="760"
+                loading="lazy"
+                title="和地たなか歯科 note"
+              ></iframe>
+            </div>
+            <div class="blog__link reveal">
+              <a class="reserve-link" href={noteProfileUrl} target="_blank" rel="noopener noreferrer">noteで記事を見る</a>
+            </div>
+          </>
+        ) : (
+          <div class="blog__placeholder reveal">
+            <span>note</span>
+            <h2>記事の公開を準備しています</h2>
+            <p>診療やお口の健康に関する情報を、順次お届けする予定です。<br />最新のお知らせはInstagramをご覧ください。</p>
+            <a class="reserve-link" href="https://www.instagram.com/wajitanakadc/" target="_blank" rel="noopener noreferrer">Instagramを見る</a>
           </div>
-          <!-- Fallback link -->
-          <div class="note-link">
-            <p>ブログ（note）はこちらからもご覧いただけます。</p>
-            <a href="https://note.com/wajitanaka_dc" target="_blank" rel="noopener noreferrer" class="btn">
-              noteを見る
-            </a>
-          </div>
-        </div>
+        )}
       </div>
     </section>
   </main>
@@ -51,56 +55,73 @@ import StickyFooterCTA from '../components/StickyFooterCTA.astro';
 </BaseLayout>
 
 <style>
-.page-hero {
-  position: relative;
-  height: 320px;
-  overflow: hidden;
-}
-.page-hero__img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-.page-hero__overlay {
-  position: absolute;
-  inset: 0;
-  background: rgba(0,0,0,0.35);
-  display: flex;
-  align-items: flex-end;
-  padding: 40px 48px;
-}
-.page-hero__title {
-  font-size: clamp(1.8rem, 4vw, 2.8rem);
-  font-weight: 700;
-  color: #fff;
-  letter-spacing: 0.05em;
-}
-.blog-section {
-  padding: 64px 0 80px;
-  background: #fff;
-}
-.blog-intro {
-  text-align: center;
-  color: #555;
-  font-size: 1rem;
-  margin-bottom: 48px;
-}
-.note-embed {
-  max-width: 860px;
-  margin: 0 auto;
-}
-.note-link {
-  text-align: center;
-  margin-top: 32px;
-}
-.note-link p {
-  color: #666;
-  margin-bottom: 16px;
-  font-size: 0.95rem;
-}
-@media (max-width: 640px) {
-  .page-hero { height: 220px; }
-  .page-hero__overlay { padding: 24px; }
-}
+  .blog {
+    padding-block: var(--section-space);
+    background: #fff;
+  }
+
+  .blog__header {
+    margin-bottom: clamp(48px, 7vw, 88px);
+    text-align: center;
+  }
+
+  .blog__header p {
+    color: var(--muted);
+    font-size: clamp(0.86rem, 1.2vw, 1rem);
+  }
+
+  .blog__embed {
+    overflow: hidden;
+    border: 1px solid var(--line);
+    background: var(--mist);
+  }
+
+  .blog__embed iframe {
+    display: block;
+    border: 0;
+    background: #fff;
+  }
+
+  .blog__link {
+    margin-top: 48px;
+    text-align: center;
+  }
+
+  .blog__placeholder {
+    padding: clamp(60px, 9vw, 110px) 24px;
+    border: 1px solid var(--line);
+    background: var(--mist);
+    text-align: center;
+  }
+
+  .blog__placeholder > span {
+    display: block;
+    margin-bottom: 14px;
+    color: var(--green);
+    font-family: var(--font-number);
+    font-size: 0.75rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+
+  .blog__placeholder h2 {
+    margin-bottom: 18px;
+    color: var(--green);
+    font-size: clamp(1.3rem, 2.6vw, 2rem);
+    font-weight: 500;
+    letter-spacing: 0.11em;
+  }
+
+  .blog__placeholder p {
+    margin-bottom: 36px;
+    color: var(--muted);
+    font-size: 0.85rem;
+    line-height: 2;
+  }
+
+  @media (max-width: 600px) {
+    .blog__embed iframe {
+      height: 650px;
+    }
+  }
 </style>

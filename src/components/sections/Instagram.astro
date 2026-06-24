@@ -1,76 +1,77 @@
----
----
-<section class="instagram reveal">
-  <div class="container">
-    <div class="section-header">
-      <span class="section-en">INSTAGRAM</span>
-      <h2 class="section-title">インスタグラム</h2>
-      <p class="instagram-handle">
-        <a href="https://www.instagram.com/wajitanakadc/" target="_blank" rel="noopener noreferrer">
-          @wajitanakadc
-        </a>
-      </p>
+<section class="instagram">
+  <div class="container instagram__inner reveal">
+    <div>
+      <span>お知らせ</span>
+      <h2>最新情報はInstagramをご覧ください</h2>
     </div>
-    <div class="instagram-feed">
-      <!-- Instagram embed via Elfsight or direct embed -->
-      <div class="instagram-embed-wrap">
-        <blockquote
-          class="instagram-media"
-          data-instgrm-permalink="https://www.instagram.com/wajitanakadc/"
-          data-instgrm-version="14"
-          style="background:#FFF; border:0; border-radius:3px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin:1px; max-width:100%; min-width:326px; padding:0; width:99.375%;"
-        ></blockquote>
-      </div>
-      <script async src="//www.instagram.com/embed.js"></script>
-      <div class="instagram-cta">
-        <a href="https://www.instagram.com/wajitanakadc/" target="_blank" rel="noopener noreferrer" class="btn">
-          インスタグラムをフォローする
-        </a>
-      </div>
-    </div>
+    <a href="https://www.instagram.com/wajitanakadc/" target="_blank" rel="noopener noreferrer">
+      <span aria-hidden="true">◎</span>
+      Instagram
+      <span aria-hidden="true">→</span>
+    </a>
   </div>
 </section>
 
 <style>
-.instagram {
-  padding: 80px 0;
-  background: #fff;
-}
-.section-header {
-  text-align: center;
-  margin-bottom: 40px;
-}
-.section-en {
-  display: block;
-  font-size: 13px;
-  letter-spacing: 0.2em;
-  color: var(--color-primary);
-  font-weight: 600;
-  margin-bottom: 8px;
-}
-.section-title {
-  font-size: clamp(1.6rem, 4vw, 2.2rem);
-  font-weight: 700;
-  color: #1a1a1a;
-  margin-bottom: 8px;
-}
-.instagram-handle a {
-  color: var(--color-primary);
-  font-size: 1rem;
-  text-decoration: none;
-  font-weight: 500;
-}
-.instagram-handle a:hover {
-  text-decoration: underline;
-}
-.instagram-feed {
-  max-width: 540px;
-  margin: 0 auto;
-}
-.instagram-embed-wrap {
-  margin-bottom: 24px;
-}
-.instagram-cta {
-  text-align: center;
-}
+  .instagram {
+    padding-block: clamp(60px, 7vw, 100px);
+    background: var(--mist);
+  }
+
+  .instagram__inner {
+    display: flex;
+    max-width: 1040px;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+  }
+
+  .instagram__inner > div > span {
+    display: block;
+    margin-bottom: 10px;
+    color: var(--green);
+    font-size: 0.72rem;
+    letter-spacing: 0.15em;
+  }
+
+  .instagram h2 {
+    font-size: clamp(1.2rem, 2.4vw, 2rem);
+    font-weight: 500;
+    letter-spacing: 0.1em;
+  }
+
+  .instagram a {
+    display: inline-flex;
+    min-width: 230px;
+    min-height: 58px;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    padding: 12px 22px;
+    border: 1px solid var(--green);
+    color: var(--green);
+    font-family: var(--font-number);
+    font-size: 0.78rem;
+    transition: background-color 180ms ease, color 180ms ease;
+  }
+
+  .instagram a:hover {
+    background: var(--green);
+    color: #fff;
+  }
+
+  .instagram a span:first-child {
+    font-size: 1.4rem;
+  }
+
+  @media (max-width: 700px) {
+    .instagram__inner {
+      align-items: flex-start;
+      flex-direction: column;
+    }
+
+    .instagram a {
+      width: 100%;
+    }
+  }
 </style>

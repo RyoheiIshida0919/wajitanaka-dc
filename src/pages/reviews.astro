@@ -3,143 +3,123 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import StickyFooterCTA from '../components/StickyFooterCTA.astro';
+import PageHero from '../components/PageHero.astro';
 
 const commitments = [
   {
-    num: '1',
+    id: '01',
     title: '丁寧な対応と清潔な院内',
-    text: '患者さんお一人おひとりに丁寧に向き合い、説明を大切にしています。また、院内を常にきれいに保つことに力を入れています。マンション、戸建て、診療、事務所など、幅広な建物管理業者までご対応で、初診は丁寧に一緒にお話しします。お悩みやご要望をしっかりとお聞かせください。',
-    img: '/images/site/f03-1.jpg',
+    text: '患者さんお一人おひとりに丁寧に向き合い、わかりやすい説明を大切にしています。院内は清潔に保ち、個室診療室を備えた落ち着いた環境を整えています。お悩みやご要望をしっかりとお聞かせください。',
+    images: ['/images/site/f03-1.jpg', '/images/site/f03-2.jpg'],
   },
   {
-    num: '2',
+    id: '02',
     title: '子ども連れでも安心して通える',
-    text: '「子どもも一緒に行ける歯科になって欲しい」「気づきやスタッフが一体となるような医院にして欲しい」といった声を受けて、保育士が常駐し、お子様のための遊ぶスペースも備えています。',
-    img: '/images/site/f06-1.jpg',
+    text: '「子どもを預かってもらえた」「先生やスタッフが一つ一つ声をかけてくれて安心した」とのお声をいただいております。小さなお子さま連れの方も安心して通っていただけるよう、託児スペースもご用意しています。',
+    images: ['/images/site/f04-2.jpg', '/images/site/f06-1.jpg'],
   },
   {
-    num: '3',
+    id: '03',
     title: '気づきのある診療と丁寧なカウンセリング',
-    text: '「気づかずにいた歯の問題を見つけてもらった」という声もいただきます。「歯科的な知識を丁寧に教えてくれる」という声も受け、歯科衛生士を中心にして丁寧なカウンセリングを心がけています。',
-    img: '/images/site/f02-1.jpg',
+    text: '「気づかなかった虫歯を見つけてもらえた」「薬の副作用で歯ぐきに傷ができていることに気づいてもらえた」といったお声をいただいております。検診では生活習慣まで含めた丁寧なカウンセリングを心がけています。',
+    images: ['/images/site/f02-1.jpg', '/images/site/f02-2.jpg'],
   },
   {
-    num: '4',
+    id: '04',
     title: '院内の雰囲気が良くリラックスできる',
-    text: '院内スタッフの「雰囲気が良い」という声が多くあります。「リラックス歯科」を意識した雰囲気作りに力を入れており、院内全体がリラックスできるような空間を目指しています。',
-    img: '/images/site/f01-2.jpg',
+    text: '「院長やスタッフの『ありがとうございます』というやり取り自体が安心につながった」「リラックスして治療を受けられた」との声をいただいております。院内の雰囲気づくりも大切にしています。',
+    images: ['/images/site/f01-2.jpg', '/images/site/f01-3.jpg'],
   },
   {
-    num: '5',
+    id: '05',
     title: '久しぶりの受診でも安心',
-    text: '「何年も歯医者に行っていなかったが安心して通えた」「スタッフが親切で、歯科のアドバイスもいただいた」という声もいただいています。久しぶりの受診でも丁寧にサポートします。',
-    img: '/images/site/f04-1.jpg',
+    text: '「何年も歯医者に行っていなかったが安心して通えた」「スタッフが親切で、歯磨きのアドバイスももらえた」とのお声をいただいています。定期検診が久しぶりの方も安心してご来院いただけます。',
+    images: ['/images/site/f04-1.jpg', '/images/site/f05-1.jpg'],
   },
   {
-    num: '6',
+    id: '06',
     title: 'デジタル診察券で便利に',
-    text: '「診察券アプリを使えている（便利）」という声もあります。スマホ診察券は絶大な好評をいただいており、次回の予約確認なども簡単にできます。',
-    img: '/images/site/f05-2.jpg',
+    text: '「診察券がアプリ化されていて便利」とのお声をいただきました。スマホが苦手な方には紙の診察券もご用意しておりますので、どなたでも安心してご利用いただけます。',
+    images: ['/images/site/f05-2.jpg', '/images/site/f05-3.jpg'],
   },
 ];
 
 const faqs = [
   {
-    num: '1',
-    q: '赤ちゃんや小さな子どもも診てもらえますか？',
-    a: '本院の最大の特長の一つが、小さなお子様への対応力です。まず、何を最優先にするかを丁寧にお聞きし、お子様が安心できるよう工夫して診療を行います。保育士も常駐しておりますので、治療中のお子様のお預かりも可能です。初めての受診でも、丁寧にご対応しますのでお気軽にどうぞ。',
+    id: '01',
+    question: '赤ちゃんや小さな子どもも診てもらえますか？',
+    answer: 'はい。0歳からのお口の健康づくりを大切にしています。歯が生える前のケア、歯みがき、食事やお口の使い方など、成長に合わせて丁寧にお伝えします。初めての歯科受診も安心してご相談ください。',
   },
   {
-    num: '2',
-    q: '子どもを預けて治療できますか？',
-    a: 'はい、平日午前中を中心に保育士常駐のキッズスペースでお子様をお預かりできます。詳しくは予約時にお申し付けください。お子様も院内のキッズスペースで楽しく過ごしていただけます。',
+    id: '02',
+    question: '子どもを預けて治療できますか？',
+    answer: 'はい。予約制で託児サービスをご利用いただけます。保育士が在籍しており、院内のキッズスペースでお子さまを安全にお預かりします。小さなお子さま連れの方も安心して治療を受けていただけます。',
   },
   {
-    num: '3',
-    q: '歯医者が怖くて治療に行けません。対応してもらえますか？',
-    a: 'はい、対応可能です。当院では静脈内鎮静法（点滴で眠ったような状態で治療）に対応しております。「緊張してしまう」という方にも、じっくりとお話を聞いてから治療を進めますのでご安心ください。',
+    id: '03',
+    question: '歯医者が怖くて治療に行けません。対応してもらえますか？',
+    answer: 'はい。当院では歯科恐怖症の方に対応しています。静脈内鎮静法で「眠っているようなリラックスした状態」で治療を受けられます。痛みや不安が苦手な方、嘔吐反射の強い方もご安心ください。',
   },
   {
-    num: '4',
-    q: '女性の先生に診てもらえますか？',
-    a: 'はい、当院には女性歯科医師が在籍しています。「女性の先生に診てもらいたい」「子どもを女性の先生に診てほしい」という方もお気軽にご相談ください。',
+    id: '04',
+    question: '女性の先生に診てもらえますか？',
+    answer: 'はい。当院には女性歯科医師が在籍しています。「男性の先生は怖い」「子どもの治療は女性にお願いしたい」という方もお気軽にご相談ください。',
   },
   {
-    num: '5',
-    q: 'どんな診療に力を入れていますか？',
-    a: '当院は、できる限りすべての診療を自院で対応することを目指しています。そのため、歯科の各分野（予防・小児・矯正・インプラント・訪問など）に対応した専門的な設備と技術を備えています。まず歯を守ることを大切にし、なるべく「抜かずに済む選択肢」を最大限考えてご提案します。',
+    id: '05',
+    question: 'どんな診療に力を入れていますか？',
+    answer: '当院は予防歯科を中心に、歯をできるだけ削らずに残す治療を心がけています。ご自身の親知らずを他の部位に移植する治療、入れ歯治療、歯科恐怖症の方へのリラックス治療にも力を入れています。',
   },
   {
-    num: '6',
-    q: '場所はどこにありますか？',
-    a: '当院は静岡県浜松市和地町4757-1にございます。浜松市の北区エリアで、東・三ケ日・細江・引佐・新都田・北浜・東浜・三方原・大人・大葉はじめ各方面からアクセスいただけます。駐車場も完備しておりますので、お車でのお越しも便利です。',
+    id: '06',
+    question: '場所はどこにありますか？',
+    answer: '浜松市中央区（旧西区）和地町にある歯科医院です。気賀・三方原・舘山寺・三ケ日・桜台・湖東・伊佐地・大人見・雄踏・高丘エリアからもアクセスしやすく、駐車場も完備しています。',
   },
 ];
 ---
 
 <BaseLayout
   title="こだわりとQ&A｜和地たなか歯科"
-  description="和地たなか歯科のこだわりと患者さんからよくある質問をご紹介。丁寧な対応・バリアフリー設計・子ども連れOK・女性歯科医師在籍など。"
+  description="和地たなか歯科が大切にしている6つのこだわりと、患者さんからよくいただくご質問をご紹介します。"
+  ogImage="/images/site/reviews-hero.jpg"
 >
   <Header />
   <main id="main-content">
-    <!-- Page Hero -->
-    <div class="page-hero">
-      <img src="/images/site/f03-2.jpg" alt="診療室" class="page-hero__img" />
-      <div class="page-hero__overlay">
-        <h1 class="page-hero__title">こだわりとQ&A</h1>
-      </div>
-    </div>
+    <PageHero title="こだわりとQ&A" image="/images/site/reviews-hero.jpg" alt="院内の照明と木の天井" position="center 45%" />
 
-    <!-- Commitments -->
     <section class="commitments">
-      <div class="container">
+      <div class="narrow">
         {commitments.map((item) => (
-          <div class="commitment-item reveal">
-            <div class="commitment-num">{item.num}</div>
-            <div class="commitment-body">
-              <h2 class="commitment-title">{item.title}</h2>
-              <p class="commitment-text">{item.text}</p>
+          <article class="commitment reveal">
+            <div class="commitment__copy">
+              <span class="section-number">{item.id}</span>
+              <h2>{item.title}</h2>
+              <p>{item.text}</p>
             </div>
-            <div class="commitment-img">
-              <img src={item.img} alt={item.title} loading="lazy" />
+            <div class="commitment__images">
+              {item.images.map((image, index) => (
+                <img src={image} alt={index === 0 ? item.title : ''} loading="lazy" />
+              ))}
             </div>
-          </div>
+          </article>
         ))}
       </div>
     </section>
 
-    <!-- FAQ -->
     <section class="faq" id="faq">
-      <div class="container">
-        <div class="section-header reveal">
-          <h2 class="faq-heading">よくある質問</h2>
-          <span class="faq-sub">-FAQ-</span>
-        </div>
-        <div class="faq-list">
+      <div class="narrow">
+        <header class="faq__header reveal">
+          <h2>よくある質問</h2>
+          <span>-FAQ-</span>
+        </header>
+        <div class="faq__list">
           {faqs.map((item) => (
-            <div class="faq-item reveal">
-              <div class="faq-num">{item.num}</div>
-              <div class="faq-content">
-                <p class="faq-q">{item.q}</p>
-                <p class="faq-a">{item.a}</p>
-              </div>
-            </div>
+            <article class="faq__item reveal">
+              <span class="section-number">{item.id}</span>
+              <h3>{item.question}</h3>
+              <p>{item.answer}</p>
+            </article>
           ))}
-        </div>
-      </div>
-    </section>
-
-    <!-- CTA -->
-    <section class="page-cta">
-      <div class="container">
-        <div class="page-cta-inner reveal">
-          <h2>まずはお気軽にご相談ください</h2>
-          <p>Web予約は24時間受付中。お電話でのご予約もどうぞ。</p>
-          <div class="page-cta-btns">
-            <a href="https://planetdentale.com/reserve/about.php?web_code=24da7c41f707a2b72d5ac93333b5fd819538b22b405ac3c5f874c15400a2c0ae" target="_blank" rel="noopener noreferrer" class="btn btn--white">Web予約（24時間）</a>
-            <a href="tel:053-489-8185" class="btn btn--outline-white">📞 053-489-8185</a>
-          </div>
         </div>
       </div>
     </section>
@@ -149,174 +129,98 @@ const faqs = [
 </BaseLayout>
 
 <style>
-/* Page Hero */
-.page-hero {
-  position: relative;
-  height: 320px;
-  overflow: hidden;
-}
-.page-hero__img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-.page-hero__overlay {
-  position: absolute;
-  inset: 0;
-  background: rgba(0,0,0,0.35);
-  display: flex;
-  align-items: flex-end;
-  padding: 40px 48px;
-}
-.page-hero__title {
-  font-size: clamp(1.8rem, 4vw, 2.8rem);
-  font-weight: 700;
-  color: #fff;
-  letter-spacing: 0.05em;
-}
-
-/* Commitments */
-.commitments {
-  padding: 80px 0;
-  background: #fff;
-}
-.commitment-item {
-  display: grid;
-  grid-template-columns: 48px 1fr 340px;
-  gap: 32px;
-  align-items: center;
-  padding: 48px 0;
-  border-bottom: 1px solid #edf2ef;
-}
-.commitment-item:last-child {
-  border-bottom: none;
-}
-.commitment-num {
-  font-size: 2.5rem;
-  font-weight: 800;
-  color: var(--color-primary);
-  opacity: 0.3;
-  font-family: Georgia, serif;
-  line-height: 1;
-}
-.commitment-title {
-  font-size: clamp(1.1rem, 2vw, 1.3rem);
-  font-weight: 700;
-  color: #1a1a1a;
-  margin-bottom: 12px;
-}
-.commitment-text {
-  font-size: 0.95rem;
-  line-height: 2;
-  color: #555;
-}
-.commitment-img {
-  border-radius: 10px;
-  overflow: hidden;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
-}
-.commitment-img img {
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
-  display: block;
-}
-
-/* FAQ */
-.faq {
-  padding: 80px 0;
-  background: #f8faf8;
-}
-.section-header {
-  text-align: center;
-  margin-bottom: 56px;
-}
-.faq-heading {
-  font-size: clamp(1.8rem, 4vw, 2.4rem);
-  font-weight: 700;
-  color: #1a1a1a;
-  margin-bottom: 4px;
-}
-.faq-sub {
-  display: block;
-  font-size: 0.9rem;
-  color: #999;
-  letter-spacing: 0.1em;
-}
-.faq-list {
-  max-width: 800px;
-  margin: 0 auto;
-}
-.faq-item {
-  display: flex;
-  gap: 24px;
-  margin-bottom: 40px;
-}
-.faq-num {
-  flex: 0 0 40px;
-  font-size: 2rem;
-  font-weight: 800;
-  color: var(--color-primary);
-  opacity: 0.3;
-  font-family: Georgia, serif;
-  line-height: 1.2;
-}
-.faq-content {
-  flex: 1;
-}
-.faq-q {
-  font-size: 1.05rem;
-  font-weight: 700;
-  color: #1a1a1a;
-  margin-bottom: 10px;
-  line-height: 1.6;
-}
-.faq-a {
-  font-size: 0.95rem;
-  line-height: 2;
-  color: #555;
-}
-
-/* CTA */
-.page-cta {
-  background: var(--color-primary);
-  padding: 64px 0;
-}
-.page-cta-inner {
-  text-align: center;
-  color: #fff;
-}
-.page-cta-inner h2 {
-  font-size: clamp(1.4rem, 3vw, 1.8rem);
-  font-weight: 700;
-  margin-bottom: 12px;
-}
-.page-cta-inner p {
-  color: rgba(255,255,255,0.85);
-  margin-bottom: 28px;
-}
-.page-cta-btns {
-  display: flex;
-  gap: 16px;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-.btn--white { background: #fff; color: var(--color-primary); font-weight: 700; }
-.btn--outline-white { border: 2px solid #fff; color: #fff; background: transparent; }
-
-@media (max-width: 900px) {
-  .commitment-item {
-    grid-template-columns: 40px 1fr;
-    grid-template-rows: auto auto;
+  .commitments {
+    padding-block: var(--section-space);
+    background: #fff;
   }
-  .commitment-img {
-    grid-column: 1 / -1;
+
+  .commitment {
+    padding-bottom: clamp(86px, 12vw, 160px);
   }
-}
-@media (max-width: 640px) {
-  .page-hero { height: 220px; }
-  .page-hero__overlay { padding: 24px; }
-  .commitment-item { grid-template-columns: 32px 1fr; }
-}
+
+  .commitment__copy {
+    max-width: 690px;
+    margin: 0 auto clamp(32px, 5vw, 58px);
+  }
+
+  .commitment h2 {
+    margin-block: 15px 20px;
+    color: var(--green);
+    font-size: clamp(1.3rem, 2.4vw, 2rem);
+    font-weight: 500;
+    letter-spacing: 0.1em;
+  }
+
+  .commitment p,
+  .faq__item p {
+    font-size: clamp(0.84rem, 1.05vw, 0.95rem);
+    line-height: 2.15;
+  }
+
+  .commitment__images {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: clamp(10px, 1.7vw, 22px);
+  }
+
+  .commitment__images img {
+    width: 100%;
+    aspect-ratio: 1.55 / 1;
+    object-fit: cover;
+  }
+
+  .faq {
+    padding-block: var(--section-space);
+    background: var(--mist);
+  }
+
+  .faq__header {
+    margin-bottom: clamp(55px, 8vw, 100px);
+    text-align: center;
+  }
+
+  .faq__header h2 {
+    font-size: clamp(1.7rem, 3.4vw, 2.8rem);
+    font-weight: 500;
+    letter-spacing: 0.13em;
+  }
+
+  .faq__header span {
+    display: block;
+    margin-top: 8px;
+    color: var(--green);
+    font-family: var(--font-number);
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+  }
+
+  .faq__item {
+    max-width: 760px;
+    margin-inline: auto;
+    padding: 0 0 clamp(50px, 7vw, 80px);
+  }
+
+  .faq__item + .faq__item {
+    padding-top: clamp(50px, 7vw, 80px);
+    border-top: 1px solid var(--line);
+  }
+
+  .faq__item h3 {
+    margin-block: 15px 16px;
+    color: var(--green);
+    font-size: clamp(1.08rem, 1.8vw, 1.4rem);
+    font-weight: 500;
+    line-height: 1.7;
+    letter-spacing: 0.07em;
+  }
+
+  @media (max-width: 600px) {
+    .commitment__images {
+      gap: 7px;
+    }
+
+    .commitment__images img {
+      aspect-ratio: 1 / 0.88;
+    }
+  }
 </style>

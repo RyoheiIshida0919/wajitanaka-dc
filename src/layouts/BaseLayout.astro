@@ -15,9 +15,24 @@ const {
   ogType = 'website',
 } = Astro.props;
 
-const siteUrl = Astro.site?.toString().replace(/\/$/, '') ?? 'https://wajitanaka-dc.pages.dev';
+const siteUrl = Astro.site?.toString().replace(/\/$/, '') ?? 'https://wajitanaka-dc.com';
 const canonicalUrl = new URL(Astro.url.pathname, siteUrl).href;
 const ogImageUrl = new URL(ogImage, `${siteUrl}/`).href;
+const clinicSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Dentist',
+  name: '和地たなか歯科',
+  url: siteUrl,
+  telephone: '+81-53-489-8185',
+  address: {
+    '@type': 'PostalAddress',
+    postalCode: '431-1115',
+    addressRegion: '静岡県',
+    addressLocality: '浜松市中央区',
+    streetAddress: '和地町4757-1',
+    addressCountry: 'JP',
+  },
+};
 ---
 
 <!doctype html>
@@ -43,9 +58,11 @@ const ogImageUrl = new URL(ogImage, `${siteUrl}/`).href;
     <link rel="manifest" href="/site.webmanifest" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Rubik:wght@400;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Rubik:wght@400;500&family=Zen+Maru+Gothic:wght@400;500;700&display=swap" rel="stylesheet" />
+    <script type="application/ld+json" set:html={JSON.stringify(clinicSchema)} />
   </head>
   <body>
+    <a class="skip-link" href="#main-content">本文へ移動</a>
     <slot />
     <script>
       const revealEls = document.querySelectorAll('.reveal');

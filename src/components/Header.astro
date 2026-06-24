@@ -1,125 +1,301 @@
 ---
+const reserveUrl = 'https://planetdentale.com/reserve/about.php?web_code=24da7c41f707a2b72d5ac93333b5fd819538b22b405ac3c5f874c15400a2c0ae';
+const questionnaireUrl = 'https://forms.gle/7NgJVgftCjhT28Do6';
 const navItems = [
-  { label: 'ホーム',           href: '/' },
-  { label: '当院の特長',       href: '/#features' },
-  { label: '診療案内',         href: '/#treatments' },
-  { label: 'こだわりとQ&A',   href: '/reviews' },
-  { label: '医師紹介',         href: '/doctors' },
-  { label: 'アクセス',         href: '/#access' },
-  { label: 'ブログ',           href: '/blog' },
+  { label: 'ホーム', href: '/' },
+  { label: '当院の特徴', href: '/#features' },
+  { label: '診療案内', href: '/#treatments' },
+  { label: '医師紹介', href: '/doctors' },
+  { label: 'アクセス', href: '/#access' },
+  { label: 'ブログ', href: '/blog' },
+  { label: 'こだわりとQ&A', href: '/reviews' },
 ];
 ---
 
 <header id="site-header" class="header">
-  <div class="header__inner container">
-    <a href="/" class="header__logo" aria-label="和地たなか歯科 トップへ">
-      <img
-        src="https://storage.googleapis.com/studio-design-asset-files/projects/Kwa5x4ogqX/s-400x150_webp_fd667224-34af-4ea1-b45f-3dec542364fb.webp"
-        alt="和地たなか歯科"
-        width="220"
-        height="80"
-        class="header__logo-img"
-      />
+  <div class="header__inner">
+    <a class="header__logo" href="/" aria-label="和地たなか歯科 トップページ">
+      <img src="/images/site/logo.png" alt="和地たなか歯科" width="342" height="149" />
     </a>
+
     <nav class="header__nav" aria-label="メインナビゲーション">
-      <ul class="header__nav-list">
-        {navItems.map((item) => (
-          <li><a href={item.href} class="header__nav-link">{item.label}</a></li>
-        ))}
+      <ul>
+        {navItems.map((item) => <li><a href={item.href}>{item.label}</a></li>)}
       </ul>
     </nav>
-    <div class="header__cta">
-      <a href="https://planetdentale.com/reserve/about.php?web_code=24da7c41f707a2b72d5ac93333b5fd819538b22b405ac3c5f874c15400a2c0ae" class="btn-reserve" target="_blank" rel="noopener noreferrer">診療予約</a>
-      <a href="tel:053-489-8185" class="btn-tel">
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
-          <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 8.43 19.79 19.79 0 01.08 2a2 2 0 012-2.18h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.09a16 16 0 006 6l.41-.41a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"></path>
-        </svg>
-        初診予約をお電話で
-      </a>
+
+    <div class="header__actions">
+      <a class="header__action header__action--outline" href={reserveUrl} target="_blank" rel="noopener noreferrer">診療予約</a>
+      <a class="header__action header__action--fill" href={questionnaireUrl} target="_blank" rel="noopener noreferrer">初診予約後<br />web問診</a>
     </div>
-    <button id="menu-toggle" class="header__hamburger" aria-label="メニューを開く" aria-expanded="false" aria-controls="mobile-menu">
-      <span class="header__hamburger-bar"></span>
-      <span class="header__hamburger-bar"></span>
-      <span class="header__hamburger-bar"></span>
+
+    <button class="header__menu" id="menu-toggle" type="button" aria-controls="mobile-menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+      <span class="sr-only">メニューを開く</span>
     </button>
   </div>
 </header>
 
-<div id="mobile-menu" class="mobile-menu" role="dialog" aria-label="ナビゲーション" aria-modal="true" hidden>
-  <div class="mobile-menu__overlay"></div>
-  <div class="mobile-menu__panel">
-    <div class="mobile-menu__header">
-      <span class="mobile-menu__logo">和地たなか歯科</span>
-      <button id="menu-close" class="mobile-menu__close" aria-label="メニューを閉じる">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-          <line x1="18" y1="6" x2="6" y2="18"></line>
-          <line x1="6" y1="6" x2="18" y2="18"></line>
-        </svg>
-      </button>
+<div class="mobile-menu" id="mobile-menu" hidden>
+  <button class="mobile-menu__backdrop" type="button" aria-label="メニューを閉じる"></button>
+  <div class="mobile-menu__panel" role="dialog" aria-modal="true" aria-label="メニュー">
+    <div class="mobile-menu__head">
+      <img src="/images/site/logo.png" alt="和地たなか歯科" width="342" height="149" />
+      <button class="mobile-menu__close" id="menu-close" type="button" aria-label="メニューを閉じる">×</button>
     </div>
-    <nav aria-label="モバイルナビ">
-      <ul class="mobile-menu__list">
-        {navItems.map((item) => (
-          <li><a href={item.href} class="mobile-menu__link">{item.label}</a></li>
-        ))}
+    <nav aria-label="モバイルナビゲーション">
+      <ul>
+        {navItems.map((item) => <li><a class="mobile-menu__link" href={item.href}>{item.label}<span>→</span></a></li>)}
       </ul>
     </nav>
     <div class="mobile-menu__actions">
-      <a href="https://planetdentale.com/reserve/about.php?web_code=24da7c41f707a2b72d5ac93333b5fd819538b22b405ac3c5f874c15400a2c0ae" class="mobile-menu__btn mobile-menu__btn--reserve" target="_blank" rel="noopener noreferrer">診療予約</a>
-      <a href="tel:053-489-8185" class="mobile-menu__btn mobile-menu__btn--tel">053-489-8185</a>
+      <a href={reserveUrl} target="_blank" rel="noopener noreferrer">診療予約</a>
+      <a href={questionnaireUrl} target="_blank" rel="noopener noreferrer">初診予約後 web問診</a>
     </div>
   </div>
 </div>
 
 <style>
-  .header { position: sticky; top: 0; z-index: 100; padding-block: 0.6rem; background-color: #fff; box-shadow: 0 1px 0 rgba(0,0,0,0.08); transition: box-shadow 0.3s; }
-  .header.is-scrolled { box-shadow: 0 2px 16px rgba(0,0,0,0.1); }
-  .header__inner { display: flex; align-items: center; gap: 0.75rem; }
-  .header__logo { flex-shrink: 0; }
-  .header__logo-img { height: 60px; width: auto; object-fit: contain; }
-  .header__nav { display: none; flex: 1; }
-  .header__nav-list { display: flex; align-items: center; flex-wrap: wrap; }
-  .header__nav-link { display: block; padding: 0.35rem 0.5rem; font-size: 0.8rem; color: #333; white-space: nowrap; transition: color 0.2s; }
-  .header__nav-link:hover { color: var(--color-primary); }
-  .header__cta { display: none; align-items: center; gap: 0.5rem; flex-shrink: 0; }
-  .btn-reserve { display: inline-flex; align-items: center; justify-content: center; padding: 0.5rem 1rem; font-size: 0.8rem; font-weight: 500; border: 1.5px solid var(--color-primary); color: var(--color-primary); border-radius: 4px; white-space: nowrap; transition: background-color 0.2s, color 0.2s; }
-  .btn-reserve:hover { background-color: var(--color-primary); color: #fff; }
-  .btn-tel { display: inline-flex; align-items: center; gap: 0.35rem; padding: 0.5rem 1rem; font-size: 0.8rem; font-weight: 500; background-color: var(--color-primary); color: #fff; border-radius: 4px; white-space: nowrap; transition: background-color 0.2s; }
-  .btn-tel:hover { background-color: var(--color-primary-dark); }
-  .header__hamburger { display: flex; flex-direction: column; gap: 5px; padding: 0.5rem; margin-left: auto; border-radius: 4px; }
-  .header__hamburger-bar { display: block; width: 22px; height: 2px; background-color: #333; border-radius: 2px; }
-  .mobile-menu { position: fixed; inset: 0; z-index: 200; }
-  .mobile-menu[hidden] { display: none; }
-  .mobile-menu__overlay { position: absolute; inset: 0; background-color: rgba(0,0,0,0.45); }
-  .mobile-menu__panel { position: absolute; top: 0; right: 0; bottom: 0; width: min(300px, 85vw); background-color: #fff; overflow-y: auto; animation: slideIn 0.28s cubic-bezier(0.4,0,0.2,1); }
-  @keyframes slideIn { from { transform: translateX(100%); } to { transform: translateX(0); } }
-  .mobile-menu__header { display: flex; align-items: center; justify-content: space-between; padding: 1.25rem; border-bottom: 1px solid #ebebeb; }
-  .mobile-menu__logo { font-size: 1rem; font-weight: 700; color: var(--color-primary); }
-  .mobile-menu__close { padding: 0.25rem; color: #666; }
-  .mobile-menu__list { padding: 0.5rem 0; }
-  .mobile-menu__link { display: block; padding: 0.875rem 1.5rem; font-size: 0.9rem; color: #333; border-bottom: 1px solid #ebebeb; transition: background-color 0.15s; }
-  .mobile-menu__link:hover { background-color: #f5f5f5; color: var(--color-primary); }
-  .mobile-menu__actions { padding: 1.25rem; display: flex; flex-direction: column; gap: 0.75rem; }
-  .mobile-menu__btn { display: flex; align-items: center; justify-content: center; gap: 0.5rem; padding: 0.875rem; font-size: 0.9rem; font-weight: 500; border-radius: 4px; text-align: center; }
-  .mobile-menu__btn--reserve { border: 1.5px solid var(--color-primary); color: var(--color-primary); }
-  .mobile-menu__btn--tel { background-color: var(--color-primary); color: #fff; }
-  @media (min-width: 1024px) {
-    .header__nav { display: flex; }
-    .header__cta { display: flex; }
-    .header__hamburger { display: none; }
+  .header {
+    position: relative;
+    z-index: 100;
+    min-height: 90px;
+    border-bottom: 1px solid #eef1ef;
+    background: rgba(255, 255, 255, 0.97);
+  }
+
+  .header__inner {
+    display: flex;
+    min-height: 90px;
+    align-items: center;
+    padding-left: clamp(20px, 3.2vw, 58px);
+  }
+
+  .header__logo {
+    width: clamp(140px, 13.5vw, 194px);
+    flex: 0 0 auto;
+  }
+
+  .header__logo img {
+    width: 100%;
+  }
+
+  .header__nav {
+    display: flex;
+    flex: 1;
+    justify-content: center;
+    padding-inline: clamp(16px, 2.4vw, 44px);
+  }
+
+  .header__nav ul {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(11px, 1.35vw, 25px);
+  }
+
+  .header__nav a {
+    position: relative;
+    display: block;
+    padding-block: 0.5rem;
+    font-size: clamp(0.74rem, 0.84vw, 0.88rem);
+    letter-spacing: 0.025em;
+    white-space: nowrap;
+  }
+
+  .header__nav a::after {
+    position: absolute;
+    right: 0;
+    bottom: 2px;
+    left: 0;
+    height: 1px;
+    background: var(--green);
+    content: '';
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 180ms ease;
+  }
+
+  .header__nav a:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+
+  .header__actions {
+    display: grid;
+    align-self: stretch;
+    grid-template-columns: repeat(2, minmax(116px, 142px));
+  }
+
+  .header__action {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-left: 1px solid var(--green);
+    color: var(--green);
+    font-size: 0.76rem;
+    font-weight: 500;
+    line-height: 1.55;
+    text-align: center;
+    transition: background-color 180ms ease, color 180ms ease;
+  }
+
+  .header__action--fill {
+    background: var(--green);
+    color: #fff;
+  }
+
+  .header__action--outline:hover {
+    background: var(--green-pale);
+  }
+
+  .header__action--fill:hover {
+    background: var(--green-deep);
+  }
+
+  .header__menu {
+    display: none;
+    width: 64px;
+    height: 64px;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 5px;
+    margin-left: auto;
+    background: var(--green);
+  }
+
+  .header__menu span:not(.sr-only) {
+    width: 22px;
+    height: 1px;
+    background: #fff;
+  }
+
+  .mobile-menu {
+    position: fixed;
+    z-index: 300;
+    inset: 0;
+  }
+
+  .mobile-menu[hidden] {
+    display: none;
+  }
+
+  .mobile-menu__backdrop {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(17, 32, 27, 0.42);
+  }
+
+  .mobile-menu__panel {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: min(86vw, 390px);
+    height: 100%;
+    overflow-y: auto;
+    background: #fff;
+  }
+
+  .mobile-menu__head {
+    display: flex;
+    height: 86px;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .mobile-menu__head img {
+    width: 150px;
+  }
+
+  .mobile-menu__close {
+    width: 42px;
+    height: 42px;
+    color: var(--green);
+    font-size: 2rem;
+    font-weight: 300;
+  }
+
+  .mobile-menu__link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 22px;
+    border-bottom: 1px solid var(--line);
+    font-size: 0.9rem;
+  }
+
+  .mobile-menu__link span {
+    color: var(--green);
+  }
+
+  .mobile-menu__actions {
+    display: grid;
+    gap: 10px;
+    padding: 24px 22px;
+  }
+
+  .mobile-menu__actions a {
+    padding: 13px;
+    background: var(--green);
+    color: #fff;
+    text-align: center;
+  }
+
+  @media (max-width: 1180px) {
+    .header {
+      min-height: 72px;
+    }
+
+    .header__inner {
+      min-height: 72px;
+      padding-left: 20px;
+    }
+
+    .header__logo {
+      width: 154px;
+    }
+
+    .header__nav,
+    .header__actions {
+      display: none;
+    }
+
+    .header__menu {
+      display: flex;
+      width: 72px;
+      height: 72px;
+    }
   }
 </style>
 
 <script>
-  const toggle = document.getElementById('menu-toggle');
-  const closeBtn = document.getElementById('menu-close');
   const menu = document.getElementById('mobile-menu');
-  const overlay = menu?.querySelector('.mobile-menu__overlay');
-  const open = () => { menu?.removeAttribute('hidden'); toggle?.setAttribute('aria-expanded','true'); document.body.style.overflow='hidden'; };
-  const close = () => { menu?.setAttribute('hidden',''); toggle?.setAttribute('aria-expanded','false'); document.body.style.overflow=''; };
-  toggle?.addEventListener('click', open);
-  closeBtn?.addEventListener('click', close);
-  overlay?.addEventListener('click', close);
-  menu?.querySelectorAll('.mobile-menu__link').forEach((l) => l.addEventListener('click', close));
-  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') close(); });
+  const toggle = document.getElementById('menu-toggle');
+  const closeButton = document.getElementById('menu-close');
+  const backdrop = menu?.querySelector('.mobile-menu__backdrop');
+
+  const openMenu = () => {
+    menu?.removeAttribute('hidden');
+    toggle?.setAttribute('aria-expanded', 'true');
+    document.body.classList.add('menu-open');
+  };
+
+  const closeMenu = () => {
+    menu?.setAttribute('hidden', '');
+    toggle?.setAttribute('aria-expanded', 'false');
+    document.body.classList.remove('menu-open');
+  };
+
+  toggle?.addEventListener('click', openMenu);
+  closeButton?.addEventListener('click', closeMenu);
+  backdrop?.addEventListener('click', closeMenu);
+  menu?.querySelectorAll('.mobile-menu__link').forEach((link) => link.addEventListener('click', closeMenu));
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') closeMenu();
+  });
 </script>

@@ -3,97 +3,72 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import StickyFooterCTA from '../components/StickyFooterCTA.astro';
+import PageHero from '../components/PageHero.astro';
+
+const doctors = [
+  {
+    role: '院長',
+    name: '田中 亮次',
+    image: '/images/site/doctor-ryoji.jpg',
+    message: '「できる限り歯を残すこと」を大切にしています。むし歯や歯周病で失われた歯を補うことも大切ですが、そもそも「抜かずに済む選択肢」を最大限考えることが、患者さんの未来の健康につながると考えています。その一環として、歯の移植にも積極的に取り組んでいます。自分の歯を活かせる可能性があるなら、できる限りその選択肢を提供したいと思っています。',
+    career: [
+      '2014年　大阪大学歯学部歯学科卒業',
+      '2014年　医療法人スワン会スワン歯科で研修',
+      '2015年　医療法人社団英仁会鈴木歯科医院勤務',
+      '2023年　東海歯科衛生士専門学校非常勤講師',
+      '日本歯周病学会会員',
+    ],
+    specialty: '歯の移植など、外科的処置も得意ですが、新しい設備を用いた入れ歯作成もお任せください！',
+  },
+  {
+    role: '医師',
+    name: '田中 有美',
+    image: '/images/site/doctor-yumi.jpg',
+    message: '「できる限り歯を残すこと」を大切にしています。むし歯や歯周病で失われた歯を補うことも大切ですが、そもそも「抜かずに済む選択肢」を最大限考えることが、患者さんの未来の健康につながると考えています。その一環として、歯の移植にも積極的に取り組んでいます。自分の歯を活かせる可能性があるなら、できる限りその選択肢を提供したいと思っています。',
+    career: [
+      '2012年　大阪大学歯学部歯学科卒業',
+      '2012年　医療法人清雅会シバタ歯科医院で研修',
+      '2013年　愛知学院大学歯学部麻酔学講座非常勤助教',
+      '2020年　医療法人社団銀輪会長谷川歯科医院勤務',
+      '日本歯科麻酔学会認定医',
+    ],
+    specialty: 'お一人お一人の気持ちに寄り添ったプラン提案が得意です。',
+  },
+];
 ---
 
 <BaseLayout
   title="医師紹介｜和地たなか歯科"
-  description="和地たなか歯科の医師紹介。院長 田中亮次・医師 田中有美。できる限り歯を残すことを大切にした診療を行っています。"
+  description="和地たなか歯科の院長 田中亮次、医師 田中有美の診療への想い、経歴、得意な治療をご紹介します。"
+  ogImage="/images/site/doctors-hero.jpg"
 >
   <Header />
   <main id="main-content">
-    <!-- Page Hero -->
-    <div class="page-hero">
-      <img src="/images/site/f03-2.jpg" alt="診療室" class="page-hero__img" />
-      <div class="page-hero__overlay">
-        <h1 class="page-hero__title">医師紹介</h1>
-      </div>
-    </div>
+    <PageHero title="医師紹介" image="/images/site/doctors-hero.jpg" alt="和地たなか歯科の院内" position="center 52%" />
 
     <section class="doctors">
-      <div class="container">
-
-        <!-- 院長 田中亮次 -->
-        <div class="doctor-card reveal">
-          <div class="doctor-photo">
-            <img src="/images/site/staff-hero.jpg" alt="院長 田中亮次" />
-          </div>
-          <div class="doctor-info">
-            <p class="doctor-role">院長</p>
-            <h2 class="doctor-name">田中 亮次</h2>
-            <p class="doctor-message">
-              「できる限り歯を残すこと」を大切にしています。<br>
-              むし歯や歯周病で失われた歯を補うことも大切ですが、そもそも「抜かずに済む選択肢」を最大限考えることが、患者さんの未来の健康につながると考えています。その一環として、歯の移植にも積極的に取り組んでいます。自分の歯を活かせる可能性があるなら、できる限りその選択肢を提供したいと思っています。
-            </p>
-            <div class="doctor-career">
-              <ul>
-                <li>2014年　大阪大学歯学部歯学科卒業</li>
-                <li>2014年　医療法人スワン会スワン歯科で研修</li>
-                <li>2015年　医療法人社団英仁会鈴木歯科医院勤務</li>
-                <li>2023年　東海歯科衛生士専門学校非常勤講師</li>
-                <li>日本歯周病学会会員</li>
+      <div class="narrow">
+        {doctors.map((doctor) => (
+          <article class="doctor reveal">
+            <div class="doctor__photo">
+              <img src={doctor.image} alt={`${doctor.role} ${doctor.name}`} loading="lazy" />
+            </div>
+            <div class="doctor__content">
+              <header>
+                <span>{doctor.role}</span>
+                <h2>{doctor.name}</h2>
+              </header>
+              <p class="doctor__message">{doctor.message}</p>
+              <ul class="doctor__career">
+                {doctor.career.map((line) => <li>{line}</li>)}
               </ul>
+              <div class="doctor__specialty">
+                <h3>得意な治療</h3>
+                <p>{doctor.specialty}</p>
+              </div>
             </div>
-            <div class="doctor-specialty">
-              <span class="specialty-label">得意な治療</span>
-              <p>歯の移植など、外科的処置も得意ですが、新しい設備を用いた入れ歯作成もお任せください！</p>
-            </div>
-          </div>
-        </div>
-
-        <hr class="doctor-divider" />
-
-        <!-- 医師 田中有美 -->
-        <div class="doctor-card reveal">
-          <div class="doctor-photo">
-            <img src="/images/site/f04-1.jpg" alt="医師 田中有美" />
-          </div>
-          <div class="doctor-info">
-            <p class="doctor-role">医師</p>
-            <h2 class="doctor-name">田中 有美</h2>
-            <p class="doctor-message">
-              「できる限り歯を残すこと」を大切にしています。<br>
-              むし歯や歯周病で失われた歯を補うことも大切ですが、そもそも「抜かずに済む選択肢」を最大限考えることが、患者さんの未来の健康につながると考えています。その一環として、歯の移植にも積極的に取り組んでいます。自分の歯を活かせる可能性があるなら、できる限りその選択肢を提供したいと思っています。
-            </p>
-            <div class="doctor-career">
-              <ul>
-                <li>2012年　大阪大学歯学部歯学科卒業</li>
-                <li>2012年　医療法人清雅会シバタ歯科医院で研修</li>
-                <li>2013年　愛知学院大学歯学部麻酔学講座非常勤助教</li>
-                <li>2020年　医療法人社団銀輪会長谷川歯科医院勤務</li>
-                <li>日本歯科麻酔学会認定医</li>
-              </ul>
-            </div>
-            <div class="doctor-specialty">
-              <span class="specialty-label">得意な治療</span>
-              <p>お一人お一人の気持ちに寄り添ったプラン提案が得意です</p>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- CTA -->
-    <section class="page-cta">
-      <div class="container">
-        <div class="page-cta-inner reveal">
-          <h2>まずはお気軽にご相談ください</h2>
-          <p>Web予約は24時間受付中。お電話でのご予約もどうぞ。</p>
-          <div class="page-cta-btns">
-            <a href="https://planetdentale.com/reserve/about.php?web_code=24da7c41f707a2b72d5ac93333b5fd819538b22b405ac3c5f874c15400a2c0ae" target="_blank" rel="noopener noreferrer" class="btn btn--white">Web予約（24時間）</a>
-            <a href="tel:053-489-8185" class="btn btn--outline-white">📞 053-489-8185</a>
-          </div>
-        </div>
+          </article>
+        ))}
       </div>
     </section>
   </main>
@@ -102,180 +77,92 @@ import StickyFooterCTA from '../components/StickyFooterCTA.astro';
 </BaseLayout>
 
 <style>
-/* Page Hero */
-.page-hero {
-  position: relative;
-  height: 320px;
-  overflow: hidden;
-}
-.page-hero__img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-.page-hero__overlay {
-  position: absolute;
-  inset: 0;
-  background: rgba(0,0,0,0.35);
-  display: flex;
-  align-items: flex-end;
-  padding: 40px 48px;
-}
-.page-hero__title {
-  font-size: clamp(1.8rem, 4vw, 2.8rem);
-  font-weight: 700;
-  color: #fff;
-  letter-spacing: 0.05em;
-}
-
-/* Doctors */
-.doctors {
-  padding: 80px 0;
-  background: #fff;
-}
-.doctor-card {
-  display: flex;
-  gap: 64px;
-  align-items: flex-start;
-  padding: 48px 0;
-}
-.doctor-photo {
-  flex: 0 0 300px;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-}
-.doctor-photo img {
-  width: 100%;
-  height: 380px;
-  object-fit: cover;
-  object-position: top center;
-  display: block;
-}
-.doctor-info {
-  flex: 1;
-}
-.doctor-role {
-  font-size: 0.9rem;
-  color: var(--color-primary);
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  margin-bottom: 4px;
-}
-.doctor-name {
-  font-size: clamp(1.6rem, 3vw, 2.2rem);
-  font-weight: 700;
-  color: #1a1a1a;
-  margin-bottom: 24px;
-  padding-bottom: 16px;
-  border-bottom: 2px solid var(--color-primary);
-}
-.doctor-message {
-  font-size: 1rem;
-  line-height: 2;
-  color: #444;
-  margin-bottom: 28px;
-}
-.doctor-career ul {
-  list-style: none;
-  padding: 0;
-  margin: 0 0 24px;
-}
-.doctor-career li {
-  font-size: 0.9rem;
-  line-height: 2;
-  color: #555;
-  padding-left: 16px;
-  position: relative;
-}
-.doctor-career li::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--color-primary);
-}
-.doctor-specialty {
-  background: #f0f8f4;
-  border-left: 4px solid var(--color-primary);
-  border-radius: 0 8px 8px 0;
-  padding: 16px 20px;
-}
-.specialty-label {
-  display: block;
-  font-size: 0.85rem;
-  font-weight: 700;
-  color: var(--color-primary);
-  margin-bottom: 6px;
-}
-.doctor-specialty p {
-  font-size: 0.95rem;
-  color: #444;
-  line-height: 1.7;
-}
-.doctor-divider {
-  border: none;
-  border-top: 1px solid #e8f0ec;
-  margin: 0;
-}
-
-/* CTA */
-.page-cta {
-  background: var(--color-primary);
-  padding: 64px 0;
-}
-.page-cta-inner {
-  text-align: center;
-  color: #fff;
-}
-.page-cta-inner h2 {
-  font-size: clamp(1.4rem, 3vw, 1.8rem);
-  font-weight: 700;
-  margin-bottom: 12px;
-}
-.page-cta-inner p {
-  color: rgba(255,255,255,0.85);
-  margin-bottom: 28px;
-}
-.page-cta-btns {
-  display: flex;
-  gap: 16px;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-.btn--white {
-  background: #fff;
-  color: var(--color-primary);
-  font-weight: 700;
-}
-.btn--outline-white {
-  border: 2px solid #fff;
-  color: #fff;
-  background: transparent;
-}
-
-@media (max-width: 768px) {
-  .doctor-card {
-    flex-direction: column;
-    gap: 28px;
+  .doctors {
+    padding-block: var(--section-space);
+    background: #fff;
   }
-  .doctor-photo {
-    flex: none;
+
+  .doctor {
+    display: grid;
+    grid-template-columns: minmax(270px, 0.82fr) minmax(0, 1.18fr);
+    gap: clamp(45px, 8vw, 105px);
+    align-items: start;
+  }
+
+  .doctor + .doctor {
+    margin-top: clamp(110px, 14vw, 190px);
+    padding-top: clamp(110px, 14vw, 190px);
+    border-top: 1px solid var(--line);
+  }
+
+  .doctor__photo img {
     width: 100%;
+    aspect-ratio: 0.78 / 1;
+    object-fit: cover;
+    object-position: center top;
   }
-  .doctor-photo img {
-    height: 280px;
+
+  .doctor__content header {
+    display: flex;
+    align-items: baseline;
+    gap: 18px;
+    margin-bottom: 30px;
+    padding-bottom: 18px;
+    border-bottom: 1px solid var(--green);
   }
-  .page-hero {
-    height: 220px;
+
+  .doctor__content header span {
+    color: var(--green);
+    font-size: 0.78rem;
+    letter-spacing: 0.15em;
   }
-  .page-hero__overlay {
-    padding: 24px;
+
+  .doctor__content h2 {
+    font-size: clamp(1.55rem, 2.8vw, 2.3rem);
+    font-weight: 500;
+    letter-spacing: 0.14em;
   }
-}
+
+  .doctor__message {
+    margin-bottom: 30px;
+    font-size: 0.88rem;
+    line-height: 2.15;
+  }
+
+  .doctor__career {
+    margin-bottom: 30px;
+    padding-block: 22px;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .doctor__career li {
+    font-size: 0.77rem;
+    line-height: 2;
+  }
+
+  .doctor__specialty h3 {
+    margin-bottom: 8px;
+    color: var(--green);
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+  }
+
+  .doctor__specialty p {
+    font-size: 0.84rem;
+    line-height: 1.9;
+  }
+
+  @media (max-width: 760px) {
+    .doctor {
+      grid-template-columns: 1fr;
+      gap: 36px;
+    }
+
+    .doctor__photo {
+      max-width: 400px;
+      margin-inline: auto;
+    }
+  }
 </style>

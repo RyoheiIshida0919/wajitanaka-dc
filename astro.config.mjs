@@ -6,7 +6,7 @@ export default defineConfig({
   output: 'static',
 
   // 現在の公開URL
-  site: 'https://wajitanaka-dc.pages.dev',
+  site: 'https://wajitanaka-dc.com',
 
   // ビルド最適化
   build: {

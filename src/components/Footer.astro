@@ -1,94 +1,230 @@
 ---
+const reserveUrl = 'https://planetdentale.com/reserve/about.php?web_code=24da7c41f707a2b72d5ac93333b5fd819538b22b405ac3c5f874c15400a2c0ae';
+const navColumns = [
+  [
+    { label: 'ホーム', href: '/' },
+    { label: '当院の特徴', href: '/#features' },
+    { label: '診療案内', href: '/#treatments' },
+  ],
+  [
+    { label: '医師紹介', href: '/doctors' },
+    { label: 'アクセス', href: '/#access' },
+    { label: 'ブログ', href: '/blog' },
+  ],
+  [
+    { label: 'こだわりとQ&A', href: '/reviews' },
+    { label: '求人', href: '/recruit' },
+    { label: 'プライバシーポリシー', href: '/privacy-policy' },
+  ],
+];
 ---
+
 <footer class="footer">
-  <div class="footer__main">
-    <div class="container">
-      <div class="footer__grid">
-        <div class="footer__brand">
-          <a href="/" class="footer__logo-link" aria-label="和地たなか歯科 トップへ">
-            <img
-              src="https://storage.googleapis.com/studio-design-asset-files/projects/Kwa5x4ogqX/s-400x150_webp_fd667224-34af-4ea1-b45f-3dec542364fb.webp"
-              alt="和地たなか歯科"
-              width="180"
-              height="68"
-              class="footer__logo-img"
-            />
-          </a>
-          <address class="footer__address">
-            〒431-1115 静岡県浜松市和地町4757-1<br />
-            <a href="tel:053-489-8185" class="footer__tel">tel. 053-489-8185</a>
-          </address>
-        </div>
-        <div class="footer__hours">
-          <table class="footer__hours-table" aria-label="診療時間">
-            <thead>
-              <tr>
-                <th></th><th>月</th><th>火</th><th>水</th><th>木</th><th>金</th><th>土</th><th>日</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <th>8:45-13:30</th>
-                <td><span class="dot"></span></td><td><span class="dot"></span></td><td><span class="dot"></span></td><td><span class="dot"></span></td><td><span class="dot"></span></td><td><span class="dot"></span></td><td></td>
-              </tr>
-              <tr>
-                <th>13:30-16:30</th>
-                <td><span class="dot"></span></td><td><span class="dot"></span></td><td><span class="dot"></span></td><td><span class="dot"></span></td><td><span class="dot"></span></td><td></td><td></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
+  <div class="container footer__upper">
+    <div class="footer__brand">
+      <img src="/images/site/logo.png" alt="和地たなか歯科" width="342" height="149" />
+      <address>
+        〒431-1115<br />
+        静岡県浜松市中央区和地町4757-1<br />
+        <a href="tel:053-489-8185">tel. 053-489-8185</a>
+      </address>
+    </div>
+
+    <div class="footer__hours">
+      <table aria-label="診療時間">
+        <thead>
+          <tr><th>診療時間</th><th>月</th><th>火</th><th>水</th><th>木</th><th>金</th><th>土</th><th>日</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th>8:45-13:30</th>
+            <td>●</td><td>●</td><td>●</td><td>●</td><td>●</td><td>●</td><td>ー</td>
+          </tr>
+          <tr>
+            <th>13:30-16:30</th>
+            <td>●</td><td>●</td><td>●</td><td>●</td><td>●</td><td>ー</td><td>ー</td>
+          </tr>
+        </tbody>
+      </table>
+      <p>患者さんのご都合に合わせた診療時間で、平日・土曜日も通院いただけます。</p>
     </div>
   </div>
-  <div class="footer__bottom">
-    <div class="container footer__bottom-inner">
-      <nav class="footer__nav" aria-label="フッターナビゲーション">
-        <ul class="footer__nav-list">
-          <li><a href="/">ホーム</a></li>
-          <li><a href="/#features">当院の特長</a></li>
-          <li><a href="/#treatments">診療案内</a></li>
-          <li><a href="/#access">アクセス</a></li>
-          <li><a href="/reviews">患者さんの声</a></li>
-          <li><a href="/recruit">求人</a></li>
-        </ul>
-      </nav>
-      <div class="footer__actions">
-        <a href="https://planetdentale.com/reserve/about.php?web_code=24da7c41f707a2b72d5ac93333b5fd819538b22b405ac3c5f874c15400a2c0ae" class="footer__reserve-btn" target="_blank" rel="noopener noreferrer">診療予約</a>
-      </div>
+
+  <div class="container footer__lower">
+    <nav class="footer__nav" aria-label="フッターナビゲーション">
+      {navColumns.map((column) => (
+        <ul>{column.map((item) => <li><a href={item.href}>{item.label}</a></li>)}</ul>
+      ))}
+    </nav>
+    <div class="footer__actions">
+      <a class="footer__instagram" href="https://www.instagram.com/wajitanakadc/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+        <span aria-hidden="true">◎</span> Instagram
+      </a>
+      <a class="reserve-link reserve-link--white" href={reserveUrl} target="_blank" rel="noopener noreferrer">診療予約</a>
     </div>
   </div>
-  <div class="footer__copy-bar">
-    <p class="footer__copy">Copyright &copy;和地たなか歯科 All right reserved.</p>
+
+  <div class="footer__copyright">
+    <div class="container">Copyright &copy; 和地たなか歯科 All rights reserved.</div>
   </div>
 </footer>
+
 <style>
-  .footer { background-color: var(--color-primary, #018966); color: rgba(255,255,255,0.9); }
-  .footer__main { padding-block: 2.5rem; border-bottom: 1px solid rgba(255,255,255,0.15); }
-  .footer__grid { display: flex; flex-direction: column; gap: 2rem; }
-  @media (min-width: 768px) { .footer__grid { flex-direction: row; align-items: flex-start; gap: 3rem; } }
-  .footer__brand { flex-shrink: 0; }
-  .footer__logo-link { display: inline-block; margin-bottom: 1rem; }
-  .footer__logo-img { height: 52px; width: auto; filter: brightness(0) invert(1); }
-  .footer__address { font-style: normal; font-size: 0.82rem; color: rgba(255,255,255,0.8); line-height: 1.8; }
-  .footer__tel { color: rgba(255,255,255,0.9); font-weight: 500; }
-  .footer__hours { flex: 1; }
-  .footer__hours-table { width: 100%; border-collapse: collapse; font-size: 0.78rem; color: rgba(255,255,255,0.85); margin-bottom: 0.75rem; }
-  .footer__hours-table thead th { padding: 0.4rem 0.5rem; text-align: center; font-weight: 400; color: rgba(255,255,255,0.6); border-bottom: 1px solid rgba(255,255,255,0.2); }
-  .footer__hours-table thead th:first-child { text-align: left; }
-  .footer__hours-table tbody th { padding: 0.4rem 0.5rem 0.4rem 0; text-align: left; font-weight: 400; color: rgba(255,255,255,0.7); white-space: nowrap; }
-  .footer__hours-table tbody td { text-align: center; padding: 0.4rem 0.5rem; }
-  .dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background-color: #fff; }
-  .footer__bottom { padding-block: 1.25rem; border-bottom: 1px solid rgba(255,255,255,0.15); }
-  .footer__bottom-inner { display: flex; flex-direction: column; gap: 1rem; }
-  @media (min-width: 768px) { .footer__bottom-inner { flex-direction: row; align-items: center; justify-content: space-between; } }
-  .footer__nav-list { display: flex; flex-wrap: wrap; }
-  .footer__nav-list li a { display: inline-block; font-size: 0.78rem; color: rgba(255,255,255,0.75); padding: 0.2rem 0.75rem; border-right: 1px solid rgba(255,255,255,0.25); transition: color 0.2s; }
-  .footer__nav-list li:last-child a { border-right: none; }
-  .footer__nav-list li a:hover { color: #fff; }
-  .footer__actions { display: flex; align-items: center; gap: 1rem; flex-shrink: 0; }
-  .footer__reserve-btn { display: inline-flex; align-items: center; justify-content: center; padding: 0.6rem 1.5rem; background-color: #fff; color: var(--color-primary, #018966); font-size: 0.85rem; font-weight: 700; border-radius: 4px; white-space: nowrap; }
-  .footer__reserve-btn:hover { background-color: rgba(255,255,255,0.85); }
-  .footer__copy-bar { padding-block: 0.875rem; text-align: center; }
-  .footer__copy { font-size: 0.72rem; color: rgba(255,255,255,0.5); }
+  .footer {
+    background: var(--green);
+    color: #fff;
+  }
+
+  .footer__upper {
+    display: grid;
+    grid-template-columns: minmax(240px, 0.75fr) minmax(520px, 1.25fr);
+    gap: clamp(60px, 10vw, 150px);
+    padding-block: 70px 52px;
+  }
+
+  .footer__brand img {
+    width: 214px;
+    margin-bottom: 20px;
+    filter: brightness(0) invert(1);
+  }
+
+  .footer__brand address {
+    font-size: 0.78rem;
+    font-style: normal;
+    line-height: 2;
+    letter-spacing: 0.08em;
+  }
+
+  .footer__brand address a {
+    display: inline-block;
+    margin-top: 5px;
+    font-size: 1.05rem;
+  }
+
+  .footer__hours table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.78rem;
+  }
+
+  .footer__hours th,
+  .footer__hours td {
+    padding: 10px 8px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.42);
+    font-weight: 400;
+    text-align: center;
+  }
+
+  .footer__hours th:first-child {
+    min-width: 115px;
+    text-align: left;
+  }
+
+  .footer__hours tbody td {
+    font-size: 0.65rem;
+  }
+
+  .footer__hours p {
+    margin-top: 16px;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.72rem;
+  }
+
+  .footer__lower {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 40px;
+    align-items: end;
+    padding-block: 46px 60px;
+    border-top: 1px solid rgba(255, 255, 255, 0.34);
+  }
+
+  .footer__nav {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(130px, 1fr));
+    gap: 32px;
+    max-width: 700px;
+  }
+
+  .footer__nav li + li {
+    margin-top: 11px;
+  }
+
+  .footer__nav a {
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+  }
+
+  .footer__nav a::before {
+    margin-right: 0.7rem;
+    content: '—';
+    opacity: 0.72;
+  }
+
+  .footer__actions {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+  }
+
+  .footer__instagram {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.76rem;
+  }
+
+  .footer__instagram span {
+    font-size: 1.45rem;
+  }
+
+  .footer__copyright {
+    padding-block: 17px;
+    background: #fff;
+    color: #777;
+    font-family: var(--font-number);
+    font-size: 0.64rem;
+    letter-spacing: 0.05em;
+    text-align: center;
+  }
+
+  @media (max-width: 900px) {
+    .footer__upper {
+      grid-template-columns: 1fr;
+      gap: 44px;
+    }
+
+    .footer__lower {
+      grid-template-columns: 1fr;
+      align-items: start;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .footer__upper {
+      padding-block: 54px 42px;
+    }
+
+    .footer__hours {
+      overflow-x: auto;
+    }
+
+    .footer__hours table {
+      min-width: 560px;
+    }
+
+    .footer__nav {
+      grid-template-columns: 1fr 1fr;
+      gap: 28px 18px;
+    }
+
+    .footer__actions {
+      align-items: stretch;
+      flex-direction: column;
+    }
+
+    .footer__actions .reserve-link {
+      width: 100%;
+    }
+  }
 </style>

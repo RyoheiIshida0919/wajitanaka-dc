@@ -1,0 +1,65 @@
+---
+interface Props {
+  title: string;
+  image: string;
+  alt: string;
+  position?: string;
+}
+
+const { title, image, alt, position = 'center' } = Astro.props;
+---
+
+<section class="page-hero">
+  <img src={image} alt={alt} style={`object-position: ${position}`} />
+  <div class="page-hero__veil"></div>
+  <div class="container page-hero__inner">
+    <h1>{title}</h1>
+  </div>
+</section>
+
+<style>
+  .page-hero {
+    position: relative;
+    height: clamp(360px, 44vw, 650px);
+    overflow: hidden;
+    background: #e8e9e6;
+  }
+
+  .page-hero > img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .page-hero__veil {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, rgba(12, 29, 23, 0.3), transparent 64%);
+  }
+
+  .page-hero__inner {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: flex-end;
+    padding-bottom: clamp(38px, 6vw, 82px);
+  }
+
+  .page-hero h1 {
+    color: #fff;
+    font-size: clamp(1.8rem, 3.7vw, 3.5rem);
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    text-shadow: 0 2px 18px rgba(0, 0, 0, 0.15);
+  }
+
+  @media (max-width: 600px) {
+    .page-hero {
+      height: 390px;
+    }
+
+    .page-hero__veil {
+      background: linear-gradient(0deg, rgba(12, 29, 23, 0.38), transparent 62%);
+    }
+  }
+</style>

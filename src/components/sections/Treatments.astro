@@ -54,7 +54,7 @@ const treatments = [
   },
   {
     name: 'インプラント',
-    sub: 'むし歯・欠損・本格修復',
+    sub: '失った歯を補う治療',
     href: '#',
     icon: `<svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" width="64" height="64">
       <rect x="32" y="8" width="16" height="10" rx="3" stroke="#018966" stroke-width="3"/>
@@ -107,21 +107,16 @@ const treatments = [
 ---
 
 <section class="treatments" id="treatments">
-  <div class="treatments-header">
-    <div class="container">
-      <h2 class="treatments-title">診療案内</h2>
-    </div>
-  </div>
-  <div class="treatments-body">
-    <div class="container">
-      <ul class="treatments-grid reveal">
-        {treatments.map(item => (
-          <li class="treatment-item">
-            <a href={item.href} class="treatment-link" aria-label={`${item.name}について詳しく見る`}>
-              <div class="treatment-icon" set:html={item.icon} />
-              <p class="treatment-name">{item.name}</p>
-              <p class="treatment-sub">{item.sub}</p>
-            </a>
+  <div class="container treatments__layout">
+    <h2 class="section-marker section-marker--vertical">診療案内</h2>
+    <div class="treatments__content">
+      <p class="treatments__lead">お口のお悩みを幅広く診療しています。まずは気になることをお聞かせください。</p>
+      <ul class="treatments-grid">
+        {treatments.map((item) => (
+          <li class="treatment-item reveal">
+            <div class="treatment-icon" set:html={item.icon} />
+            <h3 class="treatment-name">{item.name}</h3>
+            <p class="treatment-sub">{item.sub}</p>
           </li>
         ))}
       </ul>
@@ -130,75 +125,108 @@ const treatments = [
 </section>
 
 <style>
-.treatments-header {
-  background-color: var(--color-primary, #018966);
-  padding: 2rem 0;
-  text-align: center;
-}
-.treatments-title {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: #fff;
-  letter-spacing: 0.1em;
-}
-.treatments-body {
-  background-color: #f5f5f5;
-  padding: 3rem 0;
-}
-.treatments-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.5rem 1rem;
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-.treatment-item {
-  display: flex;
-}
-.treatment-link {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-decoration: none;
-  transition: opacity 0.2s;
-  width: 100%;
-}
-.treatment-link:hover {
-  opacity: 0.8;
-}
-.treatment-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 80px;
-  height: 80px;
-  margin-bottom: 0.5rem;
-}
-.treatment-icon svg {
-  width: 64px;
-  height: 64px;
-}
-.treatment-name {
-  font-size: 0.95rem;
-  font-weight: 700;
-  color: #222;
-  text-align: center;
-  letter-spacing: 0.03em;
-  line-height: 1.4;
-}
-.treatment-sub {
-  font-size: 0.7rem;
-  color: #666;
-  text-align: center;
-  margin-top: 0.2rem;
-  letter-spacing: 0.01em;
-  line-height: 1.4;
-}
-@media (min-width: 640px) {
-  .treatment-icon { width: 96px; height: 96px; }
-  .treatment-icon svg { width: 80px; height: 80px; }
-  .treatment-name { font-size: 1rem; }
-  .treatment-sub { font-size: 0.75rem; }
-}
+  .treatments {
+    padding-block: var(--section-space);
+    background: #fff;
+  }
+
+  .treatments__layout {
+    display: grid;
+    grid-template-columns: 80px minmax(0, 1fr);
+    gap: clamp(40px, 7vw, 100px);
+    align-items: start;
+  }
+
+  .treatments__layout > .section-marker {
+    position: sticky;
+    top: 125px;
+    justify-self: center;
+  }
+
+  .treatments__lead {
+    max-width: 620px;
+    margin: 0 auto clamp(45px, 6vw, 80px);
+    color: var(--muted);
+    font-size: 0.88rem;
+    text-align: center;
+  }
+
+  .treatments-grid {
+    display: grid;
+    max-width: 900px;
+    margin-inline: auto;
+    grid-template-columns: repeat(3, 1fr);
+    border-top: 1px solid var(--line);
+    border-left: 1px solid var(--line);
+  }
+
+  .treatment-item {
+    display: flex;
+    min-height: 250px;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 28px 15px;
+    border-right: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    text-align: center;
+  }
+
+  .treatment-icon {
+    display: grid;
+    width: 84px;
+    height: 84px;
+    place-items: center;
+    margin-bottom: 12px;
+  }
+
+  .treatment-icon :global(svg) {
+    width: 72px;
+    height: 72px;
+  }
+
+  .treatment-name {
+    color: var(--green);
+    font-size: 1rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+  }
+
+  .treatment-sub {
+    margin-top: 5px;
+    color: var(--muted);
+    font-size: 0.67rem;
+    line-height: 1.55;
+  }
+
+  @media (max-width: 767px) {
+    .treatments__layout {
+      grid-template-columns: 1fr;
+      gap: 45px;
+    }
+
+    .treatments__layout > .section-marker {
+      position: static;
+      justify-self: start;
+    }
+
+    .treatments-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .treatment-item {
+      min-height: 205px;
+      padding-inline: 10px;
+    }
+
+    .treatment-icon {
+      width: 70px;
+      height: 70px;
+    }
+
+    .treatment-icon :global(svg) {
+      width: 60px;
+      height: 60px;
+    }
+  }
 </style>

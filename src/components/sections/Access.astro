@@ -1,191 +1,130 @@
 ---
-const hours = [
-  { day: '月・火・水・金', am: '09:00〜12:30', pm: '14:30〜19:00' },
-  { day: '木・土', am: '09:00〜12:30', pm: '14:00〜17:00' },
-  { day: '日・祝', am: '休診', pm: '休診' },
+const reserveUrl = 'https://planetdentale.com/reserve/about.php?web_code=24da7c41f707a2b72d5ac93333b5fd819538b22b405ac3c5f874c15400a2c0ae';
+const routes = [
+  { label: 'お車', text: '無料駐車場21台（うち車椅子用駐車場1台）' },
+  { label: 'バス', text: '遠鉄バス すじかい橋バス停から徒歩2分' },
+  { label: '電車', text: '天竜浜名湖線 気賀駅からタクシーで13分' },
+  { label: '高速', text: '舘山寺ICまたは浜松西ICから車で約8分' },
 ];
 ---
+
 <section class="access" id="access">
-  <div class="container">
-    <div class="section-header reveal">
-      <span class="section-en">ACCESS</span>
-      <h2 class="section-title">アクセス・診療時間</h2>
-    </div>
-    <div class="access-inner">
-      <div class="access-info reveal">
-        <div class="access-block">
-          <h3 class="access-block-title">診療時間</h3>
-          <table class="hours-table">
-            <thead>
-              <tr>
-                <th></th>
-                <th>午前</th>
-                <th>午後</th>
-              </tr>
-            </thead>
-            <tbody>
-              {hours.map(h => (
-                <tr>
-                  <td>{h.day}</td>
-                  <td>{h.am}</td>
-                  <td>{h.pm}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-          <p class="hours-note">※ 受付終了は各終了時間の30分前です</p>
-        </div>
-        <div class="access-block">
-          <h3 class="access-block-title">所在地・交通</h3>
-          <p class="access-address">
-            〒431-1115<br>
-            静岡県浜松市和地町4757-1<br>
-            <br>
-            【お車でお越しの方】<br>
-            駐車場完備（無料）<br>
-            <br>
-            【バスでお越しの方】<br>
-            遠鉄バス「和地」バス停より徒歩3分
-          </p>
-          <div class="access-tel">
-            <a href="tel:053-489-8185" class="btn btn--primary">
-              📞 053-489-8185
-            </a>
-          </div>
-        </div>
+  <div class="container access__layout">
+    <h2 class="section-marker section-marker--vertical">アクセス</h2>
+    <div class="access__content">
+      <div class="access__map reveal">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3277.7178222443677!2d137.6561499755925!3d34.76270037289769!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x601b270ea81de745%3A0xc76024dc9e1f5fbd!2z5ZKM5Zyw44Gf44Gq44GL5q2v56eR!5e0!3m2!1sja!2sjp!4v1743118175364!5m2!1sja!2sjp"
+          width="100%"
+          height="520"
+          style="border:0"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          title="和地たなか歯科への地図"
+        ></iframe>
       </div>
-      <div class="access-right reveal">
-        <div class="access-ext-photo">
-          <img src="/images/site/access-ext.jpg" alt="和地たなか歯科 外観" loading="lazy" />
-        </div>
-        <div class="access-map">
-          <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3277.7178222443677!2d137.6561499755925!3d34.76270037289769!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x601b270ea81de745%3A0xc76024dc9e1f5fbd!2z5ZKM5Zyw44Gf44Gq44GL5q2v56eR!5e0!3m2!1sja!2sjp!4v1743118175364!5m2!1sja!2sjp"
-            width="100%"
-            height="300"
-            style="border:0;"
-            allowfullscreen=""
-            loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade"
-            title="和地たなか歯科 地図"
-          ></iframe>
-        </div>
+      <div class="access__routes">
+        {routes.map((route) => (
+          <div class="access__route reveal">
+            <span>{route.label}</span>
+            <p>{route.text}</p>
+          </div>
+        ))}
+      </div>
+      <div class="access__reserve reveal">
+        <a class="reserve-link" href={reserveUrl} target="_blank" rel="noopener noreferrer">診療予約</a>
       </div>
     </div>
   </div>
 </section>
 
 <style>
-.access {
-  padding: 80px 0;
-  background: #f8faf8;
-}
-.section-header {
-  text-align: center;
-  margin-bottom: 60px;
-}
-.section-en {
-  display: block;
-  font-size: 13px;
-  letter-spacing: 0.2em;
-  color: var(--color-primary);
-  font-weight: 600;
-  margin-bottom: 8px;
-}
-.section-title {
-  font-size: clamp(1.6rem, 4vw, 2.2rem);
-  font-weight: 700;
-  color: #1a1a1a;
-}
-.access-inner {
-  display: flex;
-  gap: 48px;
-  align-items: flex-start;
-}
-.access-info {
-  flex: 0 0 400px;
-}
-.access-block {
-  margin-bottom: 36px;
-}
-.access-block-title {
-  font-size: 1.1rem;
-  font-weight: 700;
-  color: var(--color-primary);
-  margin-bottom: 16px;
-  padding-bottom: 8px;
-  border-bottom: 2px solid var(--color-primary);
-}
-.hours-table {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: 0.9rem;
-}
-.hours-table th,
-.hours-table td {
-  padding: 10px 12px;
-  border: 1px solid #ddd;
-  text-align: center;
-}
-.hours-table th {
-  background: var(--color-primary);
-  color: #fff;
-  font-weight: 600;
-}
-.hours-table td:first-child {
-  text-align: left;
-  font-weight: 500;
-}
-.hours-note {
-  font-size: 0.8rem;
-  color: #888;
-  margin-top: 8px;
-}
-.access-address {
-  font-size: 0.95rem;
-  line-height: 2;
-  color: #555;
-  margin-bottom: 20px;
-}
-.access-tel {
-  margin-top: 16px;
-}
-.btn--primary {
-  background: var(--color-primary);
-  color: #fff;
-}
-.access-right {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-.access-ext-photo {
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-}
-.access-ext-photo img {
-  width: 100%;
-  height: 220px;
-  object-fit: cover;
-  display: block;
-}
-.access-map {
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-}
-@media (max-width: 768px) {
-  .access-inner {
-    flex-direction: column;
+  .access {
+    padding-block: var(--section-space);
+    background: #fff;
   }
-  .access-info {
-    flex: none;
+
+  .access__layout {
+    display: grid;
+    grid-template-columns: 80px minmax(0, 1fr);
+    gap: clamp(40px, 7vw, 100px);
+    align-items: start;
+  }
+
+  .access__layout > .section-marker {
+    position: sticky;
+    top: 125px;
+    justify-self: center;
+  }
+
+  .access__map {
+    overflow: hidden;
+    border: 1px solid var(--line);
+  }
+
+  .access__map iframe {
+    display: block;
     width: 100%;
+    filter: saturate(0.76) contrast(0.96);
   }
-  .access-right {
-    width: 100%;
+
+  .access__routes {
+    display: grid;
+    margin-top: clamp(35px, 5vw, 65px);
+    grid-template-columns: repeat(2, 1fr);
+    border-top: 1px solid var(--line);
+    border-left: 1px solid var(--line);
   }
-}
+
+  .access__route {
+    display: grid;
+    min-height: 112px;
+    grid-template-columns: 74px 1fr;
+    align-items: center;
+    padding: 20px 28px;
+    border-right: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .access__route span {
+    color: var(--green);
+    font-size: 0.83rem;
+    font-weight: 500;
+  }
+
+  .access__route p {
+    font-size: 0.76rem;
+    line-height: 1.8;
+  }
+
+  .access__reserve {
+    margin-top: 50px;
+    text-align: center;
+  }
+
+  @media (max-width: 767px) {
+    .access__layout {
+      grid-template-columns: 1fr;
+      gap: 45px;
+    }
+
+    .access__layout > .section-marker {
+      position: static;
+      justify-self: start;
+    }
+
+    .access__map iframe {
+      height: 380px;
+    }
+
+    .access__routes {
+      grid-template-columns: 1fr;
+    }
+
+    .access__route {
+      grid-template-columns: 58px 1fr;
+      padding-inline: 18px;
+    }
+  }
 </style>

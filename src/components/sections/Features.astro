@@ -1,172 +1,152 @@
 ---
+const reserveUrl = 'https://planetdentale.com/reserve/about.php?web_code=24da7c41f707a2b72d5ac93333b5fd819538b22b405ac3c5f874c15400a2c0ae';
 const features = [
   {
     id: '01',
-    title: '0歳から100歳まで\n通える歯科医院',
+    title: '0歳から100歳まで通える歯科医院',
     text: 'お口の健康は赤ちゃんの頃から大切です。当院では0歳からの口腔ケアを推奨し、生涯にわたってサポートします。また、噛む力は、健康寿命に大きく影響します。食べる楽しみを守り、ずっとご自身の歯で過ごせるようにお手伝いします。院内はバリアフリー設計です。',
-    images: ['/images/site/child-f01.jpg', '/images/site/f01-2.jpg', '/images/site/f01-3.jpg'],
+    images: ['/images/site/child-f01.jpg', '/images/site/f01-2.jpg'],
   },
   {
     id: '02',
-    title: '歯をできるだけ\n残す治療',
+    title: '歯をできるだけ残す治療',
     text: 'むし歯や歯周病で失われた歯を補うことも大切ですが、そもそも「抜かずに済む選択肢」を最大限考えることが、患者さんの未来の健康につながると考えています。ご自身の歯の移植も積極的に行っています。',
-    images: ['/images/site/f02-1.jpg', '/images/site/f02-2.jpg', '/images/site/f02-3.jpg'],
+    images: ['/images/site/f02-1.jpg', '/images/site/f02-2.jpg'],
   },
   {
     id: '03',
-    title: 'リラックス歯科・\n静脈内鎮静法対応',
-    text: '歯科治療が怖い、過去の経験から不安がある…そんな方でも通える歯科医院へ。個室診療室があり、リラックスした状態で治療を受けられる静脈内鎮静法を導入しています。',
-    images: ['/images/site/f03-1.jpg', '/images/site/f03-2.jpg', '/images/site/f03-3.jpg'],
+    title: 'リラックス歯科・静脈内鎮静法対応',
+    text: '歯科治療が怖い、過去の経験から不安がある。そんな方でも通える歯科医院へ。個室診療室があり、リラックスした状態で治療を受けられる静脈内鎮静法を導入しています。',
+    images: ['/images/site/f03-1.jpg', '/images/site/f03-2.jpg'],
   },
   {
     id: '04',
-    title: '女性歯科医師在籍・\n保育士による託児',
+    title: '女性歯科医師在籍・保育士による託児',
     text: '女性ならではの視点で、お子さまや歯科が苦手な方にも安心して通院いただける環境を整えています。保育士による無料託児があり、小さなお子様がいても安心して通院できます。',
-    images: ['/images/site/f04-1.jpg', '/images/site/f04-2.jpg', '/images/site/f04-3.jpg'],
+    images: ['/images/site/f04-1.jpg', '/images/site/f04-2.jpg'],
   },
   {
     id: '05',
-    title: 'Web予約・\nアプリ予約が可能',
+    title: 'Web予約・アプリ予約が可能',
     text: '忙しい方でも簡単に予約できるよう、Web予約・アプリ予約に対応しています。アプリでご自身のお口の中の管理ができます。',
-    images: ['/images/site/f05-1.jpg', '/images/site/f05-2.jpg', '/images/site/f05-3.jpg'],
+    images: ['/images/site/f05-1.jpg', '/images/site/f05-2.jpg'],
   },
   {
     id: '06',
-    title: '予防・管理を重視した\n歯科診療',
+    title: '予防・管理を重視した歯科診療',
     text: '治療だけでなく、患者さん自身が自分の口に興味を持ち、主体的にケアできるようサポートします。悪くなったから治すのではなく、なぜ悪くなったかに注目し、再発を防ぎます。',
-    images: ['/images/site/f06-1.jpg', '/images/site/f06-2.jpg', '/images/site/f06-3.jpg'],
+    images: ['/images/site/f06-1.jpg', '/images/site/f06-2.jpg'],
   },
 ];
 ---
+
 <section class="features" id="features">
-  <div class="container">
-    <div class="section-header reveal">
-      <span class="section-en">FEATURES</span>
-      <h2 class="section-title">当院の特長</h2>
-    </div>
-    {features.map((f, i) => (
-      <div class={`feature-item reveal ${i % 2 === 1 ? 'feature-item--reverse' : ''}`}>
-        <div class="feature-images">
-          <div class="feature-img-main">
-            <img src={f.images[0]} alt={f.title.replace('\n', ' ')} loading="lazy" />
+  <div class="container features__layout">
+    <h2 class="section-marker section-marker--vertical">当院の特徴</h2>
+    <div class="features__list">
+      {features.map((feature) => (
+        <article class="feature reveal">
+          <div class="feature__copy">
+            <span class="section-number">{feature.id}</span>
+            <h3>{feature.title}</h3>
+            <p>{feature.text}</p>
           </div>
-          <div class="feature-img-sub">
-            <img src={f.images[1]} alt="" loading="lazy" />
-            <img src={f.images[2]} alt="" loading="lazy" />
+          <div class="feature__images">
+            {feature.images.map((image, index) => (
+              <img src={image} alt={index === 0 ? feature.title : ''} loading="lazy" />
+            ))}
           </div>
-        </div>
-        <div class="feature-content">
-          <span class="feature-num">{f.id}</span>
-          <h3 class="feature-title">{f.title.split('\n').map((line, j) => (
-            j === 0 ? line : <><br />{line}</>
-          ))}</h3>
-          <p class="feature-text">{f.text}</p>
-        </div>
+        </article>
+      ))}
+      <div class="features__reserve reveal">
+        <a class="reserve-link" href={reserveUrl} target="_blank" rel="noopener noreferrer">診療予約</a>
       </div>
-    ))}
+    </div>
   </div>
 </section>
 
 <style>
-.features {
-  padding: 80px 0;
-  background: #fff;
-}
-.section-header {
-  text-align: center;
-  margin-bottom: 60px;
-}
-.section-en {
-  display: block;
-  font-size: 13px;
-  letter-spacing: 0.2em;
-  color: var(--color-primary);
-  font-weight: 600;
-  margin-bottom: 8px;
-}
-.section-title {
-  font-size: clamp(1.6rem, 4vw, 2.2rem);
-  font-weight: 700;
-  color: #1a1a1a;
-}
-.feature-item {
-  display: flex;
-  align-items: center;
-  gap: 60px;
-  margin-bottom: 80px;
-}
-.feature-item--reverse {
-  flex-direction: row-reverse;
-}
-.feature-images {
-  flex: 0 0 50%;
-  display: flex;
-  gap: 8px;
-}
-.feature-img-main {
-  flex: 1;
-  border-radius: 12px;
-  overflow: hidden;
-}
-.feature-img-main img {
-  width: 100%;
-  height: 320px;
-  object-fit: cover;
-  display: block;
-}
-.feature-img-sub {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  flex: 0 0 40%;
-}
-.feature-img-sub img {
-  width: 100%;
-  height: 156px;
-  object-fit: cover;
-  border-radius: 8px;
-  display: block;
-}
-.feature-content {
-  flex: 1;
-}
-.feature-num {
-  display: block;
-  font-size: 3rem;
-  font-weight: 800;
-  color: var(--color-primary);
-  opacity: 0.2;
-  line-height: 1;
-  margin-bottom: 8px;
-  font-family: 'Georgia', serif;
-}
-.feature-title {
-  font-size: clamp(1.2rem, 2.5vw, 1.5rem);
-  font-weight: 700;
-  line-height: 1.6;
-  color: #1a1a1a;
-  margin-bottom: 16px;
-}
-.feature-text {
-  font-size: 0.95rem;
-  line-height: 2;
-  color: #555;
-}
-@media (max-width: 768px) {
-  .feature-item,
-  .feature-item--reverse {
-    flex-direction: column;
-    gap: 24px;
+  .features {
+    padding-block: var(--section-space);
+    background: #fff;
   }
-  .feature-images {
-    flex: none;
+
+  .features__layout {
+    display: grid;
+    grid-template-columns: 80px minmax(0, 1fr);
+    gap: clamp(40px, 7vw, 100px);
+    align-items: start;
+  }
+
+  .features__layout > .section-marker {
+    position: sticky;
+    top: 125px;
+    justify-self: center;
+  }
+
+  .features__list {
+    max-width: 930px;
+  }
+
+  .feature {
+    padding-bottom: clamp(76px, 10vw, 145px);
+  }
+
+  .feature__copy {
+    max-width: 680px;
+    margin: 0 auto clamp(30px, 4vw, 55px);
+  }
+
+  .feature__copy h3 {
+    margin-block: 15px 20px;
+    color: var(--green);
+    font-size: clamp(1.35rem, 2.3vw, 2rem);
+    font-weight: 500;
+    letter-spacing: 0.11em;
+  }
+
+  .feature__copy p {
+    font-size: clamp(0.85rem, 1.05vw, 0.96rem);
+    line-height: 2.15;
+  }
+
+  .feature__images {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: clamp(10px, 1.7vw, 24px);
+  }
+
+  .feature__images img {
     width: 100%;
+    aspect-ratio: 1.55 / 1;
+    object-fit: cover;
   }
-  .feature-img-main img {
-    height: 220px;
+
+  .features__reserve {
+    text-align: center;
   }
-  .feature-img-sub img {
-    height: 106px;
+
+  @media (max-width: 767px) {
+    .features__layout {
+      grid-template-columns: 1fr;
+      gap: 50px;
+    }
+
+    .features__layout > .section-marker {
+      position: static;
+      justify-self: start;
+    }
+
+    .feature {
+      padding-bottom: 82px;
+    }
+
+    .feature__images {
+      gap: 8px;
+    }
+
+    .feature__images img {
+      aspect-ratio: 1 / 0.82;
+    }
   }
-}
 </style>
