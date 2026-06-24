@@ -1,229 +1,251 @@
 ---
 const slides = [
-  { type: 'brand', label: 'ここから笑顔がうまれる。歯も、心も。' },
-  { type: 'photo', src: '/images/site/hero-1.jpg', alt: '和地たなか歯科の外観', text: '0才から100才まで\nみんなが通える歯医者さん' },
-  { type: 'photo', src: '/images/site/hero-2.jpg', alt: 'バリアフリー設計の待合室', text: 'みんなにやさしい\nバリアフリー設計' },
-  { type: 'photo', src: '/images/site/hero-3.jpg', alt: '女性歯科医師と小さなお子様', text: '女性歯科医がいて\n小さなお子様も安心' },
+  {
+    className: 'slide-1',
+    src: '/images/site/hero-1.jpg',
+    alt: '和地たなか歯科の外観',
+    text: '0才から100才まで\nみんなが通える歯医者さん',
+  },
+  {
+    className: 'slide-2',
+    src: '/images/site/hero-2.jpg',
+    alt: '和地たなか歯科の院内',
+    text: 'みんなにやさしい\nバリアフリー設計',
+  },
+  {
+    className: 'slide-3',
+    src: '/images/site/hero-3.jpg',
+    alt: '女性歯科医がいて小さなお子様も安心できる診療風景',
+    text: '女性歯科医がいて\n小さなお子様も安心',
+  },
 ];
 ---
 
-<section class="hero" id="top" aria-roledescription="carousel" aria-label="和地たなか歯科のご案内">
-  <div class="hero__track" id="hero-track">
-    {slides.map((slide, index) => (
-      <article class={`hero__slide hero__slide--${slide.type}`} aria-hidden={index === 0 ? 'false' : 'true'}>
-        {slide.type === 'brand' ? (
-          <div class="hero__brand">
-            <svg class="hero__mark" viewBox="0 0 210 190" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-              <path d="M78 28C56 20 34 32 26 56C18 78 28 98 22 120C16 142 6 160 14 176C18 188 32 192 44 184C54 176 56 160 66 155C78 149 98 149 110 155C120 160 122 176 132 184C144 192 158 188 162 176C170 160 160 142 154 120C148 98 158 78 150 56C142 32 120 20 98 28" stroke="currentColor" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M98 28C104 20 116 15 126 20C138 27 140 42 132 50C124 58 112 52 108 42C104 34 110 24 120 22" stroke="currentColor" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M58 96H118M88 82V110M74 96H102" stroke="#37a9c8" stroke-width="3.5" stroke-linecap="round"/>
-              <path d="M172 32V50M163 41H181M182 62V72M177 67H187" stroke="#37a9c8" stroke-width="3" stroke-linecap="round"/>
-            </svg>
-            <h1>ここから笑顔がうまれる。<br />歯も、心も。</h1>
-          </div>
-        ) : (
-          <>
-            <img src={slide.src} alt={slide.alt} loading={index === 1 ? 'eager' : 'lazy'} />
-            <div class="hero__shade"></div>
-            <p class="hero__copy">{slide.text}</p>
-          </>
-        )}
-      </article>
-    ))}
+<section class="hero" aria-label="和地たなか歯科のスライドショー">
+  <div class="slideshow">
+    <div class="slides-track" id="track">
+      {slides.map((slide, index) => (
+        <div class={`slide ${slide.className}`}>
+          <img src={slide.src} alt={slide.alt} loading={index === 0 ? 'eager' : 'lazy'} />
+          <div class="slide-caption">{slide.text}</div>
+        </div>
+      ))}
+    </div>
+
+    <button class="arrow prev" id="prevBtn" type="button" aria-label="前へ">
+      <svg viewBox="0 0 18 18"><polyline points="11,3 5,9 11,15" /></svg>
+    </button>
+    <button class="arrow next" id="nextBtn" type="button" aria-label="次へ">
+      <svg viewBox="0 0 18 18"><polyline points="7,3 13,9 7,15" /></svg>
+    </button>
   </div>
 
-  <div class="hero__controls">
-    <button type="button" data-hero-prev aria-label="前のスライド">←</button>
-    <button class="hero__pause" type="button" data-hero-pause aria-label="自動再生を停止">Ⅱ</button>
-    <button type="button" data-hero-next aria-label="次のスライド">→</button>
+  <div class="dots" id="dots">
+    {slides.map((_, index) => (
+      <button class={`dot${index === 0 ? ' active' : ''}`} type="button" data-index={index} aria-label={`スライド${index + 1}へ`}></button>
+    ))}
   </div>
-  <p class="sr-only" aria-live="polite" id="hero-status">1 / {slides.length}</p>
 </section>
 
 <style>
   .hero {
-    position: relative;
-    height: min(730px, calc(100vh - 90px));
-    min-height: 570px;
-    overflow: hidden;
     background: #fff;
+    font-family: "Noto Sans JP", sans-serif;
   }
 
-  .hero__track {
-    display: flex;
-    height: 100%;
-    transition: transform 850ms cubic-bezier(0.65, 0, 0.35, 1);
-  }
-
-  .hero__slide {
+  .slideshow {
     position: relative;
-    min-width: 100%;
-    height: 100%;
+    width: 100%;
+    max-width: 860px;
+    margin: 0 auto;
+    overflow: hidden;
+    background: #000;
   }
 
-  .hero__slide > img {
+  .slides-track {
+    display: flex;
+    transition: transform 0.7s cubic-bezier(0.77, 0, 0.175, 1);
+  }
+
+  .slide {
+    position: relative;
+    width: 100%;
+    flex-shrink: 0;
+  }
+
+  .slide img {
+    display: block;
     width: 100%;
     height: 100%;
     object-fit: cover;
   }
 
-  .hero__slide:nth-child(2) > img {
-    object-position: center 58%;
-  }
-
-  .hero__slide:nth-child(3) > img {
-    object-position: center 52%;
-  }
-
-  .hero__brand {
-    display: flex;
-    height: 100%;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    padding: 70px 20px 105px;
-    color: var(--green);
-    text-align: center;
-  }
-
-  .hero__mark {
-    width: clamp(145px, 14vw, 220px);
-    margin-bottom: clamp(28px, 4vw, 50px);
-  }
-
-  .hero__brand h1 {
-    font-size: clamp(1.8rem, 3.6vw, 3.4rem);
-    font-weight: 500;
-    line-height: 1.75;
-    letter-spacing: 0.12em;
-  }
-
-  .hero__shade {
+  .slide-caption {
     position: absolute;
-    inset: 0;
-    background: linear-gradient(90deg, rgba(255, 255, 255, 0.76) 0%, rgba(255, 255, 255, 0.16) 48%, transparent 72%);
-  }
-
-  .hero__copy {
-    position: absolute;
-    top: 50%;
-    left: clamp(34px, 8vw, 130px);
-    color: var(--green);
-    font-size: clamp(1.65rem, 3.2vw, 3.05rem);
-    font-weight: 500;
-    line-height: 1.65;
-    letter-spacing: 0.09em;
+    color: #3d7a5e;
+    font-family: "Noto Sans JP", sans-serif;
+    font-weight: 700;
+    line-height: 1.5;
+    letter-spacing: 0.02em;
     white-space: pre-line;
+    text-shadow: 1px 1px 6px rgba(255, 255, 255, 0.7), -1px -1px 6px rgba(255, 255, 255, 0.7);
+  }
+
+  .slide-1 .slide-caption {
+    top: 7%;
+    left: 50%;
+    font-size: clamp(18px, 2.8vw, 26px);
+    text-align: center;
+    transform: translateX(-50%);
+    white-space: nowrap;
+  }
+
+  .slide-2 .slide-caption {
+    top: 50%;
+    right: 4%;
+    font-size: clamp(18px, 2.8vw, 26px);
+    text-align: right;
     transform: translateY(-50%);
   }
 
-  .hero__controls {
-    position: absolute;
-    z-index: 4;
-    bottom: 34px;
-    left: 50%;
+  .slide-3 .slide-caption {
+    bottom: 8%;
+    left: 4%;
+    font-size: clamp(18px, 2.8vw, 26px);
+    text-align: left;
+  }
+
+  .dots {
     display: flex;
-    align-items: center;
-    gap: 22px;
-    color: var(--green);
-    transform: translateX(-50%);
+    justify-content: center;
+    gap: 10px;
+    padding: 16px 0 12px;
   }
 
-  .hero__controls button {
-    width: 34px;
-    height: 34px;
-    font-family: var(--font-number);
-    font-size: 1rem;
-  }
-
-  .hero__pause {
-    border: 1px solid currentColor;
+  .dot {
+    width: 10px;
+    height: 10px;
+    padding: 0;
+    border: none;
     border-radius: 50%;
-    font-size: 0.68rem !important;
-    letter-spacing: -0.08em;
+    background: #ccc;
+    cursor: pointer;
+    transition: background 0.3s;
   }
 
-  @media (max-width: 767px) {
-    .hero {
-      height: 620px;
-      min-height: 0;
+  .dot.active {
+    background: #3d7a5e;
+  }
+
+  .arrow {
+    position: absolute;
+    top: 50%;
+    z-index: 10;
+    display: flex;
+    width: 40px;
+    height: 40px;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.55);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    transform: translateY(-50%);
+    transition: background 0.2s;
+  }
+
+  .arrow:hover {
+    background: rgba(255, 255, 255, 0.85);
+  }
+
+  .arrow.prev {
+    left: 12px;
+  }
+
+  .arrow.next {
+    right: 12px;
+  }
+
+  .arrow svg {
+    width: 18px;
+    height: 18px;
+    fill: none;
+    stroke: #333;
+    stroke-width: 2.2;
+  }
+
+  @media (max-width: 768px) {
+    .slide-1 .slide-caption,
+    .slide-2 .slide-caption,
+    .slide-3 .slide-caption {
+      font-size: 24px;
     }
 
-    .hero__brand {
-      padding-bottom: 90px;
-    }
-
-    .hero__brand h1 {
-      font-size: clamp(1.5rem, 7vw, 2rem);
-      letter-spacing: 0.07em;
-    }
-
-    .hero__shade {
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.25), rgba(255, 255, 255, 0.84));
-    }
-
-    .hero__copy {
-      top: auto;
+    .slide-1 .slide-caption,
+    .slide-2 .slide-caption {
+      top: 22px;
       right: 24px;
-      bottom: 110px;
-      left: 24px;
-      font-size: clamp(1.45rem, 7vw, 2rem);
-      transform: none;
     }
 
-    .hero__slide > img {
-      object-position: center;
+    .slide-1 .slide-caption {
+      left: 50%;
+      right: auto;
+      transform: translateX(-50%);
+    }
+
+    .slide-2 .slide-caption {
+      transform: translateY(-50%);
+    }
+
+    .slide-3 .slide-caption {
+      bottom: 24px;
+      left: 24px;
     }
   }
 </style>
 
 <script>
-  const hero = document.querySelector<HTMLElement>('.hero');
-  const track = document.getElementById('hero-track');
-  const slides = Array.from(document.querySelectorAll<HTMLElement>('.hero__slide'));
-  const status = document.getElementById('hero-status');
-  const pauseButton = document.querySelector<HTMLButtonElement>('[data-hero-pause]');
+  const track = document.getElementById('track');
+  const dots = document.querySelectorAll('.dot');
+  const total = 3;
   let current = 0;
-  let playing = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  let timer: number | undefined;
+  let timer;
 
-  const render = () => {
+  function goTo(index) {
+    current = (index + total) % total;
     if (track) track.style.transform = `translateX(-${current * 100}%)`;
-    slides.forEach((slide, index) => slide.setAttribute('aria-hidden', String(index !== current)));
-    if (status) status.textContent = `${current + 1} / ${slides.length}`;
-  };
+    dots.forEach((dot, i) => dot.classList.toggle('active', i === current));
+  }
 
-  const go = (next: number) => {
-    current = (next + slides.length) % slides.length;
-    render();
-  };
+  function next() {
+    goTo(current + 1);
+  }
 
-  const stopTimer = () => {
-    if (timer) window.clearInterval(timer);
-  };
+  function prev() {
+    goTo(current - 1);
+  }
 
-  const startTimer = () => {
-    stopTimer();
-    if (playing) timer = window.setInterval(() => go(current + 1), 6500);
-  };
+  function startAuto() {
+    clearInterval(timer);
+    timer = setInterval(next, 4500);
+  }
 
-  document.querySelector('[data-hero-prev]')?.addEventListener('click', () => {
-    go(current - 1);
-    startTimer();
+  document.getElementById('nextBtn')?.addEventListener('click', () => {
+    next();
+    startAuto();
   });
-  document.querySelector('[data-hero-next]')?.addEventListener('click', () => {
-    go(current + 1);
-    startTimer();
+
+  document.getElementById('prevBtn')?.addEventListener('click', () => {
+    prev();
+    startAuto();
   });
-  pauseButton?.addEventListener('click', () => {
-    playing = !playing;
-    pauseButton.textContent = playing ? 'Ⅱ' : '▶';
-    pauseButton.setAttribute('aria-label', playing ? '自動再生を停止' : '自動再生を開始');
-    startTimer();
+
+  dots.forEach((dot) => {
+    dot.addEventListener('click', () => {
+      goTo(Number(dot.getAttribute('data-index')));
+      startAuto();
+    });
   });
-  hero?.addEventListener('mouseenter', stopTimer);
-  hero?.addEventListener('mouseleave', startTimer);
-  hero?.addEventListener('focusin', stopTimer);
-  hero?.addEventListener('focusout', startTimer);
-  startTimer();
+
+  startAuto();
 </script>
