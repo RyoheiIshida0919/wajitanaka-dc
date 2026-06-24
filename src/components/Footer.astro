@@ -3,227 +3,299 @@ const reserveUrl = 'https://planetdentale.com/reserve/about.php?web_code=24da7c4
 const navColumns = [
   [
     { label: 'ホーム', href: '/' },
-    { label: '当院の特徴', href: '/#features' },
+    { label: '当院の特長', href: '/#features' },
+  ],
+  [
     { label: '診療案内', href: '/#treatments' },
-  ],
-  [
     { label: '医師紹介', href: '/doctors' },
-    { label: 'アクセス', href: '/#access' },
-    { label: 'ブログ', href: '/blog' },
   ],
   [
-    { label: 'こだわりとQ&A', href: '/reviews' },
+    { label: 'アクセス', href: '/#access' },
     { label: '求人', href: '/recruit' },
-    { label: 'プライバシーポリシー', href: '/privacy-policy' },
+  ],
+  [
+    { label: '患者さんの声', href: '/reviews' },
+    { label: 'ブログ（症例紹介）', href: '/blog' },
   ],
 ];
 ---
 
 <footer class="footer">
-  <div class="container footer__upper">
-    <div class="footer__brand">
-      <img src="/images/site/logo.png" alt="和地たなか歯科" width="342" height="149" />
-      <address>
-        〒431-1115<br />
-        静岡県浜松市中央区和地町4757-1<br />
-        <a href="tel:053-489-8185">tel. 053-489-8185</a>
-      </address>
+  <div class="footer__inner">
+    <div class="footer__top">
+      <div class="footer__info">
+        <div class="footer__logo">
+          <img src="/images/site/logo-invert.png" alt="和地たなか歯科" width="342" height="149" />
+        </div>
+        <p>〒431-1115 静岡県浜松市中央区和地町4757-1</p>
+        <p class="footer__tel"><a href="tel:053-489-8185">tel. 053-489-8185</a></p>
+      </div>
+
+      <div class="footer__hours-area">
+        <table class="footer__hours" aria-label="診療時間">
+          <thead>
+            <tr>
+              <th></th>
+              <th>月</th><th>火</th><th>水</th><th>木</th><th>金</th><th>土</th><th>日</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>8:45-13:30</td>
+              <td>●</td><td>●</td><td>●</td><td>●</td><td>●</td><td>●</td><td></td>
+            </tr>
+            <tr>
+              <td>13:30-16:30</td>
+              <td>●</td><td>●</td><td>●</td><td>●</td><td>●</td><td></td><td></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <a class="footer__notice" href="/privacy-policy">患者様へのご案内（保険医療機関における書面掲示）</a>
+      </div>
     </div>
 
-    <div class="footer__hours">
-      <table aria-label="診療時間">
-        <thead>
-          <tr><th>診療時間</th><th>月</th><th>火</th><th>水</th><th>木</th><th>金</th><th>土</th><th>日</th></tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th>8:45-13:30</th>
-            <td>●</td><td>●</td><td>●</td><td>●</td><td>●</td><td>●</td><td>ー</td>
-          </tr>
-          <tr>
-            <th>13:30-16:30</th>
-            <td>●</td><td>●</td><td>●</td><td>●</td><td>●</td><td>ー</td><td>ー</td>
-          </tr>
-        </tbody>
-      </table>
-      <p>患者さんのご都合に合わせた診療時間で、平日・土曜日も通院いただけます。</p>
-    </div>
-  </div>
+    <div class="footer__line"></div>
 
-  <div class="container footer__lower">
-    <nav class="footer__nav" aria-label="フッターナビゲーション">
-      {navColumns.map((column) => (
-        <ul>{column.map((item) => <li><a href={item.href}>{item.label}</a></li>)}</ul>
-      ))}
-    </nav>
-    <div class="footer__actions">
-      <a class="footer__instagram" href="https://www.instagram.com/wajitanakadc/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-        <span aria-hidden="true">◎</span> Instagram
-      </a>
-      <a class="reserve-link reserve-link--white" href={reserveUrl} target="_blank" rel="noopener noreferrer">診療予約</a>
-    </div>
-  </div>
+    <div class="footer__nav-area">
+      <nav class="footer__nav" aria-label="フッターナビゲーション">
+        {navColumns.map((column) => (
+          <ul>{column.map((item) => <li><a href={item.href}>{item.label}</a></li>)}</ul>
+        ))}
+      </nav>
 
-  <div class="footer__copyright">
-    <div class="container">Copyright &copy; 和地たなか歯科 All rights reserved.</div>
+      <a class="footer__instagram" href="https://www.instagram.com/wajitanakadc/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">◎</a>
+
+      <a class="footer__reserve" href={reserveUrl} target="_blank" rel="noopener noreferrer">診療予約</a>
+    </div>
+
+    <p class="footer__copyright">Copyright &copy;和地たなか歯科 All right reserved.</p>
   </div>
 </footer>
 
 <style>
   .footer {
-    background: var(--green);
+    min-height: 615px;
+    background: #008c6b;
     color: #fff;
+    font-family: "Yu Mincho", "Hiragino Mincho ProN", "YuMincho", serif;
   }
 
-  .footer__upper {
-    display: grid;
-    grid-template-columns: minmax(240px, 0.75fr) minmax(520px, 1.25fr);
-    gap: clamp(60px, 10vw, 150px);
-    padding-block: 70px 52px;
+  .footer__inner {
+    width: min(1740px, calc(100% - 64px));
+    margin: 0 auto;
+    padding: 56px 0 36px;
   }
 
-  .footer__brand img {
-    width: 214px;
-    margin-bottom: 20px;
-    filter: brightness(0) invert(1);
+  .footer__top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 48px;
   }
 
-  .footer__brand address {
-    font-size: 0.78rem;
-    font-style: normal;
-    line-height: 2;
-    letter-spacing: 0.08em;
+  .footer__info {
+    width: min(620px, 100%);
   }
 
-  .footer__brand address a {
-    display: inline-block;
-    margin-top: 5px;
-    font-size: 1.05rem;
+  .footer__logo img {
+    display: block;
+    width: min(610px, 100%);
+    height: auto;
+    margin-bottom: 28px;
   }
 
-  .footer__hours table {
+  .footer__info p {
+    margin: 0 0 10px 18px;
+    font-size: clamp(1rem, 1.65vw, 1.75rem);
+    line-height: 1.45;
+    letter-spacing: 0.03em;
+  }
+
+  .footer__tel {
+    font-size: clamp(1.2rem, 1.85vw, 2rem);
+    font-weight: 700;
+  }
+
+  .footer__hours-area {
+    width: min(710px, 100%);
+    padding-top: 18px;
+  }
+
+  .footer__hours {
     width: 100%;
     border-collapse: collapse;
-    font-size: 0.78rem;
+    color: #fff;
+    font-size: clamp(1rem, 1.55vw, 1.6875rem);
+    text-align: center;
   }
 
   .footer__hours th,
   .footer__hours td {
-    padding: 10px 8px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.42);
+    height: 54px;
+    border: 1px solid rgba(255, 255, 255, 0.55);
     font-weight: 400;
+  }
+
+  .footer__hours th:first-child,
+  .footer__hours td:first-child {
+    width: 178px;
+    padding-right: 24px;
+    border-left: none;
+    text-align: right;
+  }
+
+  .footer__hours th {
+    font-size: clamp(1.05rem, 1.8vw, 1.9375rem);
+  }
+
+  .footer__hours th:last-child,
+  .footer__hours td:last-child {
+    border-right: none;
+  }
+
+  .footer__hours tr:first-child th {
+    border-top: 1px solid rgba(255, 255, 255, 0.55);
+  }
+
+  .footer__hours tr:last-child td {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.55);
+  }
+
+  .footer__hours td:not(:first-child) {
+    font-size: clamp(1.2rem, 2.55vw, 2.75rem);
+    line-height: 1;
+  }
+
+  .footer__notice {
+    display: block;
+    margin-top: 28px;
+    color: #fff;
+    font-size: clamp(0.95rem, 1.35vw, 1.4375rem);
     text-align: center;
+    text-decoration: underline;
   }
 
-  .footer__hours th:first-child {
-    min-width: 115px;
-    text-align: left;
+  .footer__line {
+    height: 1px;
+    margin: 50px 0 38px;
+    background: rgba(255, 255, 255, 0.75);
   }
 
-  .footer__hours tbody td {
-    font-size: 0.65rem;
-  }
-
-  .footer__hours p {
-    margin-top: 16px;
-    color: rgba(255, 255, 255, 0.8);
-    font-size: 0.72rem;
-  }
-
-  .footer__lower {
-    display: grid;
-    grid-template-columns: 1fr auto;
-    gap: 40px;
-    align-items: end;
-    padding-block: 46px 60px;
-    border-top: 1px solid rgba(255, 255, 255, 0.34);
+  .footer__nav-area {
+    display: flex;
+    align-items: flex-start;
   }
 
   .footer__nav {
     display: grid;
-    grid-template-columns: repeat(3, minmax(130px, 1fr));
-    gap: 32px;
-    max-width: 700px;
+    grid-template-columns: 210px 210px 210px 270px;
+    column-gap: 90px;
   }
 
-  .footer__nav li + li {
-    margin-top: 11px;
+  .footer__nav ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .footer__nav li {
+    margin-bottom: 12px;
   }
 
   .footer__nav a {
-    font-size: 0.75rem;
-    letter-spacing: 0.08em;
-  }
-
-  .footer__nav a::before {
-    margin-right: 0.7rem;
-    content: '—';
-    opacity: 0.72;
-  }
-
-  .footer__actions {
-    display: flex;
-    align-items: center;
-    gap: 32px;
+    color: #fff;
+    font-size: clamp(1rem, 1.55vw, 1.6875rem);
+    line-height: 1.25;
+    text-decoration: none;
   }
 
   .footer__instagram {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 0.76rem;
+    margin-top: -12px;
+    margin-left: 20px;
+    color: #fff;
+    font-family: Arial, sans-serif;
+    font-size: clamp(2.4rem, 5vw, 5.375rem);
+    line-height: 1;
+    text-decoration: none;
   }
 
-  .footer__instagram span {
-    font-size: 1.45rem;
+  .footer__reserve {
+    display: flex;
+    width: 198px;
+    height: 108px;
+    align-items: center;
+    justify-content: center;
+    margin-top: -10px;
+    margin-left: auto;
+    background: #fff;
+    border-radius: 4px;
+    color: #008c6b;
+    font-size: 1.5625rem;
+    font-weight: 700;
+    text-decoration: none;
   }
 
   .footer__copyright {
-    padding-block: 17px;
-    background: #fff;
-    color: #777;
-    font-family: var(--font-number);
-    font-size: 0.64rem;
-    letter-spacing: 0.05em;
+    margin: 58px 0 0;
+    font-size: clamp(0.95rem, 1.5vw, 1.625rem);
+    font-weight: 700;
     text-align: center;
+    letter-spacing: 0.01em;
   }
 
   @media (max-width: 900px) {
-    .footer__upper {
-      grid-template-columns: 1fr;
-      gap: 44px;
+    .footer__inner {
+      width: 90%;
     }
 
-    .footer__lower {
-      grid-template-columns: 1fr;
-      align-items: start;
-    }
-  }
-
-  @media (max-width: 600px) {
-    .footer__upper {
-      padding-block: 54px 42px;
+    .footer__top,
+    .footer__nav-area {
+      display: block;
     }
 
+    .footer__info,
+    .footer__hours-area,
     .footer__hours {
-      overflow-x: auto;
-    }
-
-    .footer__hours table {
-      min-width: 560px;
+      width: 100%;
     }
 
     .footer__nav {
       grid-template-columns: 1fr 1fr;
-      gap: 28px 18px;
+      gap: 24px;
     }
 
-    .footer__actions {
-      align-items: stretch;
-      flex-direction: column;
+    .footer__instagram {
+      display: inline-block;
+      margin-top: 24px;
+      margin-left: 0;
     }
 
-    .footer__actions .reserve-link {
+    .footer__reserve {
+      margin: 32px 0 0;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .footer__inner {
+      width: min(100% - 32px, 560px);
+      padding: 44px 0 28px;
+    }
+
+    .footer__hours-area {
+      overflow-x: auto;
+    }
+
+    .footer__hours {
+      min-width: 560px;
+    }
+
+    .footer__nav {
+      grid-template-columns: 1fr;
+      gap: 18px;
+    }
+
+    .footer__reserve {
       width: 100%;
     }
   }
