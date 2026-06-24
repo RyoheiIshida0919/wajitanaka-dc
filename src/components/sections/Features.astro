@@ -2,151 +2,291 @@
 const reserveUrl = 'https://planetdentale.com/reserve/about.php?web_code=24da7c41f707a2b72d5ac93333b5fd819538b22b405ac3c5f874c15400a2c0ae';
 const features = [
   {
-    id: '01',
+    id: '1',
     title: '0歳から100歳まで通える歯科医院',
-    text: 'お口の健康は赤ちゃんの頃から大切です。当院では0歳からの口腔ケアを推奨し、生涯にわたってサポートします。また、噛む力は、健康寿命に大きく影響します。食べる楽しみを守り、ずっとご自身の歯で過ごせるようにお手伝いします。院内はバリアフリー設計です。',
+    paragraphs: [
+      'お口の健康は赤ちゃんの頃から大切です。当院では0歳からの口腔ケアを推奨し、生涯にわたってサポートします。',
+      'また、噛む力は健康寿命に大きく影響します。食べる楽しみを守り、ずっとご自身の歯で過ごせるようにお手伝いします。',
+      '院内はバリアフリー設計で、ご家族みなさまが通いやすい環境を整えています。',
+    ],
     images: ['/images/site/child-f01.jpg', '/images/site/f01-2.jpg'],
   },
   {
-    id: '02',
+    id: '2',
     title: '歯をできるだけ残す治療',
-    text: 'むし歯や歯周病で失われた歯を補うことも大切ですが、そもそも「抜かずに済む選択肢」を最大限考えることが、患者さんの未来の健康につながると考えています。ご自身の歯の移植も積極的に行っています。',
+    paragraphs: [
+      'むし歯や歯周病で失われた歯を補うことも大切ですが、そもそも「抜かずに済む選択肢」を最大限考えることが、患者さんの未来の健康につながると考えています。',
+      'ご自身の歯の移植も積極的に行い、できる限り天然歯を活かす治療を大切にしています。',
+    ],
     images: ['/images/site/f02-1.jpg', '/images/site/f02-2.jpg'],
   },
   {
-    id: '03',
+    id: '3',
     title: 'リラックス歯科・静脈内鎮静法対応',
-    text: '歯科治療が怖い、過去の経験から不安がある。そんな方でも通える歯科医院へ。個室診療室があり、リラックスした状態で治療を受けられる静脈内鎮静法を導入しています。',
+    paragraphs: [
+      '歯科治療が怖い、過去の経験から不安がある。そんな方でも通える歯科医院を目指しています。',
+      '個室診療室を備え、リラックスした状態で治療を受けられる静脈内鎮静法を導入しています。',
+    ],
     images: ['/images/site/f03-1.jpg', '/images/site/f03-2.jpg'],
   },
   {
-    id: '04',
+    id: '4',
     title: '女性歯科医師在籍・保育士による託児',
-    text: '女性ならではの視点で、お子さまや歯科が苦手な方にも安心して通院いただける環境を整えています。保育士による無料託児があり、小さなお子様がいても安心して通院できます。',
+    paragraphs: [
+      '女性ならではの視点で、お子さまや歯科が苦手な方にも安心して通院いただける環境を整えています。',
+      '保育士による無料託児があり、小さなお子さまがいても通いやすい体制です。',
+    ],
     images: ['/images/site/f04-1.jpg', '/images/site/f04-2.jpg'],
   },
   {
-    id: '05',
+    id: '5',
     title: 'Web予約・アプリ予約が可能',
-    text: '忙しい方でも簡単に予約できるよう、Web予約・アプリ予約に対応しています。アプリでご自身のお口の中の管理ができます。',
+    paragraphs: [
+      '忙しい方でも簡単に予約できるよう、Web予約とアプリ予約に対応しています。',
+      'アプリを通して、ご自身のお口の中の状態や通院管理もしやすくしています。',
+    ],
     images: ['/images/site/f05-1.jpg', '/images/site/f05-2.jpg'],
   },
   {
-    id: '06',
+    id: '6',
     title: '予防・管理を重視した歯科診療',
-    text: '治療だけでなく、患者さん自身が自分の口に興味を持ち、主体的にケアできるようサポートします。悪くなったから治すのではなく、なぜ悪くなったかに注目し、再発を防ぎます。',
+    paragraphs: [
+      '治療だけでなく、患者さん自身が自分の口に興味を持ち、主体的にケアできるようサポートします。',
+      '悪くなったから治すのではなく、なぜ悪くなったかに注目し、再発を防ぐ診療を大切にしています。',
+    ],
     images: ['/images/site/f06-1.jpg', '/images/site/f06-2.jpg'],
   },
 ];
 ---
 
 <section class="features" id="features">
-  <div class="container features__layout">
-    <h2 class="section-marker section-marker--vertical">当院の特徴</h2>
-    <div class="features__list">
+  <div class="features__layout">
+    <h2 class="features__side-title">当院の特徴</h2>
+    <div class="features__content">
       {features.map((feature) => (
         <article class="feature reveal">
-          <div class="feature__copy">
-            <span class="section-number">{feature.id}</span>
+          <div class="feature__number-row">
+            <div class="feature__number-group">
+              <span class="feature__number">{feature.id}</span>
+              <span class="feature__slash">/</span>
+            </div>
             <h3>{feature.title}</h3>
-            <p>{feature.text}</p>
+          </div>
+          <div class="feature__body">
+            {feature.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
           </div>
           <div class="feature__images">
             {feature.images.map((image, index) => (
               <img src={image} alt={index === 0 ? feature.title : ''} loading="lazy" />
             ))}
           </div>
+          {feature.id === '1' && (
+            <div class="features__reserve reveal">
+              <a class="reserve-link" href={reserveUrl} target="_blank" rel="noopener noreferrer">診療予約</a>
+            </div>
+          )}
         </article>
       ))}
-      <div class="features__reserve reveal">
-        <a class="reserve-link" href={reserveUrl} target="_blank" rel="noopener noreferrer">診療予約</a>
-      </div>
     </div>
   </div>
 </section>
 
 <style>
   .features {
-    padding-block: var(--section-space);
+    padding: clamp(64px, 8vw, 104px) 0;
     background: #fff;
   }
 
   .features__layout {
-    display: grid;
-    grid-template-columns: 80px minmax(0, 1fr);
-    gap: clamp(40px, 7vw, 100px);
+    width: min(980px, calc(100% - 48px));
+    margin: 0 auto;
+    display: flex;
+    gap: clamp(24px, 4vw, 42px);
     align-items: start;
   }
 
-  .features__layout > .section-marker {
-    position: sticky;
-    top: 125px;
-    justify-self: center;
+  .features__side-title {
+    margin: 0;
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    align-self: flex-start;
+    padding-top: 8px;
+    padding-right: 18px;
+    border-right: 2px solid #222;
+    color: #222;
+    font-family: "Yu Mincho", "Hiragino Mincho ProN", "Times New Roman", serif;
+    font-size: clamp(1rem, 1.8vw, 1.2rem);
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    line-height: 1.2;
+    min-height: 172px;
+    white-space: nowrap;
   }
 
-  .features__list {
-    max-width: 930px;
+  .features__content {
+    flex: 1;
+    min-width: 0;
   }
 
   .feature {
-    padding-bottom: clamp(76px, 10vw, 145px);
+    margin-bottom: clamp(58px, 7vw, 84px);
   }
 
-  .feature__copy {
-    max-width: 680px;
-    margin: 0 auto clamp(30px, 4vw, 55px);
+  .feature__number-row {
+    display: flex;
+    align-items: flex-end;
+    gap: 0;
+    margin-bottom: 20px;
   }
 
-  .feature__copy h3 {
-    margin-block: 15px 20px;
-    color: var(--green);
-    font-size: clamp(1.35rem, 2.3vw, 2rem);
-    font-weight: 500;
-    letter-spacing: 0.11em;
+  .feature__number-group {
+    display: flex;
+    align-items: baseline;
+    margin-right: 16px;
+    color: #2b324c;
   }
 
-  .feature__copy p {
-    font-size: clamp(0.85rem, 1.05vw, 0.96rem);
-    line-height: 2.15;
+  .feature__number {
+    color: inherit;
+    font-family: "Times New Roman", Times, serif;
+    font-size: clamp(2.8rem, 5.8vw, 3.55rem);
+    font-weight: 400;
+    line-height: 0.8;
+  }
+
+  .feature__slash {
+    margin-left: 2px;
+    color: #7d8395;
+    font-family: "Times New Roman", Times, serif;
+    font-size: clamp(2.3rem, 4.8vw, 2.85rem);
+    font-weight: 300;
+    line-height: 1;
+  }
+
+  .feature h3 {
+    margin: 0 0 5px;
+    font-family: "Yu Mincho", "Hiragino Mincho ProN", "Times New Roman", serif;
+    color: #111;
+    font-size: clamp(1.7rem, 3vw, 2.15rem);
+    font-weight: 400;
+    letter-spacing: 0.05em;
+    line-height: 1.38;
+  }
+
+  .feature__body {
+    margin-bottom: 24px;
+  }
+
+  .feature__body p {
+    margin: 0 0 6px;
+    color: #333;
+    font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+    font-size: clamp(0.9rem, 1.35vw, 1rem);
+    letter-spacing: 0.04em;
+    line-height: 1.95;
   }
 
   .feature__images {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: clamp(10px, 1.7vw, 24px);
+    display: flex;
+    width: 100%;
+    gap: 0;
+    overflow: hidden;
+    background: #f7f7f5;
   }
 
   .feature__images img {
-    width: 100%;
-    aspect-ratio: 1.55 / 1;
+    width: 50%;
+    aspect-ratio: 1.52 / 1;
     object-fit: cover;
+    display: block;
   }
 
   .features__reserve {
+    margin-top: 20px;
     text-align: center;
   }
 
-  @media (max-width: 767px) {
+  @media (max-width: 900px) {
     .features__layout {
-      grid-template-columns: 1fr;
-      gap: 50px;
+      width: min(100%, calc(100% - 40px));
+      gap: 28px;
     }
 
-    .features__layout > .section-marker {
-      position: static;
-      justify-self: start;
+    .feature h3 {
+      font-size: 1.55rem;
+    }
+
+    .feature__body p {
+      font-size: 0.9375rem;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .features {
+      padding: 40px 0;
+    }
+
+    .features__layout {
+      width: min(100%, calc(100% - 32px));
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .features__side-title {
+      writing-mode: horizontal-tb;
+      margin-right: 0;
+      margin-bottom: 30px;
+      padding-top: 0;
+      padding-right: 0;
+      padding-bottom: 12px;
+      border-right: 0;
+      border-bottom: 2px solid #222;
+      font-size: 1.05rem;
+      letter-spacing: 0.12em;
+      height: auto;
+      min-height: 0;
     }
 
     .feature {
-      padding-bottom: 82px;
+      margin-bottom: 56px;
+    }
+
+    .feature__number-row {
+      flex-direction: column;
+      align-items: flex-start;
+      margin-bottom: 18px;
+    }
+
+    .feature__number-group {
+      margin-right: 0;
+      margin-bottom: 8px;
+    }
+
+    .feature__number {
+      font-size: 2.5rem;
+    }
+
+    .feature__slash {
+      font-size: 2.05rem;
+    }
+
+    .feature h3 {
+      font-size: 1.36rem;
+      line-height: 1.45;
+    }
+
+    .feature__body p {
+      font-size: 0.92rem;
+      line-height: 1.9;
     }
 
     .feature__images {
-      gap: 8px;
+      flex-direction: column;
     }
 
     .feature__images img {
-      aspect-ratio: 1 / 0.82;
+      width: 100%;
+      aspect-ratio: 1.55 / 1;
     }
   }
 </style>
