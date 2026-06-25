@@ -1,5 +1,4 @@
 ---
-const reserveUrl = 'https://planetdentale.com/reserve/about.php?web_code=24da7c41f707a2b72d5ac93333b5fd819538b22b405ac3c5f874c15400a2c0ae';
 const features = [
   {
     id: '1',
@@ -9,7 +8,7 @@ const features = [
       'また、噛む力は健康寿命に大きく影響します。食べる楽しみを守り、ずっとご自身の歯で過ごせるようにお手伝いします。',
       '院内はバリアフリー設計で、ご家族みなさまが通いやすい環境を整えています。',
     ],
-    images: ['/images/site/child-f01.jpg', '/images/site/f01-2.jpg'],
+    images: ['/images/site/t-visit.jpg', '/images/site/f01-2.jpg'],
   },
   {
     id: '2',
@@ -18,7 +17,7 @@ const features = [
       'むし歯や歯周病で失われた歯を補うことも大切ですが、そもそも「抜かずに済む選択肢」を最大限考えることが、患者さんの未来の健康につながると考えています。',
       'ご自身の歯の移植も積極的に行い、できる限り天然歯を活かす治療を大切にしています。',
     ],
-    images: ['/images/site/f02-1.jpg', '/images/site/f02-2.jpg'],
+    images: ['/images/site/f02-1.jpg', '/images/site/t-implant.jpg'],
   },
   {
     id: '3',
@@ -27,7 +26,7 @@ const features = [
       '歯科治療が怖い、過去の経験から不安がある。そんな方でも通える歯科医院を目指しています。',
       '個室診療室を備え、リラックスした状態で治療を受けられる静脈内鎮静法を導入しています。',
     ],
-    images: ['/images/site/f03-1.jpg', '/images/site/f03-2.jpg'],
+    images: ['/images/site/f02-3.jpg', '/images/site/t-sedation.jpg'],
   },
   {
     id: '4',
@@ -54,7 +53,7 @@ const features = [
       '治療だけでなく、患者さん自身が自分の口に興味を持ち、主体的にケアできるようサポートします。',
       '悪くなったから治すのではなく、なぜ悪くなったかに注目し、再発を防ぐ診療を大切にしています。',
     ],
-    images: ['/images/site/f06-1.jpg', '/images/site/f06-2.jpg'],
+    images: ['/images/site/t-general.jpg', '/images/site/f06-3.jpg'],
   },
 ];
 ---
@@ -80,11 +79,6 @@ const features = [
               <img src={image} alt={index === 0 ? feature.title : ''} loading="lazy" />
             ))}
           </div>
-          {feature.id === '1' && (
-            <div class="features__reserve reveal">
-              <a class="reserve-link" href={reserveUrl} target="_blank" rel="noopener noreferrer">診療予約</a>
-            </div>
-          )}
         </article>
       ))}
     </div>
@@ -199,11 +193,6 @@ const features = [
     aspect-ratio: 1.52 / 1;
     object-fit: cover;
     display: block;
-  }
-
-  .features__reserve {
-    margin-top: 20px;
-    text-align: center;
   }
 
   @media (max-width: 900px) {
