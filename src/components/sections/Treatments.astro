@@ -108,7 +108,7 @@ const treatments = [
 
 <section class="treatments" id="treatments">
   <div class="container treatments__layout">
-    <h2 class="section-marker section-marker--vertical">診療案内</h2>
+    <h2 class="treatments__side-title">診療案内</h2>
     <div class="treatments__content">
       <p class="treatments__lead">お口のお悩みを幅広く診療しています。まずは気になることをお聞かせください。</p>
       <ul class="treatments-grid">
@@ -137,10 +137,24 @@ const treatments = [
     align-items: start;
   }
 
-  .treatments__layout > .section-marker {
+  .treatments__side-title {
     position: sticky;
     top: 125px;
+    margin: 0;
     justify-self: center;
+    padding-top: 8px;
+    padding-right: 18px;
+    border-right: 2px solid #222;
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    color: #222;
+    font-family: "Yu Mincho", "Hiragino Mincho ProN", "Times New Roman", serif;
+    font-size: clamp(1rem, 1.8vw, 1.2rem);
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    line-height: 1.2;
+    min-height: 172px;
+    white-space: nowrap;
   }
 
   .treatments__lead {
@@ -205,9 +219,19 @@ const treatments = [
       gap: 45px;
     }
 
-    .treatments__layout > .section-marker {
+    .treatments__side-title {
       position: static;
       justify-self: start;
+      writing-mode: horizontal-tb;
+      margin-right: 0;
+      padding-top: 0;
+      padding-right: 0;
+      padding-bottom: 12px;
+      border-right: 0;
+      border-bottom: 2px solid #222;
+      font-size: 1.05rem;
+      letter-spacing: 0.12em;
+      min-height: 0;
     }
 
     .treatments-grid {
