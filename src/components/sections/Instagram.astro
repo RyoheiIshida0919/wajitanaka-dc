@@ -1,77 +1,105 @@
-<section class="instagram">
-  <div class="container instagram__inner reveal">
-    <div>
-      <span>お知らせ</span>
-      <h2>最新情報はInstagramをご覧ください</h2>
+---
+const instagramUrl = 'https://www.instagram.com/wajitanakadc/';
+---
+
+<section class="news" aria-labelledby="news-title">
+  <div class="news__layout">
+    <h2 class="news__side-title" id="news-title">お知らせ</h2>
+    <div class="news__content reveal">
+      <p class="news__lead">最新情報はInstagramをご覧ください</p>
+      <a class="news__button" href={instagramUrl} target="_blank" rel="noopener noreferrer">Instagram</a>
     </div>
-    <a href="https://www.instagram.com/wajitanakadc/" target="_blank" rel="noopener noreferrer">
-      <span aria-hidden="true">◎</span>
-      Instagram
-      <span aria-hidden="true">→</span>
-    </a>
   </div>
 </section>
 
 <style>
-  .instagram {
-    padding-block: clamp(60px, 7vw, 100px);
-    background: var(--mist);
+  .news {
+    padding: clamp(48px, 6vw, 80px) 0;
+    background: #f2f1f1;
   }
 
-  .instagram__inner {
+  .news__layout {
     display: flex;
-    max-width: 1040px;
-    align-items: center;
-    justify-content: space-between;
-    gap: 40px;
+    width: min(980px, calc(100% - 48px));
+    margin: 0 auto;
+    gap: clamp(24px, 4vw, 42px);
+    align-items: flex-start;
   }
 
-  .instagram__inner > div > span {
-    display: block;
-    margin-bottom: 10px;
-    color: var(--green);
-    font-size: 0.72rem;
-    letter-spacing: 0.15em;
+  .news__side-title {
+    margin: 0;
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    align-self: flex-start;
+    padding-top: 8px;
+    padding-right: 18px;
+    border-right: 2px solid #222;
+    color: #222;
+    font-family: "Yu Gothic Medium", "Yu Gothic", "Hiragino Kaku Gothic ProN", "Noto Sans JP", sans-serif;
+    font-size: clamp(1rem, 1.8vw, 1.2rem);
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    line-height: 1.2;
+    min-height: 148px;
+    white-space: nowrap;
   }
 
-  .instagram h2 {
-    font-size: clamp(1.2rem, 2.4vw, 2rem);
-    font-weight: 500;
-    letter-spacing: 0.1em;
+  .news__content {
+    flex: 1;
+    min-width: 0;
+    padding-top: 8px;
+    text-align: center;
   }
 
-  .instagram a {
+  .news__lead {
+    margin: 0 0 22px;
+    color: #222;
+    font-family: "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Meiryo", sans-serif;
+    font-size: clamp(1rem, 1.6vw, 1.2rem);
+    letter-spacing: 0.03em;
+  }
+
+  .news__button {
     display: inline-flex;
-    min-width: 230px;
-    min-height: 58px;
+    width: min(326px, 100%);
+    height: 40px;
     align-items: center;
-    justify-content: space-between;
-    gap: 15px;
-    padding: 12px 22px;
-    border: 1px solid var(--green);
-    color: var(--green);
-    font-family: var(--font-number);
-    font-size: 0.78rem;
-    transition: background-color 180ms ease, color 180ms ease;
-  }
-
-  .instagram a:hover {
-    background: var(--green);
+    justify-content: center;
+    background: #10896a;
+    border-radius: 5px;
     color: #fff;
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    font-size: 0.95rem;
+    letter-spacing: 0.02em;
+    transition: background-color 180ms ease;
   }
 
-  .instagram a span:first-child {
-    font-size: 1.4rem;
+  .news__button:hover {
+    background: #0a6b53;
   }
 
-  @media (max-width: 700px) {
-    .instagram__inner {
-      align-items: flex-start;
+  @media (max-width: 767px) {
+    .news__layout {
+      width: min(100%, calc(100% - 32px));
       flex-direction: column;
+      gap: 28px;
     }
 
-    .instagram a {
+    .news__side-title {
+      writing-mode: horizontal-tb;
+      padding-top: 0;
+      padding-right: 0;
+      padding-bottom: 12px;
+      border-right: 0;
+      border-bottom: 2px solid #222;
+      font-size: 1.05rem;
+      letter-spacing: 0.12em;
+      min-height: 0;
+    }
+
+    .news__content {
       width: 100%;
+      padding-top: 0;
     }
   }
 </style>
