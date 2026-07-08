@@ -7,23 +7,20 @@ const slides = [
   {
     type: 'photo',
     className: 'slide-1',
-    src: '/images/site/hero-1.jpg',
-    alt: '和地たなか歯科の外観',
-    text: '0才から100才まで\nみんなが通える歯医者さん',
+    src: '/images/site/hero-slide-1.jpg',
+    alt: '0才から100才まで みんなが通える歯医者さん 和地たなか歯科の外観',
   },
   {
     type: 'photo',
     className: 'slide-2',
-    src: '/images/site/hero-2.jpg',
-    alt: '和地たなか歯科の院内',
-    text: 'みんなにやさしい\nバリアフリー設計',
+    src: '/images/site/hero-slide-2.jpg',
+    alt: 'みんなにやさしいバリアフリー設計の院内',
   },
   {
     type: 'photo',
     className: 'slide-3',
-    src: '/images/site/hero-3.jpg',
-    alt: '女性歯科医がいて小さなお子様も安心できる診療風景',
-    text: '女性歯科医がいて\n小さなお子様も安心',
+    src: '/images/site/hero-slide-3.jpg',
+    alt: '女性歯科医がいて小さなお子様も安心',
   },
 ];
 ---
@@ -48,7 +45,6 @@ const slides = [
         ) : (
           <div class={`slide ${slide.className}`}>
             <img src={slide.src} alt={slide.alt} loading={index === 1 ? 'eager' : 'lazy'} />
-            <div class="slide-caption">{slide.text}</div>
           </div>
         )
       ))}
@@ -78,7 +74,7 @@ const slides = [
   .slideshow {
     position: relative;
     width: 100%;
-    aspect-ratio: 3 / 2;
+    aspect-ratio: 2 / 1;
     margin: 0 auto;
     overflow: hidden;
     background: #000;
@@ -134,44 +130,9 @@ const slides = [
     letter-spacing: 0.1em;
   }
 
-  .slide-caption {
-    position: absolute;
-    color: #3d7a5e;
-    font-family: "Noto Sans JP", sans-serif;
-    font-weight: 700;
-    line-height: 1.5;
-    letter-spacing: 0.02em;
-    white-space: pre-line;
-    text-shadow:
-      0 0 3px rgba(255, 255, 255, 0.95),
-      0 0 8px rgba(255, 255, 255, 0.9),
-      0 1px 14px rgba(255, 255, 255, 0.85),
-      0 0 18px rgba(255, 255, 255, 0.7);
-  }
 
-  .slide-1 .slide-caption {
-    top: 7%;
-    left: 50%;
-    font-size: clamp(18px, 2.8vw, 26px);
-    text-align: center;
-    transform: translateX(-50%);
-    white-space: nowrap;
-  }
 
-  .slide-2 .slide-caption {
-    top: 50%;
-    right: 4%;
-    font-size: clamp(18px, 2.8vw, 26px);
-    text-align: right;
-    transform: translateY(-50%);
-  }
 
-  .slide-3 .slide-caption {
-    bottom: 8%;
-    left: 4%;
-    font-size: clamp(18px, 2.8vw, 26px);
-    text-align: left;
-  }
 
   .dots {
     display: none;
@@ -239,32 +200,10 @@ const slides = [
   }
 
   @media (max-width: 768px) {
-    .slide-1 .slide-caption,
-    .slide-2 .slide-caption,
-    .slide-3 .slide-caption {
-      font-size: 24px;
-    }
 
-    .slide-1 .slide-caption,
-    .slide-2 .slide-caption {
-      top: 22px;
-      right: 24px;
-    }
 
-    .slide-1 .slide-caption {
-      left: 50%;
-      right: auto;
-      transform: translateX(-50%);
-    }
 
-    .slide-2 .slide-caption {
-      transform: translateY(-50%);
-    }
 
-    .slide-3 .slide-caption {
-      bottom: 24px;
-      left: 24px;
-    }
   }
 </style>
 
