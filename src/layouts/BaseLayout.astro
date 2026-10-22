@@ -64,6 +64,7 @@ const clinicSchema = {
   <body>
     <a class="skip-link" href="#main-content">本文へ移動</a>
     <slot />
+    <script is:inline src="/live.js" defer></script>
     <script>
       const revealEls = document.querySelectorAll('.reveal');
       if (revealEls.length > 0) {

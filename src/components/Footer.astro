@@ -32,7 +32,7 @@ const navColumns = [
           </span>
         </div>
         <p>〒431-1115 静岡県浜松市中央区和地町4757-1</p>
-        <p class="footer__tel"><a href="tel:053-489-8185">tel. 053-489-8185</a></p>
+        <p class="footer__tel"><a href="tel:053-489-8185" data-live="tel">tel. <span data-live="tel-text">053-489-8185</span></a></p>
       </div>
 
       <div class="footer__hours-area">
@@ -43,7 +43,7 @@ const navColumns = [
               <th>月</th><th>火</th><th>水</th><th>木</th><th>金</th><th>土</th><th>日</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody data-live="hours-body">
             <tr>
               <td>8:45-13:30</td>
               <td>●</td><td>●</td><td>●</td><td>●</td><td>●</td><td>●</td><td></td>
@@ -54,6 +54,8 @@ const navColumns = [
             </tr>
           </tbody>
         </table>
+
+        <p class="footer__hours-note" data-live="hours-note" hidden></p>
 
         <a class="footer__notice" href="/privacy-policy">患者様へのご案内（保険医療機関における書面掲示）</a>
       </div>
@@ -76,7 +78,7 @@ const navColumns = [
         </svg>
       </a>
 
-      <a class="footer__reserve" href={reserveUrl} target="_blank" rel="noopener noreferrer">診療予約</a>
+      <a class="footer__reserve" href={reserveUrl} data-live="reserve" target="_blank" rel="noopener noreferrer">診療予約</a>
     </div>
 
     <p class="footer__copyright">Copyright &copy;和地たなか歯科 All right reserved.</p>
@@ -215,6 +217,13 @@ const navColumns = [
   .footer__hours td:not(:first-child) {
     font-size: 17px;
     line-height: 1;
+  }
+
+  .footer__hours-note {
+    margin: 10px 0 0;
+    font-size: 12px;
+    line-height: 1.5;
+    white-space: pre-line;
   }
 
   .footer__notice {

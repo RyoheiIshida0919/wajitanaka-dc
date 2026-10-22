@@ -6,6 +6,7 @@ const instagramUrl = 'https://www.instagram.com/wajitanakadc/';
   <div class="news__layout">
     <h2 class="news__side-title" id="news-title">お知らせ</h2>
     <div class="news__content reveal">
+      <ul class="news__list" data-live="news" hidden></ul>
       <p class="news__lead">最新情報はInstagramをご覧ください</p>
       <a class="news__button" href={instagramUrl} target="_blank" rel="noopener noreferrer">Instagram</a>
     </div>
@@ -49,6 +50,48 @@ const instagramUrl = 'https://www.instagram.com/wajitanakadc/';
     min-width: 0;
     padding-top: 8px;
     text-align: center;
+  }
+
+  .news__list {
+    margin: 0 0 32px;
+    padding: 0;
+    list-style: none;
+    text-align: left;
+  }
+
+  .news__list :global(.news__item) {
+    padding: 16px 0;
+    border-bottom: 1px solid #d6d4d4;
+  }
+
+  .news__list :global(.news__date) {
+    margin: 0 0 4px;
+    color: #666;
+    font-size: 0.85rem;
+  }
+
+  .news__list :global(.news__title) {
+    margin: 0;
+    color: #222;
+    font-size: 1.05rem;
+    font-weight: 700;
+    line-height: 1.5;
+  }
+
+  .news__list :global(.news__body) {
+    margin: 8px 0 0;
+    color: #222;
+    font-size: 0.95rem;
+    line-height: 1.8;
+    white-space: pre-line;
+  }
+
+  .news__list :global(.news__more) {
+    display: inline-block;
+    margin-top: 8px;
+    color: #10896a;
+    font-size: 0.9rem;
+    text-decoration: underline;
   }
 
   .news__lead {

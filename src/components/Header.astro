@@ -25,8 +25,8 @@ const navItems = [
     </nav>
 
     <div class="header__actions">
-      <a class="header__action header__action--outline" href={reserveUrl} target="_blank" rel="noopener noreferrer">診療予約</a>
-      <a class="header__action header__action--fill" href={questionnaireUrl} target="_blank" rel="noopener noreferrer">初診予約後<br />web問診</a>
+      <a class="header__action header__action--outline" href={reserveUrl} data-live="reserve" target="_blank" rel="noopener noreferrer">診療予約</a>
+      <a class="header__action header__action--fill" href={questionnaireUrl} data-live="questionnaire" target="_blank" rel="noopener noreferrer">初診予約後<br />web問診</a>
     </div>
 
     <button class="header__menu" id="menu-toggle" type="button" aria-controls="mobile-menu" aria-expanded="false">
@@ -49,8 +49,8 @@ const navItems = [
       </ul>
     </nav>
     <div class="mobile-menu__actions">
-      <a href={reserveUrl} target="_blank" rel="noopener noreferrer">診療予約</a>
-      <a href={questionnaireUrl} target="_blank" rel="noopener noreferrer">初診予約後 web問診</a>
+      <a href={reserveUrl} data-live="reserve" target="_blank" rel="noopener noreferrer">診療予約</a>
+      <a href={questionnaireUrl} data-live="questionnaire" target="_blank" rel="noopener noreferrer">初診予約後 web問診</a>
     </div>
   </div>
 </div>
