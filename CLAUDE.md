@@ -8,6 +8,10 @@
 - `main` 以外のブランチに push すると、確認用URLが自動で作られる。
 - 本番URL: https://wajitanaka-dc.pages.dev/（独自ドメイン移行後は https://wajitanaka-dc.com/）
 
+## 更新ダッシュボード（スタッフが自分で直す仕組み）
+
+診療時間・電話番号・Web予約URL・お知らせ・緊急のお知らせ帯は、`public/live.js` がダッシュボード（https://wajitanaka-dashboard.ishida-a0f.workers.dev 、ソースは `~/Programs/wajitanaka-dashboard`）の値を読み込んで差し替える。HTMLに書いてある値は取得失敗時の予備。これらを変える依頼は、ダッシュボードで直すよう案内する（コードを直しても、ダッシュボードの値が優先されて表示が変わらない）。ボタンや表を足すときは `data-live` 属性を付ける（詳細は `~/Programs/wajitanaka-dashboard/README.md`）。
+
 ## 更新の進め方（必ず守る）
 
 1. 依頼内容を一言で復唱する。曖昧なら1回だけ質問する。
