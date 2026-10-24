@@ -1,5 +1,6 @@
 ---
-const reserveUrl = 'https://planetdentale.com/reserve/about.php?web_code=24da7c41f707a2b72d5ac93333b5fd819538b22b405ac3c5f874c15400a2c0ae';
+import { getClinic } from "../lib/clinic";
+const { reserveUrl, tel, hours, hoursNote } = await getClinic(Astro);
 const navColumns = [
   [
     { label: 'ホーム', href: '/' },
@@ -32,7 +33,7 @@ const navColumns = [
           </span>
         </div>
         <p>〒431-1115 静岡県浜松市中央区和地町4757-1</p>
-        <p class="footer__tel"><a href="tel:053-489-8185" data-live="tel">tel. <span data-live="tel-text">053-489-8185</span></a></p>
+        <p class="footer__tel"><a href={`tel:${tel}`}>tel. <span>{tel}</span></a></p>
       </div>
 
       <div class="footer__hours-area">
@@ -43,19 +44,17 @@ const navColumns = [
               <th>月</th><th>火</th><th>水</th><th>木</th><th>金</th><th>土</th><th>日</th>
             </tr>
           </thead>
-          <tbody data-live="hours-body">
-            <tr>
-              <td>8:45-13:30</td>
-              <td>●</td><td>●</td><td>●</td><td>●</td><td>●</td><td>●</td><td></td>
-            </tr>
-            <tr>
-              <td>13:30-16:30</td>
-              <td>●</td><td>●</td><td>●</td><td>●</td><td>●</td><td></td><td></td>
-            </tr>
+          <tbody>
+            {hours.map((r) => (
+              <tr>
+                <td>{r.label}</td>
+                {r.days.map((on) => <td>{on ? "●" : ""}</td>)}
+              </tr>
+            ))}
           </tbody>
         </table>
 
-        <p class="footer__hours-note" data-live="hours-note" hidden></p>
+        {hoursNote && <p class="footer__hours-note">{hoursNote}</p>}
 
         <a class="footer__notice" href="/privacy-policy">患者様へのご案内（保険医療機関における書面掲示）</a>
       </div>
@@ -78,7 +77,7 @@ const navColumns = [
         </svg>
       </a>
 
-      <a class="footer__reserve" href={reserveUrl} data-live="reserve" target="_blank" rel="noopener noreferrer">診療予約</a>
+      <a class="footer__reserve" href={reserveUrl} target="_blank" rel="noopener noreferrer">診療予約</a>
     </div>
 
     <p class="footer__copyright">Copyright &copy;和地たなか歯科 All right reserved.</p>

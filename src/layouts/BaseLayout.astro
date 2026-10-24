@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import { getClinic } from '../lib/clinic';
 
 interface Props {
   title: string;
@@ -7,6 +8,8 @@ interface Props {
   ogImage?: string;
   ogType?: string;
 }
+
+const clinic = await getClinic(Astro);
 
 const {
   title,
@@ -60,11 +63,20 @@ const clinicSchema = {
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Rubik:wght@400;500&family=Yusei+Magic&family=Zen+Maru+Gothic:wght@400;500;700&display=swap" rel="stylesheet" />
     <script type="application/ld+json" set:html={JSON.stringify(clinicSchema)} />
+    <style is:global>
+      .site-alert { background:#fff4cc; color:#3a2e00; border-bottom:1px solid #e0c15a; padding:12px 16px; text-align:center; font-size:15px; font-weight:700; line-height:1.6; white-space:pre-line; }
+      .site-alert a { color:#3a2e00; text-decoration:underline; white-space:nowrap; }
+    </style>
   </head>
   <body>
     <a class="skip-link" href="#main-content">本文へ移動</a>
+    {clinic.alertOn && (
+      <div class="site-alert" role="alert">
+        {clinic.alertText}
+        {clinic.alertLink && <a href={clinic.alertLink}>　詳しくはこちら</a>}
+      </div>
+    )}
     <slot />
-    <script is:inline src="/live.js" defer></script>
     <script>
       const revealEls = document.querySelectorAll('.reveal');
       if (revealEls.length > 0) {

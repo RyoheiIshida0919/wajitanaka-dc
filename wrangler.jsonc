@@ -1,0 +1,12 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "wajitanaka-dc",
+  "main": "./src/worker.ts",
+  "account_id": "a0f2e7474db7adfabb8d5c9632695a87",
+  "compatibility_date": "2026-10-01",
+  "compatibility_flags": ["nodejs_compat"],
+  "d1_databases": [{ "binding": "DB", "database_name": "wajitanaka-site", "database_id": "b5f2e5c6-243a-4d2d-88ed-be7721f68554" }],
+  "r2_buckets": [{ "binding": "MEDIA", "bucket_name": "wajitanaka-site-media" }],
+  "triggers": { "crons": ["*/5 * * * *"] },
+  "observability": { "enabled": true }
+}

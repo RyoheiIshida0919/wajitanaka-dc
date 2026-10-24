@@ -1,0 +1,193 @@
+{
+  "$schema": "https://emdashcms.com/seed.schema.json",
+  "version": "1",
+  "meta": {
+    "name": "和地たなか歯科",
+    "description": "和地たなか歯科 公式サイト",
+    "author": "和地たなか歯科"
+  },
+  "settings": {
+    "title": "和地たなか歯科",
+    "tagline": "浜松市中央区和地町の歯医者",
+    "timezone": "Asia/Tokyo"
+  },
+  "collections": [
+    {
+      "slug": "news",
+      "label": "お知らせ",
+      "labelSingular": "お知らせ",
+      "supports": [
+        "drafts",
+        "revisions",
+        "scheduling"
+      ],
+      "fields": [
+        {
+          "slug": "title",
+          "label": "タイトル（80字まで）",
+          "type": "string",
+          "required": true
+        },
+        {
+          "slug": "body",
+          "label": "本文（なくてもかまいません）",
+          "type": "text"
+        },
+        {
+          "slug": "link",
+          "label": "リンク（あれば。https:// から）",
+          "type": "url"
+        },
+        {
+          "slug": "pinned",
+          "label": "いちばん上に固定する",
+          "type": "boolean"
+        }
+      ]
+    },
+    {
+      "slug": "clinic",
+      "label": "医院情報（緊急のお知らせ・診療時間・電話）",
+      "labelSingular": "医院情報",
+      "supports": [
+        "revisions"
+      ],
+      "fields": [
+        {
+          "slug": "title",
+          "label": "管理用の名前（変えなくてよい）",
+          "type": "string",
+          "required": true
+        },
+        {
+          "slug": "alert_on",
+          "label": "緊急のお知らせを表示する（ページのいちばん上に帯で出ます）",
+          "type": "boolean"
+        },
+        {
+          "slug": "alert_text",
+          "label": "緊急のお知らせの文章（200字まで）",
+          "type": "text"
+        },
+        {
+          "slug": "alert_link",
+          "label": "緊急のお知らせの詳しいページ（あれば）",
+          "type": "url"
+        },
+        {
+          "slug": "hours",
+          "label": "診療時間の表（診療する曜日にチェック）",
+          "type": "repeater",
+          "validation": {
+            "subFields": [
+              {
+                "slug": "label",
+                "label": "時間帯（例 8:45-13:30）",
+                "type": "string",
+                "required": true
+              },
+              {
+                "slug": "mon",
+                "label": "月",
+                "type": "boolean"
+              },
+              {
+                "slug": "tue",
+                "label": "火",
+                "type": "boolean"
+              },
+              {
+                "slug": "wed",
+                "label": "水",
+                "type": "boolean"
+              },
+              {
+                "slug": "thu",
+                "label": "木",
+                "type": "boolean"
+              },
+              {
+                "slug": "fri",
+                "label": "金",
+                "type": "boolean"
+              },
+              {
+                "slug": "sat",
+                "label": "土",
+                "type": "boolean"
+              },
+              {
+                "slug": "sun",
+                "label": "日",
+                "type": "boolean"
+              }
+            ]
+          }
+        },
+        {
+          "slug": "hours_note",
+          "label": "診療時間の表の下に出す一言（休診日など）",
+          "type": "text"
+        },
+        {
+          "slug": "tel",
+          "label": "電話番号",
+          "type": "string",
+          "required": true
+        },
+        {
+          "slug": "reserve_url",
+          "label": "Web予約のURL",
+          "type": "url",
+          "required": true
+        },
+        {
+          "slug": "questionnaire_url",
+          "label": "Web問診のURL",
+          "type": "url"
+        }
+      ]
+    }
+  ],
+  "content": {
+    "clinic": [
+      {
+        "id": "clinic-main",
+        "slug": "main",
+        "status": "published",
+        "data": {
+          "title": "医院情報",
+          "alert_on": false,
+          "alert_text": "",
+          "alert_link": "",
+          "hours": [
+            {
+              "label": "8:45-13:30",
+              "mon": true,
+              "tue": true,
+              "wed": true,
+              "thu": true,
+              "fri": true,
+              "sat": true,
+              "sun": false
+            },
+            {
+              "label": "13:30-16:30",
+              "mon": true,
+              "tue": true,
+              "wed": true,
+              "thu": true,
+              "fri": true,
+              "sat": false,
+              "sun": false
+            }
+          ],
+          "hours_note": "",
+          "tel": "053-489-8185",
+          "reserve_url": "https://planetdentale.com/reserve/about.php?web_code=24da7c41f707a2b72d5ac93333b5fd819538b22b405ac3c5f874c15400a2c0ae",
+          "questionnaire_url": "https://forms.gle/7NgJVgftCjhT28Do6"
+        }
+      }
+    ]
+  }
+}

@@ -1,5 +1,6 @@
 ---
-const reserveUrl = 'https://planetdentale.com/reserve/about.php?web_code=24da7c41f707a2b72d5ac93333b5fd819538b22b405ac3c5f874c15400a2c0ae';
+import { getClinic } from "../../lib/clinic";
+const { reserveUrl } = await getClinic(Astro);
 const features = [
   {
     id: '1',
@@ -76,7 +77,7 @@ const features = [
         </article>
       ))}
       <div class="features__reserve reveal">
-        <a class="features__reserve-btn" href={reserveUrl} data-live="reserve" target="_blank" rel="noopener noreferrer">診療予約</a>
+        <a class="features__reserve-btn" href={reserveUrl} target="_blank" rel="noopener noreferrer">診療予約</a>
       </div>
     </div>
   </div>

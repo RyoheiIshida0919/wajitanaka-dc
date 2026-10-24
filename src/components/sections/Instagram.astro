@@ -1,4 +1,6 @@
 ---
+import { getNews } from "../../lib/clinic";
+const news = await getNews(Astro);
 const instagramUrl = 'https://www.instagram.com/wajitanakadc/';
 ---
 
@@ -6,7 +8,18 @@ const instagramUrl = 'https://www.instagram.com/wajitanakadc/';
   <div class="news__layout">
     <h2 class="news__side-title" id="news-title">お知らせ</h2>
     <div class="news__content reveal">
-      <ul class="news__list" data-live="news" hidden></ul>
+      {news.length > 0 && (
+        <ul class="news__list">
+          {news.map((n) => (
+            <li class="news__item">
+              <p class="news__date">{n.date.replaceAll("-", ".")}</p>
+              <p class="news__title">{n.title}</p>
+              {n.body && <p class="news__body">{n.body}</p>}
+              {n.link && <a class="news__more" href={n.link} target="_blank" rel="noopener noreferrer">詳しくはこちら</a>}
+            </li>
+          ))}
+        </ul>
+      )}
       <p class="news__lead">最新情報はInstagramをご覧ください</p>
       <a class="news__button" href={instagramUrl} target="_blank" rel="noopener noreferrer">Instagram</a>
     </div>
