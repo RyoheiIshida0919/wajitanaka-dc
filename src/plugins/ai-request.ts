@@ -24,9 +24,11 @@ const STATUS: Record<string, string> = {
 };
 
 async function call(path: string, body?: unknown) {
-  const res = await fetch(API + path, {
+  // 同じアカウントの workers.dev 同士は普通の fetch で届かない(1042)ので、サービスバインディング経由で呼ぶ
+  const { env } = (await import("cloudflare:workers")) as any;
+  const res = await env.DASHBOARD.fetch(API + path, {
     method: body ? "POST" : "GET",
-    headers: { Authorization: `Bearer ${process.env.AGENT_KEY}`, "Content-Type": "application/json" },
+    headers: { Authorization: `Bearer ${env.AGENT_KEY}`, "Content-Type": "application/json" },
     body: body ? JSON.stringify(body) : undefined,
   });
   const data = (await res.json().catch(() => ({}))) as any;
