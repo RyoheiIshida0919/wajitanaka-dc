@@ -7,6 +7,7 @@
   "compatibility_flags": ["nodejs_compat"],
   "d1_databases": [{ "binding": "DB", "database_name": "wajitanaka-site", "database_id": "b5f2e5c6-243a-4d2d-88ed-be7721f68554" }],
   "services": [{ "binding": "DASHBOARD", "service": "wajitanaka-dashboard" }],
+  "kv_namespaces": [{ "binding": "SESSION", "id": "879f9ca4b701493c8943960ead0193e0" }],
   "r2_buckets": [{ "binding": "MEDIA", "bucket_name": "wajitanaka-site-media" }],
   "triggers": { "crons": ["*/5 * * * *"] },
   "observability": { "enabled": true }
