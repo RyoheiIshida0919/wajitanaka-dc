@@ -87,7 +87,7 @@ async function handleNew(r) {
     "--strict-mcp-config", "--mcp-config", '{"mcpServers":{}}', "--disable-slash-commands",
     "--model", "sonnet", "--append-system-prompt", SYSTEM,
     `次の改修依頼に対応してください。\n\n<依頼 No.${r.id} ${r.name}さん>\n${r.body}\n</依頼>`,
-  ], { encoding: "utf8", timeout: 40 * 60e3, input: "", env: { ...process.env, AGENT_KEY: "", GH_TOKEN: "" } });
+  ], { encoding: "utf8", timeout: 40 * 60e3, input: "", env: { ...process.env, AGENT_KEY: "", GH_TOKEN: "", CLOUDFLARE_API_TOKEN: "" } });
   let out;
   try { out = JSON.parse(res.stdout).structured_output; } catch {}
   if (!out) {
@@ -115,7 +115,11 @@ async function handleNew(r) {
   git("push", "-q", "-f", "origin", `work:req-${r.id}`);
   const path = /^\/[\w\-./]*$/.test(out.path || "") ? out.path : "/";
   const preview = `https://req-${r.id}-wajitanaka-dc.ishida-a0f.workers.dev${path}`;
-  if (!(await waitDeploy(git("rev-parse", "HEAD")))) {
+  // 確認用ページは、ビルド済みの成果物をこの場で Cloudflare に「版」として上げ、req-<id> の別名URLで公開する（本番には出ない）
+  try {
+    sh("npx", ["wrangler", "versions", "upload", "--preview-alias", `req-${r.id}`, "--message", `改修依頼 No.${r.id}`]);
+  } catch (e) {
+    log("preview upload failed", String(e.stderr || e.message).slice(-800));
     return setRequest(r.id, { status: "new", notified: "", reply: "確認用ページの作成に失敗しました。担当が確認します。" });
   }
   await setRequest(r.id, { status: "preview", preview_url: preview, reply: out.reply });

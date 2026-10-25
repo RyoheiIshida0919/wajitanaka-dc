@@ -33,3 +33,5 @@ jobs:
           AGENT_KEY: ${{ secrets.WAJITANAKA_AGENT_KEY }}
           CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           GH_TOKEN: ${{ github.token }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: a0f2e7474db7adfabb8d5c9632695a87
