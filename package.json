@@ -26,5 +26,8 @@
   },
   "emdash": {
     "seed": "seed/seed.json"
+  },
+  "engines": {
+    "node": ">=22.23.4"
   }
 }
