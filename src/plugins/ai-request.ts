@@ -62,7 +62,7 @@ function requestBlocks(r: Req): any[] {
     blocks.push({ type: "actions", elements });
     blocks.push({
       type: "form",
-      block_id: `redo-${r.id}`,
+      block_id: `redo-${r.id}-${Date.now()}`, // 送るたびに block_id を変えて、空の入力欄を出し直す
       fields: [{ type: "text_input", action_id: "note", label: "もう少し直してほしいところ（あれば）", multiline: true }],
       submit: { label: "直してもらう", action_id: "redo" },
     });
@@ -87,7 +87,7 @@ async function render(toast?: { message: string; type: "success" | "error" | "in
     },
     {
       type: "form",
-      block_id: "new",
+      block_id: `new-${Date.now()}`,
       fields: [{ type: "text_input", action_id: "body", label: "直したいこと", multiline: true, placeholder: "例：医師紹介ページに院長の経歴を追加して" }],
       submit: { label: "送る", action_id: "create" },
     },
@@ -113,7 +113,7 @@ export function createPlugin() {
               return render({ message: "送りました。AIが作業を始めます", type: "success" });
             }
             if (input.type === "form_submit" && input.action_id === "redo") {
-              const id = Number(String(input.block_id || "").replace("redo-", ""));
+              const id = Number(String(input.block_id || "").split("-")[1]);
               await call("/action", { id, action: "redo", note: input.values?.note });
               return render({ message: "追加の依頼を送りました", type: "success" });
             }
