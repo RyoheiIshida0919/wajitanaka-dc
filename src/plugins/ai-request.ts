@@ -92,6 +92,10 @@ async function render(toast?: { message: string; type: "success" | "error" | "in
       submit: { label: "送る", action_id: "create" },
     },
   ];
+  blocks.push(
+    { type: "context", text: "AIの返事はこの下に出ます。画面は自動では変わらないので、送ってしばらくしたら「返事を確認する」を押してください。" },
+    { type: "actions", elements: [{ type: "button", action_id: "refresh", label: "返事を確認する", style: "secondary" }] },
+  );
   if (loadError) blocks.push({ type: "banner", variant: "error", title: "依頼の一覧を読み込めませんでした", description: loadError });
   else if (!list.length) blocks.push({ type: "empty", title: "まだ依頼はありません" });
   else for (const r of list) blocks.push(...requestBlocks(r));
@@ -124,6 +128,7 @@ export function createPlugin() {
           } catch (e) {
             return render({ message: (e as Error).message, type: "error" });
           }
+          if (input.type === "block_action" && input.action_id === "refresh") return render({ message: "最新の状態にしました", type: "info" });
           return render();
         },
       },
