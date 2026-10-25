@@ -104,8 +104,8 @@ async function render(toast?: { message: string; type: "success" | "error" | "in
 }
 
 const PAGES = [
-  { path: "/help", label: "使い方（マニュアル）", icon: "book" },
   { path: "/requests", label: "AIに改修を依頼", icon: "sparkle" },
+  { path: "/help", label: "使い方（マニュアル）", icon: "book" },
 ];
 
 export function createPlugin() {
