@@ -1,16 +1,20 @@
+---
+import { imgSrc, imgAlt, or, lines } from "../../lib/blocks";
+const v = (Astro.props.value ?? {}) as Record<string, any>;
+const heading = or(v.heading, "生きる力はお口から");
+const lead = or(v.lead, "食べること、話すこと、笑うこと\nお口の健康は、毎日の生活を支える大切な基礎です。");
+const body = or(v.body, "私たちは、ただ歯を直すだけでなく\n「一生自分の歯で健康に過ごすこと」を\nサポートする歯科医院を目指しています。");
+---
 <section class="staff-hero" aria-labelledby="staff-message">
-  <img src="/images/site/staff-hero.jpg" alt="和地たなか歯科の医師とスタッフ" loading="eager" />
+  <img src={imgSrc(Astro, v.image, "/images/site/staff-hero.jpg")} alt={imgAlt(v.image, "和地たなか歯科の医師とスタッフ")} loading="eager" />
   <div class="staff-hero__message">
     <div class="staff-hero__content">
-      <h2 id="staff-message">生きる力はお口から</h2>
+      <h2 id="staff-message">{heading}</h2>
       <p class="staff-hero__lead">
-        食べること、話すこと、笑うこと<br />
-        お口の健康は、毎日の生活を支える大切な基礎です。
+        {lines(lead).map((l, i) => <>{i > 0 && <br />}{l}</>)}
       </p>
       <p class="staff-hero__body">
-        私たちは、ただ歯を直すだけでなく<br />
-        「一生自分の歯で健康に過ごすこと」を<br />
-        サポートする歯科医院を目指しています。
+        {lines(body).map((l, i) => <>{i > 0 && <br />}{l}</>)}
       </p>
     </div>
   </div>

@@ -1,0 +1,156 @@
+---
+import { or } from "../../lib/blocks";
+const v = (Astro.props.value ?? {}) as Record<string, any>;
+const defaults = [
+  {
+    id: '01',
+    question: '赤ちゃんや小さな子どもも診てもらえますか？',
+    answer: 'はい。0歳からのお口の健康づくりを大切にしています。歯が生える前のケア、歯みがき、食事やお口の使い方など、成長に合わせて丁寧にお伝えします。初めての歯科受診も安心してご相談ください。',
+  },
+  {
+    id: '02',
+    question: '子どもを預けて治療できますか？',
+    answer: 'はい。予約制で託児サービスをご利用いただけます。保育士が在籍しており、院内のキッズスペースでお子さまを安全にお預かりします。小さなお子さま連れの方も安心して治療を受けていただけます。',
+  },
+  {
+    id: '03',
+    question: '歯医者が怖くて治療に行けません。対応してもらえますか？',
+    answer: 'はい。当院では歯科恐怖症の方に対応しています。静脈内鎮静法で「眠っているようなリラックスした状態」で治療を受けられます。痛みや不安が苦手な方、嘔吐反射の強い方もご安心ください。',
+  },
+  {
+    id: '04',
+    question: '女性の先生に診てもらえますか？',
+    answer: 'はい。当院には女性歯科医師が在籍しています。「男性の先生は怖い」「子どもの治療は女性にお願いしたい」という方もお気軽にご相談ください。',
+  },
+  {
+    id: '05',
+    question: 'どんな診療に力を入れていますか？',
+    answer: '当院は予防歯科を中心に、歯をできるだけ削らずに残す治療を心がけています。ご自身の親知らずを他の部位に移植する治療、入れ歯治療、歯科恐怖症の方へのリラックス治療にも力を入れています。',
+  },
+  {
+    id: '06',
+    question: '場所はどこにありますか？',
+    answer: '浜松市中央区（旧西区）和地町にある歯科医院です。気賀・三方原・舘山寺・三ケ日・桜台・湖東・伊佐地・大人見・雄踏・高丘エリアからもアクセスしやすく、駐車場も完備しています。',
+  },
+];
+const heading = or(v.heading, "よくある質問");
+const sub = or(v.sub, "-FAQ-");
+const faqs = Array.isArray(v.items) && v.items.length
+  ? v.items.map((f: any, i: number) => ({ id: String(i + 1).padStart(2, "0"), question: f.question ?? "", answer: f.answer ?? "" }))
+  : defaults;
+---
+
+<section class="faq" id="faq">
+      <div class="narrow">
+        <header class="faq__header reveal">
+          <h2>{heading}</h2>
+          <span>{sub}</span>
+        </header>
+        <div class="faq__list">
+          {faqs.map((item) => (
+            <article class="faq__item reveal">
+              <span class="section-number">{item.id}</span>
+              <h3>{item.question}</h3>
+              <p>{item.answer}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+<style>
+  .commitments {
+    padding-block: var(--section-space);
+    background: #fff;
+  }
+
+  .commitment {
+    padding-bottom: clamp(86px, 12vw, 160px);
+  }
+
+  .commitment__copy {
+    max-width: 690px;
+    margin: 0 auto clamp(32px, 5vw, 58px);
+  }
+
+  .commitment h2 {
+    margin-block: 15px 20px;
+    color: var(--green);
+    font-size: clamp(1.3rem, 2.4vw, 2rem);
+    font-weight: 500;
+    letter-spacing: 0.1em;
+  }
+
+  .commitment p,
+  .faq__item p {
+    font-size: clamp(0.84rem, 1.05vw, 0.95rem);
+    line-height: 2.15;
+  }
+
+  .commitment__images {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: clamp(10px, 1.7vw, 22px);
+  }
+
+  .commitment__images img {
+    width: 100%;
+    aspect-ratio: 1.55 / 1;
+    object-fit: cover;
+  }
+
+  .faq {
+    padding-block: var(--section-space);
+    background: var(--mist);
+  }
+
+  .faq__header {
+    margin-bottom: clamp(55px, 8vw, 100px);
+    text-align: center;
+  }
+
+  .faq__header h2 {
+    font-size: clamp(1.7rem, 3.4vw, 2.8rem);
+    font-weight: 500;
+    letter-spacing: 0.13em;
+  }
+
+  .faq__header span {
+    display: block;
+    margin-top: 8px;
+    color: var(--green);
+    font-family: var(--font-number);
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+  }
+
+  .faq__item {
+    max-width: 760px;
+    margin-inline: auto;
+    padding: 0 0 clamp(50px, 7vw, 80px);
+  }
+
+  .faq__item + .faq__item {
+    padding-top: clamp(50px, 7vw, 80px);
+    border-top: 1px solid var(--line);
+  }
+
+  .faq__item h3 {
+    margin-block: 15px 16px;
+    color: var(--green);
+    font-size: clamp(1.08rem, 1.8vw, 1.4rem);
+    font-weight: 500;
+    line-height: 1.7;
+    letter-spacing: 0.07em;
+  }
+
+  @media (max-width: 600px) {
+    .commitment__images {
+      gap: 7px;
+    }
+
+    .commitment__images img {
+      aspect-ratio: 1 / 0.88;
+    }
+  }
+</style>

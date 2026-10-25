@@ -1,0 +1,12 @@
+---
+import PageHero from "../PageHero.astro";
+import { imgSrc, imgAlt, or } from "../../lib/blocks";
+const v = (Astro.props.value ?? {}) as Record<string, any>;
+const d = (Astro.props.defaults ?? {}) as Record<string, any>;
+---
+<PageHero
+  title={or(v.title, d.title ?? "")}
+  image={imgSrc(Astro, v.image, d.image ?? "")}
+  alt={v.image ? imgAlt(v.image, d.alt ?? "") : (d.alt ?? "")}
+  position={or(v.position, d.position ?? "center")}
+/>

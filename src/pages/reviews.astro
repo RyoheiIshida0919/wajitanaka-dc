@@ -3,224 +3,24 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import StickyFooterCTA from '../components/StickyFooterCTA.astro';
-import PageHero from '../components/PageHero.astro';
+import PageBlocks from '../components/PageBlocks.astro';
+import { loadPage } from '../lib/pages';
 
-const commitments = [
-  {
-    id: '01',
-    title: '丁寧な対応と清潔な院内',
-    text: '患者さんお一人おひとりに丁寧に向き合い、わかりやすい説明を大切にしています。院内は清潔に保ち、個室診療室を備えた落ち着いた環境を整えています。お悩みやご要望をしっかりとお聞かせください。',
-    images: ['/images/site/q01-1.jpg', '/images/site/q01-2.jpg'],
-  },
-  {
-    id: '02',
-    title: '子ども連れでも安心して通える',
-    text: '「子どもを預かってもらえた」「先生やスタッフが一つ一つ声をかけてくれて安心した」とのお声をいただいております。小さなお子さま連れの方も安心して通っていただけるよう、託児スペースもご用意しています。',
-    images: ['/images/site/q02-1.jpg', '/images/site/q02-2.jpg'],
-  },
-  {
-    id: '03',
-    title: '気づきのある診療と丁寧なカウンセリング',
-    text: '「気づかなかった虫歯を見つけてもらえた」「薬の副作用で歯ぐきに傷ができていることに気づいてもらえた」といったお声をいただいております。検診では生活習慣まで含めた丁寧なカウンセリングを心がけています。',
-    images: ['/images/site/q03-1.jpg', '/images/site/q03-2.jpg'],
-  },
-  {
-    id: '04',
-    title: '院内の雰囲気が良くリラックスできる',
-    text: '「院長やスタッフの『ありがとうございます』というやり取り自体が安心につながった」「リラックスして治療を受けられた」との声をいただいております。院内の雰囲気づくりも大切にしています。',
-    images: ['/images/site/q04-1.jpg', '/images/site/q04-2.jpg'],
-  },
-  {
-    id: '05',
-    title: '久しぶりの受診でも安心',
-    text: '「何年も歯医者に行っていなかったが安心して通えた」「スタッフが親切で、歯磨きのアドバイスももらえた」とのお声をいただいています。定期検診が久しぶりの方も安心してご来院いただけます。',
-    images: ['/images/site/q05-1.jpg', '/images/site/q05-2.jpg'],
-  },
-  {
-    id: '06',
-    title: 'デジタル診察券で便利に',
-    text: '「診察券がアプリ化されていて便利」とのお声をいただきました。スマホが苦手な方には紙の診察券もご用意しておりますので、どなたでも安心してご利用いただけます。',
-    images: ['/images/site/q06-1.jpg', '/images/site/q06-2.jpg'],
-  },
-];
-
-const faqs = [
-  {
-    id: '01',
-    question: '赤ちゃんや小さな子どもも診てもらえますか？',
-    answer: 'はい。0歳からのお口の健康づくりを大切にしています。歯が生える前のケア、歯みがき、食事やお口の使い方など、成長に合わせて丁寧にお伝えします。初めての歯科受診も安心してご相談ください。',
-  },
-  {
-    id: '02',
-    question: '子どもを預けて治療できますか？',
-    answer: 'はい。予約制で託児サービスをご利用いただけます。保育士が在籍しており、院内のキッズスペースでお子さまを安全にお預かりします。小さなお子さま連れの方も安心して治療を受けていただけます。',
-  },
-  {
-    id: '03',
-    question: '歯医者が怖くて治療に行けません。対応してもらえますか？',
-    answer: 'はい。当院では歯科恐怖症の方に対応しています。静脈内鎮静法で「眠っているようなリラックスした状態」で治療を受けられます。痛みや不安が苦手な方、嘔吐反射の強い方もご安心ください。',
-  },
-  {
-    id: '04',
-    question: '女性の先生に診てもらえますか？',
-    answer: 'はい。当院には女性歯科医師が在籍しています。「男性の先生は怖い」「子どもの治療は女性にお願いしたい」という方もお気軽にご相談ください。',
-  },
-  {
-    id: '05',
-    question: 'どんな診療に力を入れていますか？',
-    answer: '当院は予防歯科を中心に、歯をできるだけ削らずに残す治療を心がけています。ご自身の親知らずを他の部位に移植する治療、入れ歯治療、歯科恐怖症の方へのリラックス治療にも力を入れています。',
-  },
-  {
-    id: '06',
-    question: '場所はどこにありますか？',
-    answer: '浜松市中央区（旧西区）和地町にある歯科医院です。気賀・三方原・舘山寺・三ケ日・桜台・湖東・伊佐地・大人見・雄踏・高丘エリアからもアクセスしやすく、駐車場も完備しています。',
-  },
-];
+// 中身は EmDash の「ページ」→「reviews」で編集する。未登録なら下の既定の並びで表示
+const page = await loadPage("reviews");
+const fallback = [{"_type": "page_hero"}, {"_type": "commitments"}, {"_type": "faq"}];
+const defaults = {"page_hero": {"title": "こだわりとQ&A", "image": "/images/site/reviews-hero.jpg", "alt": "院内の照明と木の天井", "position": "center 45%"}};
+const layout = page?.layout.length ? page.layout : fallback;
+const title = page?.seoTitle || "こだわりとQ&A｜和地たなか歯科";
+const description = page?.seoDescription || "和地たなか歯科が大切にしている6つのこだわりと、患者さんからよくいただくご質問をご紹介します。";
 ---
 
-<BaseLayout
-  title="こだわりとQ&A｜和地たなか歯科"
-  description="和地たなか歯科が大切にしている6つのこだわりと、患者さんからよくいただくご質問をご紹介します。"
-  ogImage="/images/site/reviews-hero.jpg"
->
+<BaseLayout title={title} description={description}
+  ogImage="/images/site/reviews-hero.jpg">
   <Header />
   <main id="main-content">
-    <PageHero title="こだわりとQ&A" image="/images/site/reviews-hero.jpg" alt="院内の照明と木の天井" position="center 45%" />
-
-    <section class="commitments">
-      <div class="narrow">
-        {commitments.map((item) => (
-          <article class="commitment reveal">
-            <div class="commitment__copy">
-              <span class="section-number">{item.id}</span>
-              <h2>{item.title}</h2>
-              <p>{item.text}</p>
-            </div>
-            <div class="commitment__images">
-              {item.images.map((image, index) => (
-                <img src={image} alt={index === 0 ? item.title : ''} loading="lazy" />
-              ))}
-            </div>
-          </article>
-        ))}
-      </div>
-    </section>
-
-    <section class="faq" id="faq">
-      <div class="narrow">
-        <header class="faq__header reveal">
-          <h2>よくある質問</h2>
-          <span>-FAQ-</span>
-        </header>
-        <div class="faq__list">
-          {faqs.map((item) => (
-            <article class="faq__item reveal">
-              <span class="section-number">{item.id}</span>
-              <h3>{item.question}</h3>
-              <p>{item.answer}</p>
-            </article>
-          ))}
-        </div>
-      </div>
-    </section>
+    <PageBlocks layout={layout} defaults={defaults} />
   </main>
   <Footer />
   <StickyFooterCTA />
 </BaseLayout>
-
-<style>
-  .commitments {
-    padding-block: var(--section-space);
-    background: #fff;
-  }
-
-  .commitment {
-    padding-bottom: clamp(86px, 12vw, 160px);
-  }
-
-  .commitment__copy {
-    max-width: 690px;
-    margin: 0 auto clamp(32px, 5vw, 58px);
-  }
-
-  .commitment h2 {
-    margin-block: 15px 20px;
-    color: var(--green);
-    font-size: clamp(1.3rem, 2.4vw, 2rem);
-    font-weight: 500;
-    letter-spacing: 0.1em;
-  }
-
-  .commitment p,
-  .faq__item p {
-    font-size: clamp(0.84rem, 1.05vw, 0.95rem);
-    line-height: 2.15;
-  }
-
-  .commitment__images {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: clamp(10px, 1.7vw, 22px);
-  }
-
-  .commitment__images img {
-    width: 100%;
-    aspect-ratio: 1.55 / 1;
-    object-fit: cover;
-  }
-
-  .faq {
-    padding-block: var(--section-space);
-    background: var(--mist);
-  }
-
-  .faq__header {
-    margin-bottom: clamp(55px, 8vw, 100px);
-    text-align: center;
-  }
-
-  .faq__header h2 {
-    font-size: clamp(1.7rem, 3.4vw, 2.8rem);
-    font-weight: 500;
-    letter-spacing: 0.13em;
-  }
-
-  .faq__header span {
-    display: block;
-    margin-top: 8px;
-    color: var(--green);
-    font-family: var(--font-number);
-    font-size: 0.72rem;
-    letter-spacing: 0.18em;
-  }
-
-  .faq__item {
-    max-width: 760px;
-    margin-inline: auto;
-    padding: 0 0 clamp(50px, 7vw, 80px);
-  }
-
-  .faq__item + .faq__item {
-    padding-top: clamp(50px, 7vw, 80px);
-    border-top: 1px solid var(--line);
-  }
-
-  .faq__item h3 {
-    margin-block: 15px 16px;
-    color: var(--green);
-    font-size: clamp(1.08rem, 1.8vw, 1.4rem);
-    font-weight: 500;
-    line-height: 1.7;
-    letter-spacing: 0.07em;
-  }
-
-  @media (max-width: 600px) {
-    .commitment__images {
-      gap: 7px;
-    }
-
-    .commitment__images img {
-      aspect-ratio: 1 / 0.88;
-    }
-  }
-</style>

@@ -1,0 +1,21 @@
+---
+import { or, lines } from "../../lib/blocks";
+const v = (Astro.props.value ?? {}) as Record<string, any>;
+const d = (Astro.props.defaults ?? {}) as Record<string, any>;
+const title = or(v.title, d.title ?? "");
+const body = or(v.body, d.body ?? "");
+// 空行で段落を分ける
+const paragraphs = String(body).split(/\n{2,}/).filter(Boolean);
+---
+<section class="page-hero">
+  <h1>{title}</h1>
+</section>
+<section class="page-content container">
+  {paragraphs.map((p) => <p>{lines(p).map((l, i) => <>{i > 0 && <br />}{l}</>)}</p>)}
+</section>
+
+<style>
+  .page-hero { background-color: var(--color-primary); color: #fff; padding: 4rem 1.25rem; text-align: center; }
+  .page-hero h1 { font-size: 2rem; font-weight: 700; }
+  .page-content { padding-block: 4rem; }
+</style>

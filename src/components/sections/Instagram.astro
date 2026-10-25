@@ -1,12 +1,17 @@
 ---
 import { getNews } from "../../lib/clinic";
 const news = await getNews(Astro);
-const instagramUrl = 'https://www.instagram.com/wajitanakadc/';
+import { or } from "../../lib/blocks";
+const v = (Astro.props.value ?? {}) as Record<string, any>;
+const heading = or(v.heading, "お知らせ");
+const lead = or(v.lead, "最新情報はInstagramをご覧ください");
+const buttonLabel = or(v.button_label, "Instagram");
+const instagramUrl = /^https:\/\//.test(v.button_url ?? "") ? v.button_url : 'https://www.instagram.com/wajitanakadc/';
 ---
 
 <section class="news" aria-labelledby="news-title">
   <div class="news__layout">
-    <h2 class="news__side-title" id="news-title">お知らせ</h2>
+    <h2 class="news__side-title" id="news-title">{heading}</h2>
     <div class="news__content reveal">
       {news.length > 0 && (
         <ul class="news__list">
@@ -20,8 +25,8 @@ const instagramUrl = 'https://www.instagram.com/wajitanakadc/';
           ))}
         </ul>
       )}
-      <p class="news__lead">最新情報はInstagramをご覧ください</p>
-      <a class="news__button" href={instagramUrl} target="_blank" rel="noopener noreferrer">Instagram</a>
+      <p class="news__lead">{lead}</p>
+      <a class="news__button" href={instagramUrl} target="_blank" rel="noopener noreferrer">{buttonLabel}</a>
     </div>
   </div>
 </section>

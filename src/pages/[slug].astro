@@ -1,0 +1,22 @@
+---
+// 管理画面の「ページ」で新しく作ったページ（例 /about）。決まったページ（doctors 等）は各ファイルが優先される
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import StickyFooterCTA from '../components/StickyFooterCTA.astro';
+import PageBlocks from '../components/PageBlocks.astro';
+import { loadPage } from '../lib/pages';
+
+const slug = Astro.params.slug ?? "";
+const page = slug && slug !== "home" ? await loadPage(slug) : null;
+if (!page || !page.layout.length) return new Response(null, { status: 404 });
+---
+
+<BaseLayout title={page.seoTitle || `${page.title}｜和地たなか歯科`} description={page.seoDescription || page.title}>
+  <Header />
+  <main id="main-content">
+    <PageBlocks layout={page.layout} />
+  </main>
+  <Footer />
+  <StickyFooterCTA />
+</BaseLayout>

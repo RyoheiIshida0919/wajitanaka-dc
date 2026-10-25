@@ -1,0 +1,166 @@
+---
+import { imgSrc } from "../../lib/blocks";
+const v = (Astro.props.value ?? {}) as Record<string, any>;
+const defaults = [
+  {
+    id: '01',
+    title: '丁寧な対応と清潔な院内',
+    text: '患者さんお一人おひとりに丁寧に向き合い、わかりやすい説明を大切にしています。院内は清潔に保ち、個室診療室を備えた落ち着いた環境を整えています。お悩みやご要望をしっかりとお聞かせください。',
+    images: ['/images/site/q01-1.jpg', '/images/site/q01-2.jpg'],
+  },
+  {
+    id: '02',
+    title: '子ども連れでも安心して通える',
+    text: '「子どもを預かってもらえた」「先生やスタッフが一つ一つ声をかけてくれて安心した」とのお声をいただいております。小さなお子さま連れの方も安心して通っていただけるよう、託児スペースもご用意しています。',
+    images: ['/images/site/q02-1.jpg', '/images/site/q02-2.jpg'],
+  },
+  {
+    id: '03',
+    title: '気づきのある診療と丁寧なカウンセリング',
+    text: '「気づかなかった虫歯を見つけてもらえた」「薬の副作用で歯ぐきに傷ができていることに気づいてもらえた」といったお声をいただいております。検診では生活習慣まで含めた丁寧なカウンセリングを心がけています。',
+    images: ['/images/site/q03-1.jpg', '/images/site/q03-2.jpg'],
+  },
+  {
+    id: '04',
+    title: '院内の雰囲気が良くリラックスできる',
+    text: '「院長やスタッフの『ありがとうございます』というやり取り自体が安心につながった」「リラックスして治療を受けられた」との声をいただいております。院内の雰囲気づくりも大切にしています。',
+    images: ['/images/site/q04-1.jpg', '/images/site/q04-2.jpg'],
+  },
+  {
+    id: '05',
+    title: '久しぶりの受診でも安心',
+    text: '「何年も歯医者に行っていなかったが安心して通えた」「スタッフが親切で、歯磨きのアドバイスももらえた」とのお声をいただいています。定期検診が久しぶりの方も安心してご来院いただけます。',
+    images: ['/images/site/q05-1.jpg', '/images/site/q05-2.jpg'],
+  },
+  {
+    id: '06',
+    title: 'デジタル診察券で便利に',
+    text: '「診察券がアプリ化されていて便利」とのお声をいただきました。スマホが苦手な方には紙の診察券もご用意しておりますので、どなたでも安心してご利用いただけます。',
+    images: ['/images/site/q06-1.jpg', '/images/site/q06-2.jpg'],
+  },
+];
+const commitments = Array.isArray(v.items) && v.items.length
+  ? v.items.map((c: any, i: number) => ({
+      id: String(i + 1).padStart(2, "0"),
+      title: c.title ?? "",
+      text: c.text ?? "",
+      images: [imgSrc(Astro, c.image1, ""), imgSrc(Astro, c.image2, "")].filter(Boolean),
+    }))
+  : defaults;
+---
+
+<section class="commitments">
+      <div class="narrow">
+        {commitments.map((item) => (
+          <article class="commitment reveal">
+            <div class="commitment__copy">
+              <span class="section-number">{item.id}</span>
+              <h2>{item.title}</h2>
+              <p>{item.text}</p>
+            </div>
+            <div class="commitment__images">
+              {item.images.map((image, index) => (
+                <img src={image} alt={index === 0 ? item.title : ''} loading="lazy" />
+              ))}
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+
+<style>
+  .commitments {
+    padding-block: var(--section-space);
+    background: #fff;
+  }
+
+  .commitment {
+    padding-bottom: clamp(86px, 12vw, 160px);
+  }
+
+  .commitment__copy {
+    max-width: 690px;
+    margin: 0 auto clamp(32px, 5vw, 58px);
+  }
+
+  .commitment h2 {
+    margin-block: 15px 20px;
+    color: var(--green);
+    font-size: clamp(1.3rem, 2.4vw, 2rem);
+    font-weight: 500;
+    letter-spacing: 0.1em;
+  }
+
+  .commitment p,
+  .faq__item p {
+    font-size: clamp(0.84rem, 1.05vw, 0.95rem);
+    line-height: 2.15;
+  }
+
+  .commitment__images {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: clamp(10px, 1.7vw, 22px);
+  }
+
+  .commitment__images img {
+    width: 100%;
+    aspect-ratio: 1.55 / 1;
+    object-fit: cover;
+  }
+
+  .faq {
+    padding-block: var(--section-space);
+    background: var(--mist);
+  }
+
+  .faq__header {
+    margin-bottom: clamp(55px, 8vw, 100px);
+    text-align: center;
+  }
+
+  .faq__header h2 {
+    font-size: clamp(1.7rem, 3.4vw, 2.8rem);
+    font-weight: 500;
+    letter-spacing: 0.13em;
+  }
+
+  .faq__header span {
+    display: block;
+    margin-top: 8px;
+    color: var(--green);
+    font-family: var(--font-number);
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+  }
+
+  .faq__item {
+    max-width: 760px;
+    margin-inline: auto;
+    padding: 0 0 clamp(50px, 7vw, 80px);
+  }
+
+  .faq__item + .faq__item {
+    padding-top: clamp(50px, 7vw, 80px);
+    border-top: 1px solid var(--line);
+  }
+
+  .faq__item h3 {
+    margin-block: 15px 16px;
+    color: var(--green);
+    font-size: clamp(1.08rem, 1.8vw, 1.4rem);
+    font-weight: 500;
+    line-height: 1.7;
+    letter-spacing: 0.07em;
+  }
+
+  @media (max-width: 600px) {
+    .commitment__images {
+      gap: 7px;
+    }
+
+    .commitment__images img {
+      aspect-ratio: 1 / 0.88;
+    }
+  }
+</style>

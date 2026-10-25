@@ -1,0 +1,163 @@
+---
+import { imgSrc, imgAlt, lines } from "../../lib/blocks";
+const v = (Astro.props.value ?? {}) as Record<string, any>;
+const defaults = [
+  {
+    role: '院長',
+    name: '田中 亮次',
+    image: '/images/site/doctor-ryoji.jpg',
+    message: '「できる限り歯を残すこと」を大切にしています。むし歯や歯周病で失われた歯を補うことも大切ですが、そもそも「抜かずに済む選択肢」を最大限考えることが、患者さんの未来の健康につながると考えています。その一環として、歯の移植にも積極的に取り組んでいます。自分の歯を活かせる可能性があるなら、できる限りその選択肢を提供したいと思っています。',
+    career: [
+      '2014年　大阪大学歯学部歯学科卒業',
+      '2014年　医療法人スワン会スワン歯科で研修',
+      '2015年　医療法人社団英仁会鈴木歯科医院勤務',
+      '2023年　東海歯科衛生士専門学校非常勤講師',
+      '日本歯周病学会会員',
+    ],
+    specialty: '歯の移植など、外科的処置も得意ですが、新しい設備を用いた入れ歯作成もお任せください！',
+  },
+  {
+    role: '医師',
+    name: '田中 有美',
+    image: '/images/site/doctor-yumi.jpg',
+    message: '「できる限り歯を残すこと」を大切にしています。むし歯や歯周病で失われた歯を補うことも大切ですが、そもそも「抜かずに済む選択肢」を最大限考えることが、患者さんの未来の健康につながると考えています。その一環として、歯の移植にも積極的に取り組んでいます。自分の歯を活かせる可能性があるなら、できる限りその選択肢を提供したいと思っています。',
+    career: [
+      '2012年　大阪大学歯学部歯学科卒業',
+      '2012年　医療法人清雅会シバタ歯科医院で研修',
+      '2013年　愛知学院大学歯学部麻酔学講座非常勤助教',
+      '2020年　医療法人社団銀輪会長谷川歯科医院勤務',
+      '日本歯科麻酔学会認定医',
+    ],
+    specialty: 'お一人お一人の気持ちに寄り添ったプラン提案が得意です。',
+  },
+];
+// 経歴は1行1項目で入力する
+const doctors = Array.isArray(v.items) && v.items.length
+  ? v.items.map((d: any) => ({
+      role: d.role ?? "",
+      name: d.name ?? "",
+      image: imgSrc(Astro, d.image, ""),
+      alt: imgAlt(d.image, ""),
+      message: d.message ?? "",
+      career: lines(d.career).map((l) => l.trim()).filter(Boolean),
+      specialty: d.specialty ?? "",
+    }))
+  : defaults;
+---
+
+<section class="doctors">
+      <div class="narrow">
+        {doctors.map((doctor) => (
+          <article class="doctor reveal">
+            <div class="doctor__photo">
+              <img src={doctor.image} alt={(doctor as any).alt || `${doctor.role} ${doctor.name}`} loading="lazy" />
+            </div>
+            <div class="doctor__content">
+              <header>
+                <span>{doctor.role}</span>
+                <h2>{doctor.name}</h2>
+              </header>
+              <p class="doctor__message">{doctor.message}</p>
+              <ul class="doctor__career">
+                {doctor.career.map((line) => <li>{line}</li>)}
+              </ul>
+              <div class="doctor__specialty">
+                <h3>得意な治療</h3>
+                <p>{doctor.specialty}</p>
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+
+<style>
+  .doctors {
+    padding-block: var(--section-space);
+    background: #fff;
+  }
+
+  .doctor {
+    display: grid;
+    grid-template-columns: minmax(270px, 0.82fr) minmax(0, 1.18fr);
+    gap: clamp(45px, 8vw, 105px);
+    align-items: start;
+  }
+
+  .doctor + .doctor {
+    margin-top: clamp(110px, 14vw, 190px);
+    padding-top: clamp(110px, 14vw, 190px);
+    border-top: 1px solid var(--line);
+  }
+
+  .doctor__photo img {
+    width: 100%;
+    aspect-ratio: 0.78 / 1;
+    object-fit: cover;
+    object-position: center top;
+  }
+
+  .doctor__content header {
+    display: flex;
+    align-items: baseline;
+    gap: 18px;
+    margin-bottom: 30px;
+    padding-bottom: 18px;
+    border-bottom: 1px solid var(--green);
+  }
+
+  .doctor__content header span {
+    color: var(--green);
+    font-size: 0.78rem;
+    letter-spacing: 0.15em;
+  }
+
+  .doctor__content h2 {
+    font-size: clamp(1.55rem, 2.8vw, 2.3rem);
+    font-weight: 500;
+    letter-spacing: 0.14em;
+  }
+
+  .doctor__message {
+    margin-bottom: 30px;
+    font-size: 0.88rem;
+    line-height: 2.15;
+  }
+
+  .doctor__career {
+    margin-bottom: 30px;
+    padding-block: 22px;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .doctor__career li {
+    font-size: 0.77rem;
+    line-height: 2;
+  }
+
+  .doctor__specialty h3 {
+    margin-bottom: 8px;
+    color: var(--green);
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+  }
+
+  .doctor__specialty p {
+    font-size: 0.84rem;
+    line-height: 1.9;
+  }
+
+  @media (max-width: 760px) {
+    .doctor {
+      grid-template-columns: 1fr;
+      gap: 36px;
+    }
+
+    .doctor__photo {
+      max-width: 400px;
+      margin-inline: auto;
+    }
+  }
+</style>

@@ -3,22 +3,23 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import StickyFooterCTA from '../components/StickyFooterCTA.astro';
+import PageBlocks from '../components/PageBlocks.astro';
+import { loadPage } from '../lib/pages';
+
+// 中身は EmDash の「ページ」→「recruit」で編集する。未登録なら下の既定の並びで表示
+const page = await loadPage("recruit");
+const fallback = [{"_type": "simple_page"}];
+const defaults = {"simple_page": {"title": "求人", "body": "コンテンツ準備中です。"}};
+const layout = page?.layout.length ? page.layout : fallback;
+const title = page?.seoTitle || "求人｜和地たなか歯科";
+const description = page?.seoDescription || "和地たなか歯科の求人情報。スタッフ募集中です。";
 ---
-<BaseLayout title="求人｜和地たなか歯科" description="和地たなか歯科の求人情報。スタッフ募集中です。">
+
+<BaseLayout title={title} description={description}>
   <Header />
   <main>
-    <section class="page-hero">
-      <h1>求人</h1>
-    </section>
-    <section class="page-content container">
-      <p>コンテンツ準備中です。</p>
-    </section>
+    <PageBlocks layout={layout} defaults={defaults} />
   </main>
   <Footer />
   <StickyFooterCTA />
 </BaseLayout>
-<style>
-  .page-hero { background-color: var(--color-primary); color: #fff; padding: 4rem 1.25rem; text-align: center; }
-  .page-hero h1 { font-size: 2rem; font-weight: 700; }
-  .page-content { padding-block: 4rem; }
-</style>

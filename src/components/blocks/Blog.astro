@@ -1,0 +1,117 @@
+---
+import { or, lines } from "../../lib/blocks";
+const v = (Astro.props.value ?? {}) as Record<string, any>;
+const https = (u: unknown) => (typeof u === "string" && /^https:\/\//.test(u) ? u : "");
+// note の埋め込みは、ブロックの入力があればそれを、なければ環境変数を使う
+const noteProfileUrl = https(v.note_profile_url) || import.meta.env.PUBLIC_NOTE_PROFILE_URL?.trim();
+const noteEmbedUrl = (/^https:\/\/note\.com\//.test(v.note_embed_url ?? "") ? v.note_embed_url : "") || import.meta.env.PUBLIC_NOTE_EMBED_URL?.trim();
+const hasNoteFeed = Boolean(noteProfileUrl && noteEmbedUrl);
+const lead = or(v.lead, "診療案内・症例紹介・お口の健康情報などを発信しています。");
+const placeholderTitle = or(v.placeholder_title, "記事の公開を準備しています");
+const placeholderText = or(v.placeholder_text, "診療やお口の健康に関する情報を、順次お届けする予定です。\n最新のお知らせはInstagramをご覧ください。");
+const buttonLabel = or(v.button_label, "Instagramを見る");
+const buttonUrl = https(v.button_url) || "https://www.instagram.com/wajitanakadc/";
+---
+
+<section class="blog">
+      <div class="narrow">
+        <header class="blog__header reveal">
+          <p>{lead}</p>
+        </header>
+        {hasNoteFeed ? (
+          <>
+            <div class="blog__embed reveal">
+              <iframe
+                src={noteEmbedUrl}
+                width="100%"
+                height="760"
+                loading="lazy"
+                title="和地たなか歯科 note"
+              ></iframe>
+            </div>
+            <div class="blog__link reveal">
+              <a class="reserve-link" href={noteProfileUrl} target="_blank" rel="noopener noreferrer">noteで記事を見る</a>
+            </div>
+          </>
+        ) : (
+          <div class="blog__placeholder reveal">
+            <span>note</span>
+            <h2>{placeholderTitle}</h2>
+            <p>{lines(placeholderText).map((l, i) => <>{i > 0 && <br />}{l}</>)}</p>
+            <a class="reserve-link" href={buttonUrl} target="_blank" rel="noopener noreferrer">{buttonLabel}</a>
+          </div>
+        )}
+      </div>
+    </section>
+
+<style>
+  .blog {
+    padding-block: var(--section-space);
+    background: #fff;
+  }
+
+  .blog__header {
+    margin-bottom: clamp(48px, 7vw, 88px);
+    text-align: center;
+  }
+
+  .blog__header p {
+    color: var(--muted);
+    font-size: clamp(0.86rem, 1.2vw, 1rem);
+  }
+
+  .blog__embed {
+    overflow: hidden;
+    border: 1px solid var(--line);
+    background: var(--mist);
+  }
+
+  .blog__embed iframe {
+    display: block;
+    border: 0;
+    background: #fff;
+  }
+
+  .blog__link {
+    margin-top: 48px;
+    text-align: center;
+  }
+
+  .blog__placeholder {
+    padding: clamp(60px, 9vw, 110px) 24px;
+    border: 1px solid var(--line);
+    background: var(--mist);
+    text-align: center;
+  }
+
+  .blog__placeholder > span {
+    display: block;
+    margin-bottom: 14px;
+    color: var(--green);
+    font-family: var(--font-number);
+    font-size: 0.75rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+
+  .blog__placeholder h2 {
+    margin-bottom: 18px;
+    color: var(--green);
+    font-size: clamp(1.3rem, 2.6vw, 2rem);
+    font-weight: 500;
+    letter-spacing: 0.11em;
+  }
+
+  .blog__placeholder p {
+    margin-bottom: 36px;
+    color: var(--muted);
+    font-size: 0.85rem;
+    line-height: 2;
+  }
+
+  @media (max-width: 600px) {
+    .blog__embed iframe {
+      height: 650px;
+    }
+  }
+</style>

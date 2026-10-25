@@ -1,0 +1,41 @@
+---
+// EmDash の「ページ」（pages コレクション）の layout ブロックを、元の部品で並べて表示する。
+// まだ登録されていないページは、各ページに書いた既定の並び（fallback）で表示する。
+import Hero from "./sections/Hero.astro";
+import StaffHero from "./sections/StaffHero.astro";
+import Features from "./sections/Features.astro";
+import Treatments from "./sections/Treatments.astro";
+import Access from "./sections/Access.astro";
+import Instagram from "./sections/Instagram.astro";
+import PageHeroBlock from "./blocks/PageHeroBlock.astro";
+import Doctors from "./blocks/Doctors.astro";
+import Commitments from "./blocks/Commitments.astro";
+import Faq from "./blocks/Faq.astro";
+import Blog from "./blocks/Blog.astro";
+import SimplePage from "./blocks/SimplePage.astro";
+
+export const COMPONENTS: Record<string, any> = {
+  hero_slider: Hero,
+  message: StaffHero,
+  features: Features,
+  treatments: Treatments,
+  access: Access,
+  news: Instagram,
+  page_hero: PageHeroBlock,
+  doctors: Doctors,
+  commitments: Commitments,
+  faq: Faq,
+  blog: Blog,
+  simple_page: SimplePage,
+};
+
+interface Props {
+  layout: any[];
+  defaults?: Record<string, Record<string, any>>;
+}
+const { layout, defaults = {} } = Astro.props;
+---
+{layout.map((block) => {
+  const C = COMPONENTS[block?._type];
+  return C ? <C value={block} defaults={defaults[block._type]} /> : null;
+})}

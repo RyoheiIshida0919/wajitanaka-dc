@@ -1,7 +1,9 @@
 ---
 import { getClinic } from "../../lib/clinic";
+import { imgSrc, or } from "../../lib/blocks";
+const v = (Astro.props.value ?? {}) as Record<string, any>;
 const { reserveUrl } = await getClinic(Astro);
-const features = [
+const defaults = [
   {
     id: '1',
     title: '0歳から100歳まで通える歯科医院',
@@ -51,11 +53,20 @@ const features = [
     images: ['/images/site/ft06-1.jpg', '/images/site/ft06-2.jpg'],
   },
 ];
+const heading = or(v.heading, "当院の特徴");
+const features = Array.isArray(v.items) && v.items.length
+  ? v.items.map((f: any, i: number) => ({
+      id: String(i + 1),
+      title: f.title ?? "",
+      paragraphs: String(f.body ?? "").split(/\n{2,}/).filter(Boolean),
+      images: [imgSrc(Astro, f.image1, ""), imgSrc(Astro, f.image2, "")].filter(Boolean),
+    }))
+  : defaults;
 ---
 
 <section class="features" id="features">
   <div class="features__layout">
-    <h2 class="features__side-title">当院の特徴</h2>
+    <h2 class="features__side-title">{heading}</h2>
     <div class="features__content">
       {features.map((feature) => (
         <article class={`feature feature--${feature.id} reveal`}>

@@ -1,5 +1,7 @@
 ---
-const treatments = [
+import { imgSrc, or } from "../../lib/blocks";
+const v = (Astro.props.value ?? {}) as Record<string, any>;
+const defaults = [
   { name: '一般歯科', sub: 'むし歯・歯周病・知覚過敏', icon: '/images/site/icon-general.png' },
   { name: '小児歯科', sub: 'むし歯・歯みがき・歯並び', icon: '/images/site/icon-child.png' },
   { name: '予防歯科', sub: 'メンテナンス・定期検診', icon: '/images/site/icon-prevent.png' },
@@ -10,11 +12,16 @@ const treatments = [
   { name: '顎関節症', sub: '歯ぎしり・くいしばり', icon: '/images/site/icon-tmj.png' },
   { name: '口腔外科', sub: '親知らず・口内炎・粘膜の異常', icon: '/images/site/icon-oral.png' },
 ];
+const heading = or(v.heading, "診療案内");
+// ブロックに項目があればそれを、なければ元の内容を使う（アイコンは元の画像パスか、管理画面で選んだ画像）
+const treatments = Array.isArray(v.items) && v.items.length
+  ? v.items.map((t: any) => ({ name: t.name ?? "", sub: t.sub ?? "", icon: imgSrc(Astro, t.icon, "") }))
+  : defaults;
 ---
 
 <section class="treatments" id="treatments">
   <div class="container treatments__layout">
-    <h2 class="treatments__side-title">診療案内</h2>
+    <h2 class="treatments__side-title">{heading}</h2>
     <div class="treatments__content">
       <ul class="treatments-grid">
         {treatments.map((item) => (

@@ -1,5 +1,7 @@
 ---
-const slides = [
+import { imgSrc, imgAlt, or, lines } from "../../lib/blocks";
+const v = (Astro.props.value ?? {}) as Record<string, any>;
+const defaultSlides = [
   {
     type: 'catch',
     className: 'slide-catch',
@@ -23,6 +25,11 @@ const slides = [
     alt: '女性歯科医がいて小さなお子様も安心',
   },
 ];
+const catchText = or(v.catch_text, "ここから笑顔がうまれる。\n歯も、心も。");
+// 1枚目はキャッチコピーの画面。2枚目以降は写真（ブロックに写真があればそれを使う）
+const slides = Array.isArray(v.slides) && v.slides.length
+  ? [defaultSlides[0], ...v.slides.map((sl: any, i: number) => ({ type: 'photo', className: `slide-${i + 1}`, src: imgSrc(Astro, sl.image, ''), alt: or(sl.alt, imgAlt(sl.image, '')) }))]
+  : defaultSlides;
 ---
 
 <section class="hero" aria-label="和地たなか歯科のスライドショー">
@@ -39,7 +46,7 @@ const slides = [
                 width="87"
                 height="83"
               />
-              <p class="slide-catch__headline">ここから笑顔がうまれる。<br />歯も、心も。</p>
+              <p class="slide-catch__headline">{lines(catchText).map((l, i) => <>{i > 0 && <br />}{l}</>)}</p>
             </div>
           </div>
         ) : (
