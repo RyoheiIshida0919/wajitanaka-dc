@@ -95,12 +95,15 @@ async function handleNew(r) {
     log("claude failed", res.status, (res.stderr || res.stdout || "").slice(0, 1000));
     return setRequest(r.id, { status: "new", notified: "", reply: "自動での対応がうまくいきませんでした。担当が確認します。" });
   }
-  if (out.outcome !== "changed") {
+  // 前回の作業ブランチの続きで「もう直っている」と判断された場合も、確認用ページは作り直す
+  const carried = hasBranch && git("diff", "--name-only", "origin/main", "HEAD") !== "";
+  if (out.outcome !== "changed" && !carried) {
     clean();
     log("outcome", out.outcome);
     return setRequest(r.id, { status: out.outcome === "need_info" ? "new" : "closed", reply: out.reply });
   }
-  const d = checkDiff();
+  let d = checkDiff();
+  if (!d.ok && carried && d.why === "変更がありませんでした") d = { ok: true, files: [], nothingNew: true };
   if (!d.ok) {
     clean();
     log("diff check failed", d.why);
@@ -111,7 +114,7 @@ async function handleNew(r) {
     log("build failed", String(e.stderr || e.message).slice(-1000));
     return setRequest(r.id, { status: "new", notified: "", reply: "自動での対応がうまくいきませんでした。担当が確認します。" });
   }
-  git("commit", "-qm", `改修依頼 No.${r.id}: ${r.body.split("\n")[0].slice(0, 60)}`);
+  if (!d.nothingNew) git("commit", "-qm", `改修依頼 No.${r.id}: ${r.body.split("\n")[0].slice(0, 60)}`);
   git("push", "-q", "-f", "origin", `work:req-${r.id}`);
   const path = /^\/[\w\-./]*$/.test(out.path || "") ? out.path : "/";
   const preview = `https://req-${r.id}-wajitanaka-dc.ishida-a0f.workers.dev${path}`;
