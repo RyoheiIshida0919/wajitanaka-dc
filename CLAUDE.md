@@ -2,15 +2,19 @@
 
 このリポジトリは和地たなか歯科の公式サイト（Astro 静的サイト）。更新するのは歯科医院のスタッフで、プログラミングの専門知識はない。専門用語を避け、日本語で簡潔に説明する。
 
-## 公開の仕組み
+## 公開の仕組み（2026-10 EmDash へ移行）
 
-- `main` ブランチに push すると Cloudflare Pages が自動で公開する（1〜2分）。
-- `main` 以外のブランチに push すると、確認用URLが自動で作られる。
-- 本番URL: https://wajitanaka-dc.pages.dev/（独自ドメイン移行後は https://wajitanaka-dc.com/）
+- サイトは EmDash（Astro）で Cloudflare Workers に公開している。`main` に push すると Workers Builds が自動で本番（https://wajitanaka-dc.ishida-a0f.workers.dev/）へ反映する（1〜2分）。
+- 旧 https://wajitanaka-dc.pages.dev/ は新サイトへ転送するだけ。独自ドメイン wajitanaka-dc.com はまだ STUDIO のまま（切り替えは未定）。
+- 確認用ページは `npx wrangler versions upload --preview-alias <名前>` で作る（https://<名前>-wajitanaka-dc.ishida-a0f.workers.dev/）。
 
-## 更新ダッシュボード（スタッフが自分で直す仕組み）
+## 中身の編集は EmDash の管理画面で
 
-診療時間・電話番号・Web予約URL・お知らせ・緊急のお知らせ帯は、`public/live.js` がダッシュボード（https://wajitanaka-dashboard.ishida-a0f.workers.dev 、ソースは `~/Programs/wajitanaka-dashboard`）の値を読み込んで差し替える。HTMLに書いてある値は取得失敗時の予備。これらを変える依頼は、ダッシュボードで直すよう案内する（コードを直しても、ダッシュボードの値が優先されて表示が変わらない）。ボタンや表を足すときは `data-live` 属性を付ける（詳細は `~/Programs/wajitanaka-dashboard/README.md`）。
+管理画面 https://wajitanaka-dc.ishida-a0f.workers.dev/_emdash/admin（パスキーでログイン）。
+- 「ページ」：各ページの文章・写真・セクションの並び（layout ブロック）。表示は `src/components/PageBlocks.astro` が部品を並べる。部品は値が空なら従来の内容で表示する（`src/lib/blocks.ts`）
+- 「お知らせ」「医院情報」：お知らせ・緊急のお知らせ・診療時間・電話・予約URL（`src/lib/clinic.ts` が読む）
+- 「AIに改修を依頼」：デザイン変更・新しいセクションなど。GitHub Actions の Claude が直して確認用ページを返す
+- 文章や写真だけの変更をコードで直さない（管理画面の値が優先される）。新しい種類のセクションを作ったら、`scripts/setup-blocks.mjs` を参考に EmDash へ部品の定義を登録する（`node scripts/emdash-mcp.mjs`）
 
 ## 更新の進め方（必ず守る）
 
