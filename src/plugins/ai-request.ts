@@ -1,6 +1,7 @@
 // EmDash 管理画面の「AIに改修を依頼」。依頼はダッシュボード(wajitanaka-dashboard)の依頼台帳へ送り、
 // GitHub Actions 上の Claude Code が直して確認用ページを返す。公開はここで「公開する」を押したものだけ。
 import { definePlugin } from "emdash";
+import { manualBlocks } from "./manual";
 
 const API = "https://wajitanaka-dashboard.ishida-a0f.workers.dev/api/agent";
 
@@ -102,6 +103,11 @@ async function render(toast?: { message: string; type: "success" | "error" | "in
   return toast ? { blocks, toast } : { blocks };
 }
 
+const PAGES = [
+  { path: "/help", label: "使い方（マニュアル）", icon: "book" },
+  { path: "/requests", label: "AIに改修を依頼", icon: "sparkle" },
+];
+
 export function createPlugin() {
   return definePlugin({
     id: "ai-request",
@@ -110,6 +116,7 @@ export function createPlugin() {
       admin: {
         handler: async (ctx: any) => {
           const input = ctx.input || {};
+          if (input.type === "page_load" && input.page === "/help") return { blocks: manualBlocks() };
           try {
             if (input.type === "form_submit" && input.action_id === "create") {
               const user = ctx.user;
@@ -134,12 +141,12 @@ export function createPlugin() {
       },
     },
     admin: {
-      pages: [{ path: "/requests", label: "AIに改修を依頼", icon: "sparkle" }],
+      pages: PAGES,
     },
   });
 }
 
-const PAGES = [{ path: "/requests", label: "AIに改修を依頼", icon: "sparkle" }];
+
 
 // astro.config から登録する（EmDash は entrypoint のモジュールを読み込んで createPlugin() を呼ぶ）
 export function aiRequestPlugin() {

@@ -29,19 +29,15 @@
 
 ## 触ってよい場所と触ってはいけない場所
 
-### よく更新する場所
+### よく更新する場所（コードで直すもの）
 
 | 内容 | ファイル |
 |------|---------|
-| 診療時間 | `src/components/Footer.astro`（表）、`src/layouts/BaseLayout.astro`（検索エンジン向けデータ `openingHoursSpecification`）。両方を必ず同時に直す |
-| 電話番号・住所 | `Footer.astro`、`Access.astro`、`BaseLayout.astro`。複数箇所にあるので `grep` で全箇所を洗い出して直す |
-| Web予約URL | `Header.astro`、`Footer.astro`、`StickyFooterCTA.astro`、`CTASection.astro`、`Access.astro`、`Features.astro` の `reserveUrl`。全て同じ値に揃える |
-| お知らせ | `src/components/sections/Instagram.astro`（現在はInstagramへの誘導のみ） |
-| ブログ | `.env` の note のURL設定（`.env.example` 参照）。設定するとブログページに埋め込まれる |
-| 医師紹介 | `src/pages/doctors.astro` |
-| 患者さんの声・FAQ | `src/pages/reviews.astro`、`src/components/sections/ReviewsFAQ.astro` |
-| 求人 | `src/pages/recruit.astro` |
-| 写真 | `public/images/` 配下 |
+| 各セクションの見た目・作り | `src/components/sections/*.astro`、`src/components/blocks/*.astro`（中身の文章・写真は EmDash の「ページ」） |
+| 部品の一覧（ブロックの種類と部品の対応） | `src/components/PageBlocks.astro` |
+| ヘッダー・フッター・追従ボタン | `src/components/Header.astro`、`Footer.astro`、`StickyFooterCTA.astro`（電話・予約URL・診療時間は EmDash の「医院情報」から読む） |
+| 検索エンジン向けデータ | `src/layouts/BaseLayout.astro` の `clinicSchema` |
+| 管理画面の「使い方」「AIに改修を依頼」 | `src/plugins/manual.ts`、`src/plugins/ai-request.ts` |
 
 ### 触らない場所（依頼されても、まず確認する）
 
