@@ -4,6 +4,23 @@ import { definePlugin } from "emdash";
 import { manualBlocks } from "./manual";
 
 const API = "https://wajitanaka-dashboard.ishida-a0f.workers.dev/api/agent";
+const SITE = "https://wajitanaka-dc.ishida-a0f.workers.dev";
+// 添付画像は依頼文の末尾に URL として書く（依頼台帳の形は変えない）。GitHub Actions 側がこの URL から画像を取り込む
+const IMAGE_MARK = "【添付画像】";
+const IMAGE_FIELDS = [1, 2, 3].map((n) => ({ type: "media_picker", action_id: `img${n}`, label: `画像${n}（あれば）`, mime_type_filter: "image/" }));
+
+function withImages(text: unknown, values: Record<string, unknown> = {}) {
+  const urls = IMAGE_FIELDS.map((f) => String(values[f.action_id] || "").trim())
+    .filter(Boolean)
+    .map((u) => (u.startsWith("/") ? SITE + u : u));
+  const body = String(text || "").trim();
+  return urls.length ? `${body}\n\n${IMAGE_MARK}\n${urls.join("\n")}` : body;
+}
+
+function imageBlocks(body: string): any[] {
+  const urls = body.match(/https:\/\/wajitanaka-dc\.ishida-a0f\.workers\.dev\/_emdash\/api\/media\/file\/[^\s]+/g) || [];
+  return urls.map((url, i) => ({ type: "image", url: url.slice(SITE.length), alt: `添付画像${i + 1}` }));
+}
 
 type Req = {
   id: number;
@@ -44,6 +61,7 @@ function requestBlocks(r: Req): any[] {
   const blocks: any[] = [
     { type: "divider" },
     { type: "section", text: `**No.${r.id}　${jst(r.created_at)}　${r.name}さん　［${STATUS[r.status] || r.status}］**\n${r.body}` },
+    ...imageBlocks(r.body),
   ];
   if (r.reply) blocks.push({ type: "context", text: `AIより：${r.reply}` });
   if (r.status === "preview") {
@@ -64,7 +82,7 @@ function requestBlocks(r: Req): any[] {
     blocks.push({
       type: "form",
       block_id: `redo-${r.id}-${Date.now()}`, // 送るたびに block_id を変えて、空の入力欄を出し直す
-      fields: [{ type: "text_input", action_id: "note", label: "もう少し直してほしいところ（あれば）", multiline: true }],
+      fields: [{ type: "text_input", action_id: "note", label: "もう少し直してほしいところ（あれば）", multiline: true }, ...IMAGE_FIELDS],
       submit: { label: "直してもらう", action_id: "redo" },
     });
   }
@@ -84,12 +102,12 @@ async function render(toast?: { message: string; type: "success" | "error" | "in
     { type: "header", text: "AIに改修を依頼" },
     {
       type: "context",
-      text: "ページの作りやデザインを変えたいとき、ページを追加したいときに、ふだんの言葉で書いて送ってください。AIが直して、確認用ページを返します（通常10〜20分）。確認して「公開する」を押すと、ホームページに反映されます。各ページの文章・写真の差し替えやセクションの並べ替えは左の「ページ」から、お知らせ・診療時間・電話は「お知らせ」「医院情報」から、AIを通さずすぐ直せます。",
+      text: "ページの作りやデザインを変えたいとき、ページを追加したいときに、ふだんの言葉で書いて送ってください。見本の画面や使いたい写真は「画像」欄から貼れます（3枚まで）。AIが直して、確認用ページを返します（通常10〜20分）。確認して「公開する」を押すと、ホームページに反映されます。各ページの文章・写真の差し替えやセクションの並べ替えは左の「ページ」から、お知らせ・診療時間・電話は「お知らせ」「医院情報」から、AIを通さずすぐ直せます。",
     },
     {
       type: "form",
       block_id: `new-${Date.now()}`,
-      fields: [{ type: "text_input", action_id: "body", label: "直したいこと", multiline: true, placeholder: "例：医師紹介ページに院長の経歴を追加して" }],
+      fields: [{ type: "text_input", action_id: "body", label: "直したいこと", multiline: true, placeholder: "例：医師紹介ページに院長の経歴を追加して" }, ...IMAGE_FIELDS],
       submit: { label: "送る", action_id: "create" },
     },
   ];
@@ -120,12 +138,12 @@ export function createPlugin() {
           try {
             if (input.type === "form_submit" && input.action_id === "create") {
               const user = ctx.user;
-              await call("/create", { name: user?.name || user?.email || "管理画面", email: user?.email || "", body: input.values?.body });
+              await call("/create", { name: user?.name || user?.email || "管理画面", email: user?.email || "", body: withImages(input.values?.body, input.values) });
               return render({ message: "送りました。AIが作業を始めます", type: "success" });
             }
             if (input.type === "form_submit" && input.action_id === "redo") {
               const id = Number(String(input.block_id || "").split("-")[1]);
-              await call("/action", { id, action: "redo", note: input.values?.note });
+              await call("/action", { id, action: "redo", note: withImages(input.values?.note, input.values) });
               return render({ message: "追加の依頼を送りました", type: "success" });
             }
             if (input.type === "block_action" && (input.action_id === "publish" || input.action_id === "cancel")) {
