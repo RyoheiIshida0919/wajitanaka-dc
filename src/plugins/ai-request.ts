@@ -7,10 +7,26 @@ const API = "https://wajitanaka-dashboard.ishida-a0f.workers.dev/api/agent";
 const SITE = "https://wajitanaka-dc.ishida-a0f.workers.dev";
 // 添付画像は依頼文の末尾に URL として書く（依頼台帳の形は変えない）。GitHub Actions 側がこの URL から画像を取り込む
 const IMAGE_MARK = "【添付画像】";
-const IMAGE_FIELDS = [1, 2, 3].map((n) => ({ type: "media_picker", action_id: `img${n}`, label: `画像${n}（あれば）`, mime_type_filter: "image/" }));
+// 管理画面のプラグイン画面はアップロード欄(media_picker)を描画しないため、「メディア」に上げた画像から選んでもらう
+const IMAGE_KEYS = ["img1", "img2", "img3"];
+
+async function imageFields() {
+  let options: { label: string; value: string }[] = [];
+  try {
+    // 画像の公開URLは storage_key から作る（プラグイン用の media API は要ログインの URL しか返さないため、D1 を直接読む）
+    const { env } = (await import("cloudflare:workers")) as any;
+    const { results } = await env.DB.prepare(
+      "SELECT filename, storage_key, created_at FROM media WHERE status = 'ready' AND mime_type LIKE 'image/%' ORDER BY created_at DESC LIMIT 40",
+    ).all();
+    options = results.map((m: any) => ({ label: `${m.filename}（${jst(m.created_at)}）`, value: `/_emdash/api/media/file/${m.storage_key}` }));
+  } catch {}
+  if (!options.length) return [];
+  options.unshift({ label: "（なし）", value: "" });
+  return IMAGE_KEYS.map((k, i) => ({ type: "select", action_id: k, label: `画像${i + 1}（あれば）`, options, initial_value: "" }));
+}
 
 function withImages(text: unknown, values: Record<string, unknown> = {}) {
-  const urls = IMAGE_FIELDS.map((f) => String(values[f.action_id] || "").trim())
+  const urls = IMAGE_KEYS.map((k) => String(values[k] || "").trim())
     .filter(Boolean)
     .map((u) => (u.startsWith("/") ? SITE + u : u));
   const body = String(text || "").trim();
@@ -57,7 +73,7 @@ async function call(path: string, body?: unknown) {
 const jst = (iso: string) =>
   new Date(iso).toLocaleString("ja-JP", { timeZone: "Asia/Tokyo", month: "numeric", day: "numeric", hour: "2-digit", minute: "2-digit" });
 
-function requestBlocks(r: Req): any[] {
+function requestBlocks(r: Req, imgs: any[]): any[] {
   const blocks: any[] = [
     { type: "divider" },
     { type: "section", text: `**No.${r.id}　${jst(r.created_at)}　${r.name}さん　［${STATUS[r.status] || r.status}］**\n${r.body}` },
@@ -82,7 +98,7 @@ function requestBlocks(r: Req): any[] {
     blocks.push({
       type: "form",
       block_id: `redo-${r.id}-${Date.now()}`, // 送るたびに block_id を変えて、空の入力欄を出し直す
-      fields: [{ type: "text_input", action_id: "note", label: "もう少し直してほしいところ（あれば）", multiline: true }, ...IMAGE_FIELDS],
+      fields: [{ type: "text_input", action_id: "note", label: "もう少し直してほしいところ（あれば）", multiline: true }, ...imgs],
       submit: { label: "直してもらう", action_id: "redo" },
     });
   }
@@ -90,7 +106,7 @@ function requestBlocks(r: Req): any[] {
   return blocks;
 }
 
-async function render(toast?: { message: string; type: "success" | "error" | "info" }) {
+async function render(ctx: any, toast?: { message: string; type: "success" | "error" | "info" }) {
   let list: Req[] = [];
   let loadError = "";
   try {
@@ -98,16 +114,17 @@ async function render(toast?: { message: string; type: "success" | "error" | "in
   } catch (e) {
     loadError = (e as Error).message;
   }
+  const imgs = await imageFields();
   const blocks: any[] = [
     { type: "header", text: "AIに改修を依頼" },
     {
       type: "context",
-      text: "ページの作りやデザインを変えたいとき、ページを追加したいときに、ふだんの言葉で書いて送ってください。見本の画面や使いたい写真は「画像」欄から貼れます（3枚まで）。AIが直して、確認用ページを返します（通常10〜20分）。確認して「公開する」を押すと、ホームページに反映されます。各ページの文章・写真の差し替えやセクションの並べ替えは左の「ページ」から、お知らせ・診療時間・電話は「お知らせ」「医院情報」から、AIを通さずすぐ直せます。",
+      text: "ページの作りやデザインを変えたいとき、ページを追加したいときに、ふだんの言葉で書いて送ってください。見本の画面や使いたい写真は、先に左の「メディア」へアップロードしてから、下の「画像」欄で選んでください（3枚まで）。AIが直して、確認用ページを返します（通常10〜20分）。確認して「公開する」を押すと、ホームページに反映されます。各ページの文章・写真の差し替えやセクションの並べ替えは左の「ページ」から、お知らせ・診療時間・電話は「お知らせ」「医院情報」から、AIを通さずすぐ直せます。",
     },
     {
       type: "form",
       block_id: `new-${Date.now()}`,
-      fields: [{ type: "text_input", action_id: "body", label: "直したいこと", multiline: true, placeholder: "例：医師紹介ページに院長の経歴を追加して" }, ...IMAGE_FIELDS],
+      fields: [{ type: "text_input", action_id: "body", label: "直したいこと", multiline: true, placeholder: "例：医師紹介ページに院長の経歴を追加して" }, ...imgs],
       submit: { label: "送る", action_id: "create" },
     },
   ];
@@ -117,7 +134,7 @@ async function render(toast?: { message: string; type: "success" | "error" | "in
   );
   if (loadError) blocks.push({ type: "banner", variant: "error", title: "依頼の一覧を読み込めませんでした", description: loadError });
   else if (!list.length) blocks.push({ type: "empty", title: "まだ依頼はありません" });
-  else for (const r of list) blocks.push(...requestBlocks(r));
+  else for (const r of list) blocks.push(...requestBlocks(r, imgs));
   return toast ? { blocks, toast } : { blocks };
 }
 
@@ -139,22 +156,22 @@ export function createPlugin() {
             if (input.type === "form_submit" && input.action_id === "create") {
               const user = ctx.user;
               await call("/create", { name: user?.name || user?.email || "管理画面", email: user?.email || "", body: withImages(input.values?.body, input.values) });
-              return render({ message: "送りました。AIが作業を始めます", type: "success" });
+              return render(ctx, { message: "送りました。AIが作業を始めます", type: "success" });
             }
             if (input.type === "form_submit" && input.action_id === "redo") {
               const id = Number(String(input.block_id || "").split("-")[1]);
               await call("/action", { id, action: "redo", note: withImages(input.values?.note, input.values) });
-              return render({ message: "追加の依頼を送りました", type: "success" });
+              return render(ctx, { message: "追加の依頼を送りました", type: "success" });
             }
             if (input.type === "block_action" && (input.action_id === "publish" || input.action_id === "cancel")) {
               await call("/action", { id: Number(input.value), action: input.action_id });
-              return render({ message: input.action_id === "publish" ? "公開をお願いしました" : "取り消しました", type: "success" });
+              return render(ctx, { message: input.action_id === "publish" ? "公開をお願いしました" : "取り消しました", type: "success" });
             }
           } catch (e) {
-            return render({ message: (e as Error).message, type: "error" });
+            return render(ctx, { message: (e as Error).message, type: "error" });
           }
-          if (input.type === "block_action" && input.action_id === "refresh") return render({ message: "最新の状態にしました", type: "info" });
-          return render();
+          if (input.type === "block_action" && input.action_id === "refresh") return render(ctx, { message: "最新の状態にしました", type: "info" });
+          return render(ctx);
         },
       },
     },
