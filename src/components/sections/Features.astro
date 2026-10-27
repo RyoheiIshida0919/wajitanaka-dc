@@ -77,13 +77,15 @@ const features = Array.isArray(v.items) && v.items.length
             </div>
             <h3>{feature.title}</h3>
           </div>
-          <div class="feature__body">
-            {feature.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
-          </div>
-          <div class="feature__images">
-            {feature.images.map((image, index) => (
-              <img src={image} alt={index === 0 ? feature.title : ''} loading="lazy" />
-            ))}
+          <div class="feature__main">
+            <div class="feature__body">
+              {feature.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+            </div>
+            {feature.images[0] && (
+              <div class="feature__images">
+                <img src={feature.images[0]} alt={feature.title} loading="lazy" />
+              </div>
+            )}
           </div>
         </article>
       ))}
@@ -189,22 +191,31 @@ const features = Array.isArray(v.items) && v.items.length
     line-height: 1.95;
   }
 
+  .feature__main {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(20px, 3vw, 36px);
+    align-items: start;
+  }
+
+  .feature__main .feature__body {
+    margin-bottom: 0;
+  }
+
   .feature__images {
-    display: flex;
     width: 100%;
-    gap: 0;
     overflow: hidden;
     background: #f7f7f5;
   }
 
   .feature__images img {
-    width: 50%;
+    width: 100%;
     aspect-ratio: 1.52 / 1;
     object-fit: cover;
     display: block;
   }
 
-  .feature--4 .feature__images img:first-child {
+  .feature--4 .feature__images img {
     object-position: center top;
   }
 
@@ -306,8 +317,12 @@ const features = Array.isArray(v.items) && v.items.length
       line-height: 1.9;
     }
 
-    .feature__images {
-      flex-direction: column;
+    .feature__main {
+      display: block;
+    }
+
+    .feature__main .feature__body {
+      margin-bottom: 24px;
     }
 
     .feature__images img {

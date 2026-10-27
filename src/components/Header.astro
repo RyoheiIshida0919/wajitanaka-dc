@@ -3,7 +3,7 @@ import { getClinic } from "../lib/clinic";
 const { reserveUrl, questionnaireUrl } = await getClinic(Astro);
 const navItems = [
   { label: 'ホーム', href: '/' },
-  { label: '当院の特徴', href: '/#features' },
+  { label: '当院の特徴', href: '/features' },
   { label: '診療案内', href: '/#treatments' },
   { label: '医師紹介', href: '/doctors' },
   { label: 'アクセス', href: '/#access' },
