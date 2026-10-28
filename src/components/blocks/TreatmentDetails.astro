@@ -23,7 +23,7 @@ const items = fromBlock
       text: t.text ?? "",
       image: imgSrc(Astro, t.image, ""),
     }))
-  : defaults;
+  : defaults.map((d, i) => ({ ...d, id: `t${i + 1}` }));
 const lead = or(v.lead, "気になる項目のアイコンを押すと、その説明へ移動します。");
 ---
 
