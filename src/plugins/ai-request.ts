@@ -43,7 +43,7 @@ const jst = (iso: string) =>
 function requestBlocks(r: Req): any[] {
   const blocks: any[] = [
     { type: "divider" },
-    { type: "section", text: `**No.${r.id}　${jst(r.created_at)}　${r.name}さん　［${STATUS[r.status] || r.status}］**\n${r.body}` },
+    { type: "section", text: `No.${r.id}　${jst(r.created_at)}　${r.name}さん　［${STATUS[r.status] || r.status}］\n${r.body}` },
   ];
   if (r.images?.length) blocks.push({ type: "context", text: `画像 ${r.images.length}枚つき` });
   if (r.reply) blocks.push({ type: "context", text: `AIより：${r.reply}` });

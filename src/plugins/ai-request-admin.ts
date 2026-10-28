@@ -24,6 +24,9 @@ async function shrink(file: File): Promise<Img> {
   return { mime: "image/jpeg", data: preview.split(",")[1], preview };
 }
 
+// 「仕上がりを見る」などのリンク。渡さないとボタンが描かれない
+const resolveLinkTarget = (t: any) => (t?.kind === "external" && /^https:\/\//.test(t.url) ? t.url : null);
+
 async function post(page: string, interaction: any) {
   const res = await fetch("/_emdash/api/plugins/ai-request/admin", {
     method: "POST",
@@ -144,9 +147,9 @@ function BlocksPage({ page, paste }: { page: string; paste: boolean }) {
   return h("div", { className: `relative flex flex-col gap-4 ${busy ? "opacity-70" : ""}` },
     toast ? h("div", { className: `rounded-md p-3 text-sm ${toast.type === "error" ? "bg-kumo-danger/10 text-kumo-danger" : "bg-kumo-brand/10"}` }, toast.message) : null,
     error ? h("div", { className: "rounded-md bg-kumo-danger/10 p-3 text-sm text-kumo-danger" }, error) : null,
-    h(BlockRenderer, { blocks: parts[0], onAction: send }),
+    h(BlockRenderer, { blocks: parts[0], onAction: send, resolveLinkTarget }),
     at > 0 ? h(PastePanel, { images, setImages, busy }) : null,
-    parts[1].length ? h(BlockRenderer, { blocks: parts[1], onAction: send }) : null,
+    parts[1].length ? h(BlockRenderer, { blocks: parts[1], onAction: send, resolveLinkTarget }) : null,
   );
 }
 
