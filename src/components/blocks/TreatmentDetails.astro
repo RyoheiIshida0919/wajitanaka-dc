@@ -1,0 +1,176 @@
+---
+import { imgSrc, or, lines } from "../../lib/blocks";
+const v = (Astro.props.value ?? {}) as Record<string, any>;
+// 試作。説明文・写真は管理画面の「ページ」で入れる（写真が空なら表示しない）
+const defaults = [
+  { id: 'general', name: '一般歯科', sub: 'むし歯・歯周病・知覚過敏', icon: '/images/site/icon-general.png', text: 'むし歯や歯周病、しみる症状など、お口のお悩み全般に対応します。ここに診療の説明が入ります。', image: '' },
+  { id: 'child', name: '小児歯科', sub: 'むし歯・歯みがき・歯並び', icon: '/images/site/icon-child.png', text: 'お子さまのむし歯、歯みがき、歯並びのご相談に対応します。ここに診療の説明が入ります。', image: '' },
+  { id: 'prevent', name: '予防歯科', sub: 'メンテナンス・定期検診', icon: '/images/site/icon-prevent.png', text: '定期検診やメンテナンスで、お口の健康を保つお手伝いをします。ここに診療の説明が入ります。', image: '' },
+  { id: 'fear', name: '歯科恐怖外来', sub: '静脈内鎮静法・リラックス歯科', icon: '/images/site/icon-fear.png', text: '歯科治療が苦手な方が、リラックスして受けられるよう配慮しています。ここに診療の説明が入ります。', image: '' },
+  { id: 'whitening', name: 'ホワイトニング', sub: '審美歯科・白いかぶせ物', icon: '/images/site/icon-whitening.png', text: '歯の色や見た目に関するご相談に対応します。ここに診療の説明が入ります。', image: '' },
+  { id: 'implant', name: 'インプラント', sub: '失った歯を補う治療', icon: '/images/site/icon-implant.png', text: '失った歯を補う方法のひとつです。ここに診療の説明が入ります。', image: '' },
+  { id: 'ortho', name: '歯並び', sub: '矯正相談', icon: '/images/site/icon-ortho.png', text: '歯並びについてのご相談をお受けします。ここに診療の説明が入ります。', image: '' },
+  { id: 'tmj', name: '顎関節症', sub: '歯ぎしり・くいしばり', icon: '/images/site/icon-tmj.png', text: '顎の違和感や歯ぎしり・くいしばりのご相談に対応します。ここに診療の説明が入ります。', image: '' },
+  { id: 'oral', name: '口腔外科', sub: '親知らず・口内炎・粘膜の異常', icon: '/images/site/icon-oral.png', text: '親知らずや口内炎、粘膜の気になる症状のご相談に対応します。ここに診療の説明が入ります。', image: '' },
+];
+const fromBlock = Array.isArray(v.items) && v.items.length;
+const items = fromBlock
+  ? v.items.map((t: any, i: number) => ({
+      id: `t${i + 1}`,
+      name: t.name ?? "",
+      sub: t.sub ?? "",
+      icon: imgSrc(Astro, t.icon, defaults[i]?.icon ?? ""),
+      text: t.text ?? "",
+      image: imgSrc(Astro, t.image, ""),
+    }))
+  : defaults;
+const lead = or(v.lead, "気になる項目のアイコンを押すと、その説明へ移動します。");
+---
+
+<section class="tdetails">
+  <div class="container">
+    <p class="tdetails__lead">{lead}</p>
+    <ul class="tdetails__nav">
+      {items.map((item) => (
+        <li>
+          <a href={`#${item.id}`}>
+            {item.icon && <img src={item.icon} alt="" loading="lazy" />}
+            <span class="tdetails__nav-name">{item.name}</span>
+            <span class="tdetails__nav-sub">{item.sub}</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+
+    <div class="tdetails__list">
+      {items.map((item, i) => (
+        <article class={`tdetail reveal${i % 2 ? ' tdetail--reverse' : ''}`} id={item.id}>
+          <div class="tdetail__copy">
+            <h2>{item.name}</h2>
+            <p class="tdetail__sub">{item.sub}</p>
+            <p>{lines(item.text).map((l, n) => (<>{n > 0 && <br />}{l}</>))}</p>
+          </div>
+          {item.image && (
+            <div class="tdetail__image">
+              <img src={item.image} alt={item.name} loading="lazy" />
+            </div>
+          )}
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .tdetails {
+    padding-block: var(--section-space);
+    background: var(--paper);
+  }
+
+  .tdetails__lead {
+    margin: 0 0 clamp(32px, 5vw, 56px);
+    text-align: center;
+    font-size: clamp(0.84rem, 1.05vw, 0.95rem);
+    line-height: 2;
+  }
+
+  .tdetails__nav {
+    display: grid;
+    max-width: 860px;
+    margin: 0 auto clamp(70px, 10vw, 130px);
+    padding: 0;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(24px, 4vw, 48px) clamp(12px, 3vw, 40px);
+    list-style: none;
+  }
+
+  .tdetails__nav a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    color: #10896a;
+  }
+
+  .tdetails__nav img {
+    width: auto;
+    max-width: clamp(70px, 10vw, 110px);
+    height: clamp(64px, 8vw, 90px);
+    object-fit: contain;
+    margin-bottom: 10px;
+  }
+
+  .tdetails__nav-name {
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    font-size: clamp(0.95rem, 1.5vw, 1.15rem);
+  }
+
+  .tdetails__nav-sub {
+    margin-top: 4px;
+    font-size: clamp(0.66rem, 0.9vw, 0.76rem);
+    line-height: 1.5;
+  }
+
+  .tdetails__list {
+    max-width: 900px;
+    margin-inline: auto;
+  }
+
+  .tdetail {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: clamp(20px, 3vw, 40px);
+    align-items: center;
+    padding-block: clamp(40px, 6vw, 72px);
+    border-top: 1px solid var(--line);
+    scroll-margin-top: 24px;
+  }
+
+  .tdetail:has(.tdetail__image) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .tdetail--reverse .tdetail__image {
+    order: -1;
+  }
+
+  .tdetail h2 {
+    margin: 0;
+    color: var(--green);
+    font-size: clamp(1.3rem, 2.4vw, 2rem);
+    font-weight: 500;
+    letter-spacing: 0.1em;
+  }
+
+  .tdetail__sub {
+    margin: 6px 0 16px;
+    color: var(--green);
+    font-size: 0.8rem;
+  }
+
+  .tdetail p {
+    font-size: clamp(0.84rem, 1.05vw, 0.95rem);
+    line-height: 2.1;
+  }
+
+  .tdetail__image img {
+    width: 100%;
+    aspect-ratio: 1.4 / 1;
+    object-fit: cover;
+  }
+
+  @media (max-width: 767px) {
+    .tdetails__nav {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .tdetail:has(.tdetail__image) {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .tdetail--reverse .tdetail__image {
+      order: 0;
+    }
+  }
+</style>

@@ -1,0 +1,26 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import StickyFooterCTA from '../components/StickyFooterCTA.astro';
+import PageBlocks from '../components/PageBlocks.astro';
+import { loadPage } from '../lib/pages';
+
+// 中身は EmDash の「ページ」→「treatments」で編集する。未登録なら下の既定の並びで表示
+const page = await loadPage("treatments");
+const fallback = [{"_type": "page_hero"}, {"_type": "treatment_details"}];
+const defaults = {"page_hero": {"title": "診療案内", "image": "/images/site/doctors-hero.jpg", "alt": "和地たなか歯科の院内", "position": "center 52%"}};
+const layout = page?.layout.length ? page.layout : fallback;
+const title = page?.seoTitle || "診療案内｜和地たなか歯科";
+const description = page?.seoDescription || "和地たなか歯科の診療案内です。一般歯科、小児歯科、予防歯科、歯科恐怖外来、ホワイトニング、インプラント、歯並び、顎関節症、口腔外科についてご紹介します。";
+---
+
+<BaseLayout title={title} description={description}
+  ogImage="/images/site/doctors-hero.jpg">
+  <Header />
+  <main id="main-content">
+    <PageBlocks layout={layout} defaults={defaults} />
+  </main>
+  <Footer />
+  <StickyFooterCTA />
+</BaseLayout>
