@@ -75,13 +75,18 @@ const lead = or(v.lead, "気になる項目のアイコンを押すと、その�
   }
 
   .tdetails__nav {
-    display: grid;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     max-width: 860px;
     margin: 0 auto clamp(70px, 10vw, 130px);
     padding: 0;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: clamp(24px, 4vw, 48px) clamp(12px, 3vw, 40px);
+    gap: clamp(20px, 3vw, 32px) 12px;
     list-style: none;
+  }
+
+  .tdetails__nav li {
+    width: calc((100% - 48px) / 5);
   }
 
   .tdetails__nav a {
@@ -94,21 +99,21 @@ const lead = or(v.lead, "気になる項目のアイコンを押すと、その�
 
   .tdetails__nav img {
     width: auto;
-    max-width: clamp(70px, 10vw, 110px);
-    height: clamp(64px, 8vw, 90px);
+    max-width: clamp(52px, 6vw, 72px);
+    height: clamp(48px, 5.5vw, 64px);
     object-fit: contain;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
   }
 
   .tdetails__nav-name {
     font-weight: 700;
-    letter-spacing: 0.06em;
-    font-size: clamp(0.95rem, 1.5vw, 1.15rem);
+    letter-spacing: 0.04em;
+    font-size: clamp(0.8rem, 1.2vw, 0.98rem);
   }
 
   .tdetails__nav-sub {
     margin-top: 4px;
-    font-size: clamp(0.66rem, 0.9vw, 0.76rem);
+    font-size: clamp(0.6rem, 0.8vw, 0.7rem);
     line-height: 1.5;
   }
 
@@ -162,7 +167,16 @@ const lead = or(v.lead, "気になる項目のアイコンを押すと、その�
 
   @media (max-width: 767px) {
     .tdetails__nav {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 24px 8px;
+    }
+
+    .tdetails__nav li {
+      width: calc((100% - 16px) / 3);
+    }
+
+    .tdetails__nav img {
+      max-width: 56px;
+      height: 52px;
     }
 
     .tdetail:has(.tdetail__image) {
