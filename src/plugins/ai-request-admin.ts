@@ -155,5 +155,6 @@ function BlocksPage({ page, paste }: { page: string; paste: boolean }) {
 
 export const pages = {
   "/requests": () => h(BlocksPage, { page: "/requests", paste: true }),
+  "/instagram": () => h(BlocksPage, { page: "/instagram", paste: false }),
   "/help": () => h(BlocksPage, { page: "/help", paste: false }),
 };

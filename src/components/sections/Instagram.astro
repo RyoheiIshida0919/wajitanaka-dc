@@ -2,6 +2,8 @@
 import { getNews } from "../../lib/clinic";
 const news = await getNews(Astro);
 import { or } from "../../lib/blocks";
+import { getInstagramPosts } from "../../lib/instagram";
+const igPosts = await getInstagramPosts(3);
 const v = (Astro.props.value ?? {}) as Record<string, any>;
 const heading = or(v.heading, "お知らせ");
 const lead = or(v.lead, "最新情報はInstagramをご覧ください");
@@ -26,6 +28,17 @@ const instagramUrl = /^https:\/\//.test(v.button_url ?? "") ? v.button_url : 'ht
         </ul>
       )}
       <p class="news__lead">{lead}</p>
+      {igPosts.length > 0 && (
+        <ul class="news__ig">
+          {igPosts.map((p) => (
+            <li>
+              <a href={p.url} target="_blank" rel="noopener noreferrer">
+                <img src={p.image} alt={p.caption || "Instagramの投稿"} loading="lazy" decoding="async" referrerpolicy="no-referrer" />
+              </a>
+            </li>
+          ))}
+        </ul>
+      )}
       <a class="news__button" href={instagramUrl} target="_blank" rel="noopener noreferrer">{buttonLabel}</a>
     </div>
   </div>
@@ -118,6 +131,34 @@ const instagramUrl = /^https:\/\//.test(v.button_url ?? "") ? v.button_url : 'ht
     font-family: "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Meiryo", sans-serif;
     font-size: clamp(1rem, 1.6vw, 1.2rem);
     letter-spacing: 0.03em;
+  }
+
+  .news__ig {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: clamp(8px, 1.6vw, 16px);
+    margin: 0 0 24px;
+    padding: 0;
+    list-style: none;
+  }
+
+  .news__ig a {
+    display: block;
+    aspect-ratio: 1;
+    overflow: hidden;
+    border-radius: 4px;
+    background: #e4e2e2;
+  }
+
+  .news__ig img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 240ms ease;
+  }
+
+  .news__ig a:hover img {
+    transform: scale(1.04);
   }
 
   .news__button {

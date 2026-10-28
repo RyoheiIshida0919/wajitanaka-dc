@@ -2,6 +2,7 @@
 // GitHub Actions 上の Claude Code が直して確認用ページを返す。公開はここで「公開する」を押したものだけ。
 import { definePlugin } from "emdash";
 import { manualBlocks } from "./manual";
+import { instagramStatus, saveInstagramToken } from "../lib/instagram";
 
 const API = "https://wajitanaka-dashboard.ishida-a0f.workers.dev/api/agent";
 type Req = {
@@ -104,8 +105,30 @@ async function render(ctx: any, toast?: { message: string; type: "success" | "er
   return toast ? { blocks, toast } : { blocks };
 }
 
+async function instagramPage(toast?: { message: string; type: "success" | "error" | "info" }) {
+  const st = await instagramStatus();
+  const blocks: any[] = [
+    { type: "header", text: "Instagram連携" },
+    {
+      type: "context",
+      text: "トップページの「お知らせ」の下に、Instagramの最新投稿3件を表示するための設定です。Metaの開発者画面で作った「アクセストークン」をここに貼って保存してください。一度保存すれば、あとは自動で更新されます（投稿はおよそ30分ごとに反映）。",
+    },
+    st
+      ? { type: "banner", variant: "default", title: `連携中：@${st.username}`, description: "トップページに最新投稿が表示されます。鍵を差し替えるときだけ、下から保存し直してください。" }
+      : { type: "banner", variant: "alert", title: "まだ連携されていません", description: "アクセストークンを貼って保存してください。" },
+    {
+      type: "form",
+      block_id: `ig-${Date.now()}`,
+      fields: [{ type: "secret_input", action_id: "token", label: "アクセストークン", placeholder: "IGAA… で始まる長い文字列" }],
+      submit: { label: "保存する", action_id: "ig_save" },
+    },
+  ];
+  return toast ? { blocks, toast } : { blocks };
+}
+
 const PAGES = [
   { path: "/requests", label: "AIに改修を依頼", icon: "sparkle" },
+  { path: "/instagram", label: "Instagram連携", icon: "image" },
   { path: "/help", label: "使い方（マニュアル）", icon: "book" },
 ];
 
@@ -118,6 +141,17 @@ export function createPlugin() {
         handler: async (ctx: any) => {
           const input = ctx.input || {};
           if (input.type === "page_load" && input.page === "/help") return { blocks: manualBlocks() };
+          if (input.page === "/instagram") {
+            if (input.type === "form_submit" && input.action_id === "ig_save") {
+              try {
+                const name = await saveInstagramToken(input.values?.token);
+                return instagramPage({ message: `@${name} と連携しました`, type: "success" });
+              } catch (e) {
+                return instagramPage({ message: (e as Error).message, type: "error" });
+              }
+            }
+            return instagramPage();
+          }
           try {
             if (input.type === "form_submit" && input.action_id === "create") {
               const user = ctx.user;
